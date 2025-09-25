@@ -1,11 +1,106 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>David Gusmao Website</title>
-  </head>
-  <body>
-    <h1>Hello — your site is ready</h1>
-    <p>Edit this file or add a Jekyll _config.yml and index.md</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>David Gusmao — Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href="styles.css" as="style">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <img class="profile" src="images/profile.jpg" alt="Professional headshot of David Gusmao" />
+      <div>
+        <h1>David Gusmao</h1>
+        <address>
+          <a href="mailto:YOUR_UCF_EMAIL@knights.ucf.edu">YOUR_UCF_EMAIL@knights.ucf.edu</a> ·
+          <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+        </address>
+      </div>
+    </div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#objective">Objective</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#awards">Awards</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="objective" aria-labelledby="h-objective">
+      <h2 id="h-objective">Professional Objective</h2>
+      <p><!-- TODO: 1–2 sentence objective in your voice. --></p>
+    </section>
+
+    <section id="education" aria-labelledby="h-education">
+      <h2 id="h-education">Education</h2>
+      <article>
+        <h3>University of Central Florida — B.S.</h3>
+        <p><!-- TODO: Major(s), expected graduation, GPA (optional). --></p>
+      </article>
+    </section>
+
+    <section id="experience" aria-labelledby="h-experience">
+      <h2 id="h-experience">Relevant Experience</h2>
+      <!-- Optional section; delete article blocks if N/A -->
+      <article>
+        <h3><!-- TODO: Role — Organization --></h3>
+        <p><time datetime="2024-08">Aug 2024</time> – <time datetime="2025-09">Present</time></p>
+        <ul>
+          <li><!-- TODO: Impact-focused bullet using verbs + metrics --></li>
+          <li><!-- TODO --></li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="projects" aria-labelledby="h-projects">
+      <h2 id="h-projects">Projects</h2>
+      <ul class="project-links">
+        <li>
+          <a href="project-pocketprofessors.html">
+            PocketProfessors — MERN app
+          </a>
+        </li>
+        <li>
+          <a href="project-contact-manager.html">
+            Contact Manager — Semantic HTML/CSS/JS
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="skills" aria-labelledby="h-skills">
+      <h2 id="h-skills">Skills</h2>
+      <ul class="tags">
+        <li>Semantic HTML</li>
+        <li>CSS (Flexbox, Grid, Responsive)</li>
+        <li>JavaScript (DOM)</li>
+        <li>Git & GitHub</li>
+        <li>Accessibility (WAVE/W3C)</li>
+        <!-- TODO: add more -->
+      </ul>
+    </section>
+
+    <section id="awards" aria-labelledby="h-awards">
+      <h2 id="h-awards">Awards & Honors</h2>
+      <p><!-- Optional; remove if none. --></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> David Gusmao</p>
+  </footer>
+
+  <script>
+    // purely optional; no JS required for the assignment
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>

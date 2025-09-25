@@ -1,0 +1,80 @@
+/* Base — semantic, accessible defaults */
+* { box-sizing: border-box; }
+html { color-scheme: light dark; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Skip link for keyboard/screen reader users */
+.skip-link {
+  position: absolute; left: -999px; top: -999px;
+}
+.skip-link:focus {
+  left: 0; top: 0; padding: .5rem .75rem; background: gold; color: #000;
+}
+
+/* Header */
+header {
+  background: goldenrod;
+  color: #000;
+  padding: 1rem;
+  border-bottom: 1px solid #000;
+}
+header .container {
+  display: flex; gap: 1rem; align-items: center; max-width: 960px; margin: 0 auto;
+}
+header h1 { margin: 0; font-size: clamp(1.25rem, 3.5vw, 2rem); }
+header address a { color: inherit; }
+header address a:hover, nav a:hover { text-decoration: underline; }
+
+/* Simple header variant for project pages */
+header.simple { display: grid; gap: .5rem; }
+header.simple nav a { color: #000; }
+
+/* Profile image */
+.profile {
+  width: clamp(64px, 12vw, 128px);
+  height: clamp(64px, 12vw, 128px);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Nav */
+nav ul {
+  list-style: none; margin: .5rem auto 0; padding: 0;
+  display: flex; gap: 1rem; flex-wrap: wrap; max-width: 960px;
+}
+nav a { color: #000; text-decoration: none; }
+
+/* Main content */
+main { max-width: 960px; margin: 1rem auto; padding: 0 1rem; }
+section + section, article + article { margin-top: 1.25rem; }
+h2 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); margin: .25rem 0 .5rem; }
+h3 { margin: 0 0 .25rem; }
+
+/* Project list */
+.project-links { padding-left: 1.25rem; }
+.project-links a { text-decoration: none; }
+
+/* Tags (skills) */
+.tags { display: flex; flex-wrap: wrap; gap: .5rem; padding-left: 0; list-style: none; }
+.tags li {
+  border: 1px solid #ccc; border-radius: 999px;
+  padding: .25rem .5rem; font-size: .95rem;
+}
+
+/* Figures */
+figure { margin: 0; }
+figure img { width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; }
+figcaption { font-size: .9rem; color: #555; margin-top: .25rem; }
+
+/* Footer */
+footer { border-top: 1px solid #eee; padding: 1rem; text-align: center; }
+
+/* Responsive touch-up */
+@media (max-width: 640px) {
+  header .container { flex-direction: column; align-items: flex-start; }
+  nav ul { justify-content: flex-start; }
+}
