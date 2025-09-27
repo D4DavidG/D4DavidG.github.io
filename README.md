@@ -1,4 +1,4 @@
-# Hi, I'm David Gusmao 👋 
+# Hi, I'm David Gusmao 👋
 
 Aspiring **Frontend Software Engineer** with research and project-management experience. I build clean, responsive, and accessible web apps with **Semantic HTML**, **CSS (Flexbox/Grid/Responsive)**, and **JavaScript**—and I love turning ideas into fast, human-friendly interfaces. Recently, I’ve shipped projects like **PocketProfessors** (trading-card-style study app) and **CS Majors vs Gorilla** (contact manager with semantic forms + AJAX).
 
