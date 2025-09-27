@@ -2,9 +2,11 @@
 
 Aspiring **Frontend Software Engineer** with research and project-management experience. I build clean, responsive, and accessible web apps with **Semantic HTML**, **CSS (Flexbox/Grid/Responsive)**, and **JavaScript**—and I love turning ideas into fast, human-friendly interfaces. Recently, I’ve shipped projects like **PocketProfessors** (trading-card-style study app) and **CS Majors vs Gorilla** (contact manager with semantic forms + AJAX).
 
-- 🌐 Portfolio: https://d4davidg.github.io/
+- 🌐 Portfolio: https://david-gusmao.github.io/
 - 💼 LinkedIn: https://www.linkedin.com/in/david-e-gusmao/
-- 📄 Resume (Google Doc): https://docs.google.com/document/d/1mnhtiJgajjSWrU0dFwDjUrdSREeE9Zyv7mdi1qzmO4o/edit?usp=sharing
+- 🧑‍💻 GitHub: https://github.com/D4DavidG      <!-- change if your username also changed -->
+- 📄 Resume: https://docs.google.com/document/d/1mnhtiJgajjSWrU0dFwDjUrdSREeE9Zyv7mdi1qzmO4o/edit?usp=sharing
+
 
 ---
 
