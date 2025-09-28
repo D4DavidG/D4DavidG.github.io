@@ -1,0 +1,50 @@
+List of ChatGPT contributions
+
+I gave chatgpt all of the lecture slide decks (semantic HTML, CSS, responsive design, forms), sample HTML/CSS files, my linkedin, and my resume.
+
+This was also so that whenever I asked for help with code it would only do what was in the scope of the class. 
+
+
+For index.html:
+
+* Assisted in writing code for implementing accessible “skip to main content” link.
+* Implemented neon-themed top navigation with button-style links that smooth-scroll to sections.
+
+For project-pocketprofessors.html
+
+Assisted in writing a comprehensive project page:
+  • Used memory from when it helped me with pocket professors and scanned github for all knowledge relating to my project
+  • Overview, Key Features, Technologies, How It Works, Role & Contributions, Credits & Links.
+  • Added optional developer quick-start block.
+* Fixed structure for validator and consistent styling.
+
+For project-contact-manager.html
+
+* Rewrote as a polished page emphasizing your role as PROJECT MANAGER.
+  • Used memory from when it helped me with pocket professors and scanned github for all knowledge relating to my project
+  • Overview, Key Features, Technologies, How It Works, Role & Contributions, Credits & Links.
+
+For styles.css
+
+* Introduced a global NEON THEME (black background, neon green #00ff00, soft/faint glow variables).
+* Organized CSS into logical sections (base/vars → base/typography → header/topnav → components → utilities → responsive).
+* Converted top nav words into GLOWING BUTTON LINKS (.topnav .btn) with hover/focus glow.
+* Enabled smooth scrolling (respects prefers-reduced-motion).
+* Implemented avatar styling:
+  • Neon hover glow for profile/avatar.
+
+For README.md
+
+* Wrote an updated README with:
+  • Professional intro and links: portfolio, LinkedIn, GitHub, live resume.
+  • What’s new (neon theme, glowing buttons, smooth scroll, avatar glow).
+  • Skills badges.
+  • Featured Projects (PocketProfessors and CS Majors vs Gorilla/Contact Manager), including your Project Manager role.
+  • Highlights (awards, scholarships, foundation exam) and GitHub stats links.
+
+
+CLEANUP, VALIDATION, AND FIXES
+
+* Reorganized CSS blocks for clarity; no property/value changes.
+* Performed overall wording/typo cleanup recommendations (e.g., “accessible”, “panel”, “resource allocation”) for polish.
+* Add global focus outline: `a:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }`
