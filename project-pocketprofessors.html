@@ -30,7 +30,7 @@
       <p>
         PocketProfessors is a full-stack web application where users log in, open card packs,
         and collect hand-drawn cards of professors and people at UCF (including special developer cards).
-        It’s built to feel like a playful TCG while staying fast, responsive, and accessible.
+        It’s built to feel like a playful TCG while staying fast, responsive, and accessible. Most of the technologies for this project were learned duirng it.
       </p>
 
       <h2>Key Features</h2>
@@ -89,6 +89,15 @@
         </li>
       </ul>
 
+      <h2>Challenges & Lessons</h2>
+      <ul>
+        <li><strong>Collaboration:</strong> Learned to manage a team, delegate tasks, and enforce quality through reviews and checklists.</li>
+        <li><strong>JWT lifecycle:</strong> Implemented token refresh and secure storage to balance UX and security.</li>
+        <li><strong>Responsive design:</strong> Crafted a mobile-first layout that adapts cleanly across devices.</li>
+        <li><strong>Database modeling:</strong> Designed efficient MongoDB schemas for users, cards, and collections.</li>
+        <li><strong>Testing:</strong> Wrote unit and integration tests to ensure reliability and catch regressions early.</li>    
+      </ul>
+
       <details>
         <summary><strong>Developer quick start</strong></summary>
         <pre><code>git clone https://github.com/jm19pa/Group25-Large-Project-COP4331.git
@@ -113,7 +122,15 @@ SENDGRID_API_KEY=...
   </main>
 
   <footer>
+    <p><span id="year"></span> David Gusmao ·
+      <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
     <p><a href="index.html">Back to Resume</a></p>
   </footer>
+
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

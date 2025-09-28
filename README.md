@@ -1,6 +1,6 @@
 # Hi, I'm David Gusmao 👋
 
-Aspiring Frontend Software Engineer with research and project-management experience. Skilled in React JS, JavaScript, and semantic HTML/CSS. I enjoy building clean, responsive, and accessible interfaces and applying evidence-driven insights from human-factors research to improve developer and user workflows. 
+Aspiring Software Engineer with research and project-management experience. Skilled in React JS, JavaScript, and semantic HTML/CSS. I enjoy building clean, responsive, and accessible interfaces and applying evidence-driven insights from human-factors research to improve developer and user workflows. 
 
 - 🌐 Portfolio: https://d4davidg.github.io/
 - 💼 LinkedIn: https://www.linkedin.com/in/david-e-gusmao/
