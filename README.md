@@ -1,23 +1,12 @@
 # Hi, I'm David Gusmao 👋
 
-Aspiring **Frontend Software Engineer** and **Project Manager** who loves building clean, responsive, and accessible UIs.  
-Tonight I revamped my portfolio with a **neon black/green theme**, smooth in-page navigation, **glowing button** nav, and an **avatar hover glow**—all with semantic HTML + CSS only.
+Aspiring Frontend Software Engineer with research and project-management experience. Skilled in React JS, JavaScript, and semantic HTML/CSS. I enjoy building clean, responsive, and accessible interfaces and applying evidence-driven insights from human-factors research to improve developer and user workflows. 
 
 - 🌐 Portfolio: https://d4davidg.github.io/
 - 💼 LinkedIn: https://www.linkedin.com/in/david-e-gusmao/
 - 🧑‍💻 GitHub: https://github.com/D4DavidG
 - 📄 Resume (Google Doc): https://docs.google.com/document/d/1mnhtiJgajjSWrU0dFwDjUrdSREeE9Zyv7mdi1qzmO4o/edit?usp=sharing
 - ✉️ Email: davidegusmao@outlook.com · da045393@ucf.edu
-
----
-
-## ✨ What’s new on the site
-
-- **Neon theme**: black background, neon `#00ff00` accents, subtle glows
-- **Button-style top nav** with hover glow
-- **Smooth scroll** to sections (respects `prefers-reduced-motion`)
-- **Avatar hover glow** + adjustable crop/zoom controls
-- Clean, semantic structure aligned with course requirements (W3C/WAVE-friendly)
 
 ---
 
