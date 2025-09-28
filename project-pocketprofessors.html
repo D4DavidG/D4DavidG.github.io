@@ -11,91 +11,109 @@
     <nav aria-label="Breadcrumb">
       <a href="index.html">← Back to Resume</a>
     </nav>
-    <h1>PocketProfessors</h1>
-    <p class="subtitle">Trading-card inspired web app for study cards, packs, and collections</p>
+    <h1 class="neon">PocketProfessors</h1>
+    <p class="subtitle">
+      Live site:
+      <a href="http://pocketprofessors.com" target="_blank" rel="noopener">pocketprofessors.com ↗</a> ·
+      Repository:
+      <a href="https://github.com/jm19pa/Group25-Large-Project-COP4331" target="_blank" rel="noopener">Group25-Large-Project-COP4331 ↗</a>
+    </p>
   </header>
 
   <main>
     <article>
       <figure>
-        <img src="images/pocketprofessors.png" alt="Screenshot of PocketProfessors app showing card pack opening and collection view" />
-        <figcaption>Pack opening and collection pages.</figcaption>
+        <img src="images/titlecardforpp.png" alt="PocketProfessors landing" />
       </figure>
 
       <h2>Overview</h2>
       <p>
-        PocketProfessors is a MERN-style project inspired by the feel of the Pokémon TCG.
-        Users open packs, collect “professor” cards, and track progress toward completing a set.
-        I led front-end UX and collaborated on API design to make the experience fast,
-        responsive, and accessible.
+        PocketProfessors is a full-stack web application where users log in, open card packs,
+        and collect hand-drawn cards of professors and people at UCF (including special developer cards).
+        It’s built to feel like a playful TCG while staying fast, responsive, and accessible.
       </p>
 
       <h2>Key Features</h2>
       <ul>
-        <li><strong>Weighted pack opening:</strong> Cards drawn from the <code>Cards</code> collection with rarity weights (common → legendary), emulating TCG odds.</li>
-        <li><strong>Collection tracking:</strong> User pulls stored in <code>UserCards</code> by <em>UserId</em> and card name; separate endpoints to fetch <em>found</em> vs <em>unfound</em> cards.</li>
-        <li><strong>JWT refresh on each request:</strong> API returns a refreshed JWT token so the client always stays authenticated without extra round-trips.</li>
-        <li><strong>Clean UX:</strong> Card grid with responsive layout, mobile-first touch targets, keyboard focus states, and aria-labels for screen readers.</li>
+        <li><strong>User authentication</strong> with JWT (login/session).</li>
+        <li><strong>MongoDB integration</strong> for card data and collections.</li>
+        <li><strong>Collectible pack opening</strong> that simulates obtaining cards.</li>
+        <li><strong>Frontend / backend separation</strong> for clean architecture.</li>
+        <li><strong>Responsive design</strong> across web and mobile.</li>
       </ul>
 
-      <h2>Architecture</h2>
+      <h2>Technologies</h2>
       <ul>
-        <li><strong>Backend:</strong> Node.js + Express REST API</li>
-        <li><strong>Database:</strong> MongoDB (<code>Cards</code> and <code>UserCards</code> collections)</li>
-        <li><strong>Core endpoints:</strong>
-          <ul>
-            <li><code>POST /api/openPack</code> — apply rarity weights, return drawn cards, update <code>UserCards</code></li>
-            <li><code>GET /api/foundCards</code> — user’s collected cards</li>
-            <li><code>GET /api/unfoundCards</code> — remaining cards to chase</li>
-          </ul>
-          Each response refreshes and returns the user’s JWT.
-        </li>
-        <li><strong>Front-end:</strong> HTML/CSS/JS (semantic structure, responsive layout, ARIA for accessibility)</li>
+        <li><strong>Frontend:</strong> React, TypeScript, Vite, CSS.</li>
+        <li><strong>Backend:</strong> Node.js, Express.js.</li>
+        <li><strong>Database:</strong> MongoDB via Mongoose.</li>
+        <li><strong>Auth:</strong> JWT, bcrypt.</li>
+        <li><strong>Email:</strong> SendGrid.</li>
+        <li><strong>Testing:</strong> Jest, Supertest.</li>
+        <li><strong>Deployment:</strong> Nginx (Linux), GitHub.</li>
       </ul>
+
+      <h2>How It Works</h2>
+      <ol>
+        <li><strong>Sign in</strong> with JWT auth.</li>
+        <li><strong>Open packs</strong> to receive hand-drawn UCF/professor cards (with special dev cards).</li>
+        <li><strong>Review & collect</strong>—cards persist to your account via MongoDB; the UI is responsive for mobile/desktop.</li>
+      </ol>
+
+      <figure>
+        <img src="images/pocketprofessors.png" alt="PocketProfessors pack opening" />
+        <figcaption>Open weighted packs.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/professorpannel.png" alt="PocketProfessors collection views" />
+        <figcaption>Collect professors, track progress.</figcaption>
+      </figure>
 
       <h2>My Role & Contributions</h2>
+      <h3>Project Manager & Frontend Developer</h3>
       <ul>
-        <li>Designed the landing & collection UIs (grid system, card components, hover/focus affordances).</li>
-        <li>Implemented pack-opening flow and client-side state updates after API responses.</li>
-        <li>Co-designed API shapes and error handling (e.g., token refresh, idempotent pulls).</li>
+        <li>Name & Website Theming, All Cards, All Art, Powerpoint, Gantt Chart, Recourse Allocation, Droplet, and Domain.</li>
+        <li>Front-end UX for the pack-opening and collection views (responsive grid, focus states, ARIA labels).</li>
+        <li>Collaborated on API shape and JWT token lifecycle.</li>
+        <li>Helped align component structure with React + TypeScript best practices.</li>
       </ul>
 
-      <h2>Challenges & Lessons</h2>
+      <h2>Credits & Links</h2>
       <ul>
-        <li><strong>Weighted randomness:</strong> Tuned rarity weights so pulls “feel right” while remaining statistically fair.</li>
-        <li><strong>Token lifecycle:</strong> Simplified auth by letting each API call return a fresh JWT, reducing expired-token edge cases.</li>
-        <li><strong>Performance + accessibility:</strong> Lazy-loaded media and ensured complete keyboard navigation with visible focus states.</li>
+        <li>Team project for UCF COP4331 (Group 25).</li>
+        <li>Live site:
+          <a href="http://pocketprofessors.com/" target="_blank" rel="noopener">pocketprofessors.com</a>
+        </li>
+        <li>Repository:
+          <a href="https://github.com/jm19pa/Group25-Large-Project-COP4331" target="_blank" rel="noopener">GitHub: Group25-Large-Project-COP4331</a>
+        </li>
       </ul>
 
-      <h2>Skills Learned</h2>
-      <ul>
-        <li>REST design and JSON contracts</li>
-        <li>Stateful UI patterns without a framework</li>
-        <li>Accessible components (ARIA roles, focus management)</li>
-        <li>MongoDB data modeling for collections/progress</li>
-      </ul>
+      <details>
+        <summary><strong>Developer quick start</strong></summary>
+        <pre><code>git clone https://github.com/jm19pa/Group25-Large-Project-COP4331.git
+cd Group25-Large-Project-COP4331
+npm install
+# then set .env:
+MONGODB_URI=...
+JWT_SECRET=...
+SENDGRID_API_KEY=...
+        </code></pre>
+        <p>See the repo README for the full setup and scripts.</p>
+      </details>
 
-      <!-- Optional links block; keep if you add URLs -->
-      <!--
-      <h2>Links</h2>
-      <ul>
-        <li><a href="https://your-demo-url" target="_blank" rel="noopener">Live Demo</a></li>
-        <li><a href="https://github.com/yourrepo" target="_blank" rel="noopener">Source Code</a></li>
-      </ul>
-      -->
+      <hr>
+
+      <p>
+        Also see my other projects on the <a href="index.html#projects">Projects</a> section,
+        connect on <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>,
+        or visit my <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub profile</a>.
+      </p>
     </article>
   </main>
 
-<footer>
-  <p>
-    © <span id="year"></span> David Gusmao ·
-    <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
-    <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
-    <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
-  </p>
-</footer>
-
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-
+  <footer>
+    <p><a href="index.html">Back to Resume</a></p>
+  </footer>
 </body>
 </html>

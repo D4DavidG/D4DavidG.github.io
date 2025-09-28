@@ -11,82 +11,105 @@
     <nav aria-label="Breadcrumb">
       <a href="index.html">← Back to Resume</a>
     </nav>
-    <h1>Contact Manager</h1>
-    <p class="subtitle">Semantic HTML/CSS/JS front end with a lightweight PHP backend</p>
+    <h1 class="neon">Contact Manager</h1>
+    <p class="subtitle">
+      Completed Jun 2025 · Team of 4 · LAMP stack (Linux, Apache, MySQL, PHP), FileZilla, GoDaddy, DigitalOcean, PuTTY
+    </p>
+    <p class="subtitle">
+      Repository:
+      <a href="https://github.com/jm19pa/COP4331-Group16-Small-Project" target="_blank" rel="noopener">
+        github.com/jm19pa/COP4331-Group16-Small-Project ↗
+      </a>
+    </p>
   </header>
 
   <main>
     <article>
       <figure>
-        <img src="images/contact-manager.png" alt="Screenshot of Contact Manager interface with search, add, edit, and delete contact forms" />
-        <figcaption>Search, add, edit, and delete with client-side validation.</figcaption>
+        <img src="images/gorilla home page.png" alt="CS majors Vs Gorillas" />
+        <figcaption>Main Home Page is all that is accessable due to website being down.</figcaption>
       </figure>
 
       <h2>Overview</h2>
       <p>
-        A clean, semantic, and responsive contact manager. The UI supports searching, adding,
-        editing, and deleting contacts. Front end uses vanilla JavaScript
-        (<code>XMLHttpRequest</code>) to interact with a PHP backend and updates the page without reloads.
+        A clean, semantic, and responsive contact manager built as a small-group project.
+        The interface supports searching, adding, editing, and deleting contacts. The front end uses
+        vanilla JavaScript (<code>XMLHttpRequest</code>) to communicate with a lightweight PHP backend
+        and updates the page without reloads.
       </p>
+
+      <h2>My Role — Project Manager</h2>
+      <ul>
+        <li><strong>Planning & scope:</strong> defined functional requirements, split milestones (search → add/edit → delete → polish), maintained the task board.</li>
+        <li><strong>Coordination:</strong> ran stand-ups, tracked blockers, assigned issues/PRs, and enforced code-review checklists.</li>
+        <li><strong>Architecture & handoffs:</strong> finalized endpoint contracts (<code>search.php</code>, <code>add.php</code>, <code>update.php</code>, <code>delete.php</code>) and payload shapes.</li>
+        <li><strong>Quality:</strong> validated forms (HTML constraints + JS), accessibility passes (labels, focus order, ARIA), and browser checks.</li>
+        <li><strong>DevOps:</strong> coordinated hosting and transfers (GoDaddy/DigitalOcean), SFTP/SSH (FileZilla, PuTTY), and environment setup documentation.</li>
+      </ul>
 
       <h2>Features</h2>
       <ul>
-        <li><strong>Live search:</strong> Debounced search box calls <code>search.php</code> and renders results dynamically.</li>
-        <li><strong>CRUD:</strong> <code>add.php</code>, <code>update.php</code>, <code>delete.php</code> endpoints; optimistic UI updates with error fallback.</li>
-        <li><strong>Form validation:</strong> HTML constraints (e.g., <code>required</code>, <code>type="email"</code>, <code>pattern</code>) plus JS checks and accessible error messaging.</li>
-        <li><strong>Responsive layout:</strong> Works on mobile and desktop with flexible forms and table/list views.</li>
+        <li><strong>Live search:</strong> debounced input calls <code>search.php</code> and renders results dynamically.</li>
+        <li><strong>CRUD:</strong> create/update/delete via PHP endpoints with optimistic UI and error fallback.</li>
+        <li><strong>Validation:</strong> native HTML constraints (<code>required</code>, <code>type="email"</code>, <code>pattern</code>) plus JS error messaging.</li>
+        <li><strong>Responsive design:</strong> form/table layouts adapt cleanly from mobile to desktop.</li>
+        <li><strong>Accessible UI:</strong> proper labels/ids, descriptive buttons, visible focus states, logical tab order.</li>
       </ul>
 
       <h2>Architecture</h2>
       <ul>
-        <li><strong>Front-end:</strong> Semantic HTML sections, responsive CSS (flex/grid), unobtrusive JS for DOM updates.</li>
-        <li><strong>Transport:</strong> <code>XMLHttpRequest</code> to PHP endpoints, JSON payloads, try/catch error handling.</li>
-        <li><strong>Backend:</strong> PHP scripts (<code>search.php</code>, <code>add.php</code>, <code>update.php</code>, <code>delete.php</code>) responding with JSON.</li>
+        <li><strong>Front-end:</strong> Semantic HTML sections, CSS (flex/grid), unobtrusive JS for DOM updates.</li>
+        <li><strong>Transport:</strong> <code>XMLHttpRequest</code> with JSON payloads/responses; centralized request helpers.</li>
+        <li><strong>Backend:</strong> PHP scripts returning JSON (<code>search.php</code>, <code>add.php</code>, <code>update.php</code>, <code>delete.php</code>).</li>
+        <li><strong>Data:</strong> MySQL schema for contacts (name, email, phone, etc.), parameterized queries.</li>
       </ul>
 
-      <h2>My Role & Contributions</h2>
+      <h2>Technical Contributions</h2>
       <ul>
-        <li>Implemented the delete flow and fixed a null-DOM reference bug (ensured elements are selected after render and guarded with null checks).</li>
-        <li>Wired up XHR helpers for GET/POST, standardized success/error handling, and status toasts.</li>
-        <li>Built accessible forms (labels/ids match, descriptive button text, keyboard focus order, visible focus rings).</li>
+        <li>Implemented the delete flow and fixed a null-DOM reference bug by guarding queries and deferring lookups until content mount.</li>
+        <li>Wrote XHR utilities for GET/POST, standardized success/error handling, and added status toasts.</li>
+        <li>Authored the form accessibility pattern (labels, error regions, focus management) and responsive form grid.</li>
       </ul>
 
       <h2>Challenges & Lessons</h2>
       <ul>
-        <li><strong>Null element references:</strong> Resolved race conditions by deferring DOM queries until after content mount and guarding with existence checks.</li>
-        <li><strong>Validation UX:</strong> Combined native constraints with custom messages so screen readers announce issues clearly.</li>
-        <li><strong>Separation of concerns:</strong> Kept HTML semantic, CSS for layout/visuals, and JS strictly for behavior.</li>
+        <li><strong>Race conditions:</strong> solved null element references with safe selectors and render timing.</li>
+        <li><strong>Validation UX:</strong> combined native constraints with concise custom messages for clarity and screen-reader compatibility.</li>
+        <li><strong>Separation of concerns:</strong> kept HTML semantic, CSS for layout/visuals, and JS for behavior to simplify maintenance.</li>
       </ul>
 
-      <h2>Skills Learned</h2>
+      <h2>Skills Demonstrated</h2>
       <ul>
-        <li>Semantic HTML for forms and results lists</li>
-        <li>Accessible validation patterns (labels, aria-live regions)</li>
-        <li>AJAX with <code>XMLHttpRequest</code> and PHP endpoints</li>
-        <li>Responsive form design with flex/grid</li>
+        <li>Project management (scope, milestones, issue/PR workflow, stand-ups)</li>
+        <li>Semantic HTML & accessible forms (labels, aria-live, focus order)</li>
+        <li>AJAX with <code>XMLHttpRequest</code> to PHP endpoints</li>
+        <li>Responsive CSS with flex/grid</li>
+        <li>Basic DevOps (GoDaddy/DigitalOcean, FileZilla, PuTTY)</li>
       </ul>
 
-      <!-- Optional links block; keep if you add URLs -->
-      <!--
       <h2>Links</h2>
       <ul>
-        <li><a href="https://your-demo-url" target="_blank" rel="noopener">Live Demo</a></li>
-        <li><a href="https://github.com/yourrepo" target="_blank" rel="noopener">Source Code</a></li>
+        <li>Source Code:
+          <a href="https://github.com/jm19pa/COP4331-Group16-Small-Project" target="_blank" rel="noopener">
+            github.com/jm19pa/COP4331-Group16-Small-Project
+          </a>
+        </li>
+        <li>No public demo is hosted at this time.</li>
       </ul>
-      -->
     </article>
   </main>
 
-<footer>
-  <p>
-    © <span id="year"></span> David Gusmao ·
-    <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
-    <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
-    <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
-  </p>
-</footer>
+  <footer>
+    <p>
+      © <span id="year"></span> David Gusmao ·
+      <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+      <p><a href="index.html">Back to Resume</a></p>
+    </p>
+  </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+

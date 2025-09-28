@@ -1,10 +1,31 @@
-/* Base — semantic, accessible defaults */
+/* ===========================
+   Base — semantic, accessible
+   =========================== */
 * { box-sizing: border-box; }
 html { color-scheme: light dark; }
+
+/* ====== Neon theme variables ====== */
+:root{
+  --bg: #000;               /* page background */
+  --text: #d7d7d7;          /* body text */
+  --muted: #9aa09a;         /* secondary text */
+  --neon: #00ff00;          /* primary neon green */
+  --neon-soft: rgba(0,255,0,.55);
+  --neon-faint: rgba(0,255,0,.25);
+}
+
+/* ====== Dark site base + smooth scrolling ====== */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* Skip link for keyboard/screen reader users */
@@ -12,68 +33,236 @@ body {
   position: absolute; left: -999px; top: -999px;
 }
 .skip-link:focus {
-  left: 0; top: 0; padding: .5rem .75rem; background: #00da00; color: #000;
+  left: 0; top: 0; padding: .5rem .75rem; background: var(--neon); color: #000;
 }
 
-/* Header */
+/* =================
+   Header (Neon Bar)
+   ================= */
 header {
-  background: #00da00;
-  color: #000;
+  background: #000;                /* black bar */
+  color: var(--neon);              /* neon text inside the bar */
   padding: 1rem;
-  border-bottom: 1px solid #000;
+  border: 1px solid var(--neon);
+  box-shadow:
+    0 0 12px var(--neon),          /* outer glow */
+    inset 0 0 8px var(--neon-faint); /* inner glow */
+  position: static;                /* make sure it scrolls away */
+  top: auto;
 }
 header .container {
   display: flex; gap: 1rem; align-items: center; max-width: 960px; margin: 0 auto;
 }
 header h1 { margin: 0; font-size: clamp(1.25rem, 3.5vw, 2rem); }
-header address a { color: inherit; }
+header address a { color: var(--neon); }
 header address a:hover, nav a:hover { text-decoration: underline; }
+
+/* Optional neon text glow on key header text */
+header h1.neon, header address.neon {
+  text-shadow:
+    0 0 8px var(--neon-soft),
+    0 0 16px var(--neon-faint);
+}
 
 /* Simple header variant for project pages */
 header.simple { display: grid; gap: .5rem; }
-header.simple nav a { color: #000; }
+header.simple nav a { color: var(--neon); }
 
-/* Profile image */
-.profile {
-  width: clamp(64px, 12vw, 128px);
-  height: clamp(64px, 12vw, 128px);
-  border-radius: 50%;
-  object-fit: cover;
+/* ==========================
+   Top Navigation as Buttons
+   ========================== */
+/* Use this HTML:
+   <nav class="topnav" aria-label="Primary">
+     <a class="btn" href="#resume">Resume</a>
+     ...
+   </nav>
+*/
+.topnav {
+  max-width: 960px;
+  margin: .5rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .6rem;
+  justify-content: center;
+  padding-bottom: .5rem;
 }
 
-/* Nav */
+.topnav .btn,
+nav ul li a.btn { /* also style if you're still using <ul> */
+  appearance: none;
+  display: inline-block;
+  padding: .5rem .9rem;
+  border-radius: 999px;
+  border: 1px solid var(--neon);
+  background: #000;
+  color: var(--neon);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .2px;
+  box-shadow: 0 0 0 transparent;
+  transition: box-shadow .18s ease, transform .06s ease, background-color .18s ease;
+}
+
+.topnav .btn:hover,
+.topnav .btn:focus-visible,
+nav ul li a.btn:hover,
+nav ul li a.btn:focus-visible {
+  outline: none;
+  background: #001a00; /* barely-not-black for depth */
+  box-shadow:
+    0 0 8px var(--neon),
+    0 0 18px var(--neon-soft);
+}
+.topnav .btn:active,
+nav ul li a.btn:active { transform: translateY(1px) scale(.98); }
+
+/* If you're still using a <ul> for nav somewhere, keep it tidy */
 nav ul {
   list-style: none; margin: .5rem auto 0; padding: 0;
   display: flex; gap: 1rem; flex-wrap: wrap; max-width: 960px;
 }
-nav a { color: #000; text-decoration: none; }
+nav a { color: var(--neon); text-decoration: none; }
 
-/* Main content */
-main { max-width: 960px; margin: 1rem auto; padding: 0 1rem; }
-section + section, article + article { margin-top: 1.25rem; }
-h2 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); margin: .25rem 0 .5rem; }
+/* =================
+   Typography/Links
+   ================= */
+a { color: var(--neon); }
+a:hover, a:focus-visible { text-decoration: underline; }
+
+/* Section headings with subtle neon accent */
+h2 {
+  color: var(--text);
+  text-shadow: 0 0 10px var(--neon-faint);
+}
 h3 { margin: 0 0 .25rem; }
 
-/* Project list */
+/* =============
+   Main Content
+   ============= */
+main { max-width: 960px; margin: 1rem auto; padding: 0 1rem; }
+section + section, article + article { margin-top: 1.25rem; }
+
+/* Highlight the section you jumped to (smooth scroll target) */
+:target {
+  scroll-margin-top: 12px;          /* room under the top bar when arriving */
+  outline: 2px solid var(--neon);
+  outline-offset: 6px;
+  border-radius: 10px;
+  animation: target-pop .9s ease 1;
+}
+@keyframes target-pop {
+  0%   { box-shadow: 0 0 0 var(--neon-faint); }
+  40%  { box-shadow: 0 0 18px var(--neon-soft); }
+  100% { box-shadow: 0 0 0 var(--neon-faint); }
+}
+
+/* ===========
+   Avatar (DP)
+   =========== */
+/* Your existing circle + crop behavior, retuned for neon theme */
+.profile {
+  width: clamp(80px, 14vw, 140px);
+  aspect-ratio: 1 / 1;
+  border-radius: 10%;
+  object-fit: cover;
+  object-position: 50% 10%;
+  border: 2px solid var(--neon-faint);
+  box-shadow: 0 2px 10px rgba(0,0,0,.6);
+}
+
+/* Zoomable frame option you added */
+.avatar {
+  width: clamp(80px, 14vw, 140px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--neon-faint);
+  box-shadow: 0 2px 10px rgba(0,0,0,.6);
+}
+
+.avatar .profile {
+  width: 89%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 1% 1%;        /* adjust framing (x y) */
+  transform: scale(1.75);          /* <- ZOOM amount (try 1.05–1.25) */
+  transform-origin: 50% 40%;       /* tweak pivot point for faces */
+  transition: transform .2s ease;  /* optional nicety */
+}
+
+/* === Neon glow on profile hover === */
+
+/* Smooth transition when hovering */
+.profile,
+.avatar {
+  transition: box-shadow .2s ease, border-color .2s ease, filter .2s ease;
+}
+
+/* If you use ONLY <img class="profile"> */
+.profile:hover {
+  border-color: var(--neon);
+  box-shadow:
+    0 0 10px var(--neon),
+    0 0 22px var(--neon-soft),
+    0 0 36px var(--neon-soft);
+}
+
+/* If you use the .avatar wrapper, glow the frame so it halos nicely */
+.avatar:hover {
+  border-color: var(--neon);
+  box-shadow:
+    0 0 10px var(--neon),
+    0 0 22px var(--neon-soft),
+    0 0 36px var(--neon-soft);
+}
+
+/* Optional: a tiny “alive” sheen on the image itself while hovered */
+.avatar:hover .profile,
+.profile:hover {
+  filter: drop-shadow(0 0 4px var(--neon-faint));
+}
+
+
+
+/* =========
+   Projects
+   ========= */
 .project-links { padding-left: 1.25rem; }
 .project-links a { text-decoration: none; }
 
-/* Tags (skills) */
+/* =======
+   Tags
+   ======= */
 .tags { display: flex; flex-wrap: wrap; gap: .5rem; padding-left: 0; list-style: none; }
 .tags li {
-  border: 1px solid #ccc; border-radius: 999px;
-  padding: .25rem .5rem; font-size: .95rem;
+  border: 1px solid var(--neon-faint);
+  border-radius: 999px;
+  padding: .25rem .5rem;
+  font-size: .95rem;
+  color: var(--text);
+  box-shadow: 0 0 6px var(--neon-faint);
 }
 
-/* Figures */
+/* =======
+   Figures
+   ======= */
 figure { margin: 0; }
-figure img { width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; }
-figcaption { font-size: .9rem; color: #555; margin-top: .25rem; }
+figure img { width: 100%; height: auto; border: 1px solid #1a1a1a; border-radius: 8px; }
+figcaption { font-size: .9rem; color: var(--muted); margin-top: .25rem; }
 
-/* Footer */
-footer { border-top: 1px solid #eee; padding: 1rem; text-align: center; }
+/* =======
+   Footer
+   ======= */
+footer {
+  border-top: 1px solid #111;
+  padding: 1rem;
+  text-align: center;
+  color: var(--muted);
+}
 
-/* Responsive touch-up */
+/* =====================
+   Responsive touch-up
+   ===================== */
 @media (max-width: 640px) {
   header .container { flex-direction: column; align-items: flex-start; }
   nav ul { justify-content: flex-start; }
