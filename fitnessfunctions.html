@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FitnessFunctions — Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#00ff00">
+</head>
+
+<body>
+  <header class="simple">
+    <nav aria-label="Breadcrumb">
+      <a href="index.html">← Back to Resume</a>
+    </nav>
+
+    <h1 class="neon">FitnessFunctions</h1>
+    <p class="subtitle">
+      Role-based class enrollment system · PHP + MySQL · Admin & Member dashboards
+    </p>
+
+    <p class="subtitle">
+      <!-- Change this if FitnessFunctions has its own repo -->
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub ↗</a>
+      &nbsp;·&nbsp;
+      <a href="downloads/FitnessFunctions.zip" download>Download Project ZIP</a>
+    </p>
+  </header>
+
+  <main>
+    <article>
+      <h2>Overview</h2>
+      <p>
+        FitnessFunctions is a role-based web app that manages gym instructors, class schedules,
+        and member enrollments. Admins can create/edit/delete instructors and classes, while
+        members can browse upcoming sessions, enroll, and drop classes. Enrollment counts are
+        tracked per class to support capacity limits.
+      </p>
+
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Authentication + Roles:</strong> users log in and are routed to Admin or Member dashboards.</li>
+        <li><strong>Admin Dashboard:</strong> manage instructors, manage classes, and view enrollments.</li>
+        <li><strong>CRUD Operations:</strong> add/edit/delete instructors and classes.</li>
+        <li><strong>Enrollment System:</strong> members enroll from “All Classes” and drop from “My Classes”.</li>
+        <li><strong>Capacity Tracking:</strong> “Enrolled” count updates and classes can show <em>Full</em>.</li>
+      </ul>
+
+      <h2>Technologies</h2>
+      <ul>
+        <li><strong>Frontend:</strong> HTML, CSS (custom neon dashboard UI)</li>
+        <li><strong>Backend:</strong> PHP</li>
+        <li><strong>Database:</strong> MySQL</li>
+        <li><strong>Environment:</strong> Apache (localhost development)</li>
+      </ul>
+
+      <h2>Screenshots</h2>
+
+      <figure>
+        <img src="images/fitnessfunctions/login.png" alt="FitnessFunctions login screen" />
+        <figcaption>Login page with test accounts.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/adminDashboard.png" alt="FitnessFunctions admin dashboard" />
+        <figcaption>Admin dashboard navigation.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/manageInstructors.png" alt="Manage instructors page" />
+        <figcaption>Admin: Manage instructors (CRUD).</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/manageClasses.png" alt="Manage classes page" />
+        <figcaption>Admin: Manage classes (CRUD + capacity).</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/classEnrollments.png" alt="Class enrollments page" />
+        <figcaption>Admin: View class enrollments (who is enrolled in each class).</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/memberDashboard.png" alt="Member dashboard" />
+        <figcaption>Member dashboard.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/availableClasses.png" alt="Available classes page" />
+        <figcaption>Member: Browse available classes and see enrollment counts.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/myClassess.png" alt="My classes page" />
+        <figcaption>Member: View enrolled classes and drop if needed.</figcaption>
+      </figure>
+
+      <h2>Implementation Proof (Business Logic + Data)</h2>
+
+      <figure>
+        <img src="images/fitnessfunctions/addClass.png" alt="Add class form" />
+        <figcaption>Add Class form (admin). Scheduling + instructor assignment + capacity input.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/validationCheck.png" alt="Validation when submitting empty form" />
+        <figcaption>Client-side validation: required fields prevent submitting an empty form.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/capacityFull.png" alt="Capacity full example" />
+        <figcaption>Capacity logic: class marked <strong>Full</strong> when enrollment reaches capacity.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/databaseSchema.png" alt="Database schema in MySQL Workbench" />
+        <figcaption>Database schema (MySQL) showing core tables: users, instructors, classes, enrollments.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/fitnessfunctions/codeStructure.png" alt="Project file structure in VS Code" />
+        <figcaption>Project structure (PHP pages + handlers + DB connection).</figcaption>
+      </figure>
+
+      <h2>Download</h2>
+      <p>
+        You can download the full project files here:
+        <a href="downloads/FitnessFunctions.zip" download>FitnessFunctions.zip</a>
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p><span id="year"></span> David Gusmao ·
+      <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a>
+    </p>
+    <p><a href="index.html">Back to Resume</a></p>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
