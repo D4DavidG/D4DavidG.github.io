@@ -4,23 +4,24 @@
   <meta charset="utf-8">
   <title>FitnessFunctions — Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2efcff">
   <link rel="stylesheet" href="styles.css">
-  <meta name="theme-color" content="#00ff00">
 </head>
 
-<body>
-  <header class="simple">
+<body class="theme-aqua">
+  <div class="mouse-glow" aria-hidden="true"></div>
+
+<header class="simple glass">
     <nav aria-label="Breadcrumb">
       <a href="index.html">← Back to Resume</a>
     </nav>
 
     <h1 class="neon">FitnessFunctions</h1>
     <p class="subtitle">
-      Role-based class enrollment system · PHP + MySQL · Admin & Member dashboards
+      <strong class="neon">Solo Project</strong> · Role-based class enrollment system · PHP + MySQL · Admin & Member dashboards
     </p>
 
     <p class="subtitle">
-      <!-- Change this if FitnessFunctions has its own repo -->
       <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub ↗</a>
       &nbsp;·&nbsp;
       <a href="downloads/FitnessFunctions.zip" download>Download Project ZIP</a>
@@ -31,14 +32,16 @@
     <article>
       <h2>Overview</h2>
       <p>
-        FitnessFunctions is a role-based web app that manages gym instructors, class schedules,
-        and member enrollments. Admins can create/edit/delete instructors and classes, while
-        members can browse upcoming sessions, enroll, and drop classes. Enrollment counts are
-        tracked per class to support capacity limits.
+        FitnessFunctions is a <strong>solo-built</strong> role-based web app that manages gym instructors,
+        class schedules, and member enrollments. I designed and implemented the full system end-to-end:
+        authentication + roles, admin CRUD tools, member enrollment flows, and MySQL-backed capacity tracking.
+        Admins can create/edit/delete instructors and classes, while members browse upcoming sessions, enroll,
+        and drop classes. Enrollment totals update per class to enforce capacity limits.
       </p>
 
       <h2>Key Features</h2>
       <ul>
+        <li><strong>Solo Project:</strong> Role-based class enrollment system · PHP + MySQL</li>
         <li><strong>Authentication + Roles:</strong> users log in and are routed to Admin or Member dashboards.</li>
         <li><strong>Admin Dashboard:</strong> manage instructors, manage classes, and view enrollments.</li>
         <li><strong>CRUD Operations:</strong> add/edit/delete instructors and classes.</li>
@@ -139,6 +142,29 @@
     <p><a href="index.html">Back to Resume</a></p>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
+      let raf = 0;
+      let x = window.innerWidth * 0.5;
+      let y = window.innerHeight * 0.35;
+
+      function apply(){
+        document.documentElement.style.setProperty('--mx', x + 'px');
+        document.documentElement.style.setProperty('--my', y + 'px');
+        raf = 0;
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        x = e.clientX;
+        y = e.clientY;
+        if (!raf) raf = requestAnimationFrame(apply);
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>

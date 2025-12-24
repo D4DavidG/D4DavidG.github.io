@@ -13,10 +13,12 @@
   <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <meta name="theme-color" content="#00ff00">
 </head>
-<body>
+
+<body class="theme-green">
+  <div class="mouse-glow" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <header>
+<header class="hero glass">
     <div class="container">
       <div class="avatar">
         <img
@@ -28,7 +30,7 @@
       </div>
 
       <div>
-        <h1>David Gusmao</h1>
+        <h1 class="neon">David Gusmao</h1>
         <address>
           <a href="mailto:davidegusmao@outlook.com">davidegusmao@outlook.com</a> ·
           <a href="mailto:da045393@ucf.edu">da045393@ucf.edu</a> ·
@@ -74,8 +76,24 @@
       <h2 id="h-experience">Relevant Experience</h2>
 
       <article>
+  <h3>Undergraduate Research Assistant — Hardening Build Systems</h3>
+  <p>
+    <time datetime="2025-10">Oct 2025</time> – Present · Orlando, FL ·
+    <!-- <a href="https://pappasbrent.com/research/hardening-build-systems" target="_blank" rel="noopener">
+      Project page ↗
+    </a> -->
+  </p>
+  <ul>
+    <li>Contribute to research focused on improving the security and reliability of software build systems through empirical analysis and tooling.</li>
+    <li>Develop and iterate on scripts/tools to summarize build artifacts and outcomes (e.g., generating LaTeX-ready tables and pgfplots-style visualizations from collected results).</li>
+    <li>Support reproducible research workflows by organizing datasets/results, validating outputs, and documenting analysis steps for the project.</li>
+  </ul>
+</article>
+
+
+      <article>
         <h3>Research Assistant — Human Factors: Group Study</h3>
-        <p><time datetime="2024-02">Feb 2025</time> – Present · Orlando, FL</p>
+        <p><time datetime="2025-02">Feb 2025</time> – Present · Orlando, FL</p>
         <ul>
           <li>Conducted novel research experiments on how programmers debug code in groups, leading to insights on collaborative problem-solving techniques</li>
           <li>Equipped participants with technology for tracking various biometrics, enhancing the accuracy of data collection for comprehensive analysis</li>
@@ -96,16 +114,9 @@
     <section id="projects" aria-labelledby="h-projects">
       <h2 id="h-projects">Projects</h2>
       <ul class="project-links">
-        <li>
-          <a href="project-pocketprofessors.html">PocketProfessors — MERN app (packs, collections, JWT refresh)</a>
-        </li>
-        <li>
-          <a href="project-contact-manager.html">CS Majors vs Gorilla — Contact Manager (semantic forms + AJAX)</a>
-        </li>
-        <li>
-          <a href="fitnessfunctions.html">FitnessFunctions — Class Enrollment System (Admin/Member, PHP + MySQL)</a>
-        </li>
-      </ul>
+                <li><a href="fitnessfunctions.html">FitnessFunctions — Class Enrollment System (Admin/Member, PHP + MySQL)</a></li>
+        <li><a href="project-pocketprofessors.html">PocketProfessors — MERN app (packs, collections, JWT refresh)</a></li>
+        <li><a href="project-contact-manager.html">CS Majors vs Gorilla — Contact Manager (semantic forms + AJAX)</a></li>      </ul>
     </section>
 
     <section id="skills" aria-labelledby="h-skills">
@@ -144,17 +155,41 @@
         <li>Red Cross Water Safety Instructor</li>
       </ul>
     </section>
-
-    <footer>
-      <p><span id="year"></span> David Gusmao ·
-        <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
-        <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
-        <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
-      </p>
-      <p><a href="index.html">Back to Resume</a></p>
-    </footer>
-
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
   </main>
+
+  <footer>
+    <p><span id="year"></span> David Gusmao ·
+      <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p><a href="index.html">Back to Resume</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mouse glow (shared “FitnessFunctions-style” flow)
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
+      let raf = 0;
+      let x = window.innerWidth * 0.5;
+      let y = window.innerHeight * 0.35;
+
+      function apply(){
+        document.documentElement.style.setProperty('--mx', x + 'px');
+        document.documentElement.style.setProperty('--my', y + 'px');
+        raf = 0;
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        x = e.clientX;
+        y = e.clientY;
+        if (!raf) raf = requestAnimationFrame(apply);
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>

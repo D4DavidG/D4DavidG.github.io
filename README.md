@@ -1,6 +1,6 @@
 # Hi, I'm David Gusmao 👋
 
-Aspiring Software Engineer with research and project-management experience. Skilled in React JS, JavaScript, and semantic HTML/CSS. I enjoy building clean, responsive, and accessible interfaces and applying evidence-driven insights from human-factors research to improve developer and user workflows. 
+Aspiring Software Engineer and Undergraduate Research Assistant with experience spanning full-stack web development, frontend engineering, and empirical software engineering research. I enjoy building clean, responsive, and accessible interfaces while applying evidence-driven insights from research to improve developer workflows and system reliability.
 
 - 🌐 Portfolio: https://d4davidg.github.io/
 - 💼 LinkedIn: https://www.linkedin.com/in/david-e-gusmao/
@@ -10,7 +10,7 @@ Aspiring Software Engineer with research and project-management experience. Skil
 
 ---
 
-## 🧰 Skills (badges)
+## 🧰 Skills
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
@@ -27,34 +27,80 @@ Aspiring Software Engineer with research and project-management experience. Skil
 
 ---
 
-## 📌 Featured Projects
+## 🔬 Research Experience
 
-### PocketProfessors — MERN/TypeScript collectible study app
-- **Live**: http://pocketprofessors.com/  
-- **Repo**: https://github.com/jm19pa/Group25-Large-Project-COP4331  
-- **Project Page (on my site)**: https://d4davidg.github.io/project-pocketprofessors.html  
-- **What I did**: Front-end UX for pack opening and collections, responsive grid, focus states/ARIA; collaborated on API shape & JWT lifecycle; project visuals/branding.
+### Undergraduate Research Assistant — Hardening Build Systems  
+**University of Central Florida** · Oct 2025 – Present  
+🔗 Project: https://pappasbrent.com/research/hardening-build-systems
 
-### CS Majors vs Gorilla — Contact Manager (Small Project)
-- **Repo**: https://github.com/jm19pa/COP4331-Group16-Small-Project  
-- **Project Page (on my site)**: https://d4davidg.github.io/project-contact-manager.html  
-- **Role**: **Project Manager** (scope, milestones, stand-ups, issue/PR flow) + front-end contributions (AJAX with `XMLHttpRequest`, accessible forms, responsive layout).  
-- **Stack**: LAMP (Linux, Apache, MySQL, PHP), FileZilla, GoDaddy/DigitalOcean, PuTTY.
+- Contribute to research focused on improving the **security and reliability of software build systems**.
+- Analyze build artifacts and outcomes to identify patterns related to hardening and reproducibility.
+- Develop and iterate on **analysis scripts and tooling**, including:
+  - Generating LaTeX-ready tables
+  - Producing pgfplots-style visualizations from experimental data
+- Support **reproducible research workflows** by organizing datasets, validating results, and documenting analysis steps.
+- Collaborate with faculty and graduate researchers on experimental design and reporting.
 
 ---
 
-## 🏆 Highlights
+## 📌 Featured Projects
 
-- 3rd Place — **UCF Horse Plinko Cyber Defense Competition** (Oct 2024)  
-- **Bright Futures Academic Scholarship**  
-- Passed the **Computer Science Foundation Exam**  
-- Certifications: HSR Group 2, RCR (Engineers), CIBA, MTA Windows OS, MTA Python, Red Cross WSI
+### 🃏 PocketProfessors — MERN / TypeScript Collectible Study App
+- **Live Site:** http://pocketprofessors.com/
+- **Repository:** https://github.com/jm19pa/Group25-Large-Project-COP4331
+- **Project Page:** https://d4davidg.github.io/project-pocketprofessors.html
+
+**What I did**
+- Frontend UX for pack opening and collection views (responsive grid, focus states, ARIA labels).
+- Collaborated on API design and JWT authentication lifecycle.
+- Led project branding, theming, visuals, planning artifacts (Gantt chart, resource allocation).
+- Helped align frontend architecture with React + TypeScript best practices.
+
+---
+
+### 🏋️ FitnessFunctions — Role-Based Class Enrollment System
+- **Project Page:** https://d4davidg.github.io/fitnessfunctions.html
+- **Stack:** PHP, MySQL, HTML, CSS (custom neon UI)
+
+**Highlights**
+- Solo-built full-stack system with Admin and Member dashboards.
+- Authentication + role-based routing.
+- Full CRUD for instructors and classes.
+- Capacity-aware enrollment logic with real-time availability.
+- MySQL-backed relational schema with clean separation of concerns.
+
+---
+
+### 🦍 CS Majors vs Gorilla — Contact Manager (Small Project)
+- **Repository:** https://github.com/jm19pa/COP4331-Group16-Small-Project
+- **Project Page:** https://d4davidg.github.io/project-contact-manager.html
+
+**Role: Project Manager**
+- Defined scope, milestones, and issue/PR workflow.
+- Coordinated team communication and reviews.
+- Contributed frontend logic using `XMLHttpRequest` for AJAX-based CRUD.
+- Focused on semantic HTML, accessibility, and responsive layout.
+
+---
+
+## 🏆 Highlights & Honors
+
+- 🥉 3rd Place — **UCF Horse Plinko Cyber Defense Competition** (Oct 2024)
+- 🎓 **Bright Futures Academic Scholarship**
+- ✅ Passed the **Computer Science Foundation Exam**
+- 📜 Certifications:
+  - Human Subjects Research — Social/Behavioral (Group 2)
+  - Responsible Conduct of Research (Engineers)
+  - Certified Internet Business Associate
+  - MTA: Windows OS Fundamentals
+  - MTA: Introduction to Programming Using Python
+  - Red Cross Water Safety Instructor
 
 ---
 
 ## 📊 GitHub Stats
 
-> If these cards don’t render, they may be rate-limited by GitHub—refresh later.
+> If these cards don’t render, they may be temporarily rate-limited by GitHub.
 
 ![David's GitHub Stats](https://github-readme-stats.vercel.app/api?username=D4DavidG&show_icons=true&hide_rank=false)
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=D4DavidG&layout=compact)
@@ -63,8 +109,8 @@ Aspiring Software Engineer with research and project-management experience. Skil
 
 ## 📫 Contact
 
-- Email: **davidegusmao@outlook.com**  
-- LinkedIn: **https://www.linkedin.com/in/david-e-gusmao/**  
+- Email: **davidegusmao@outlook.com**
+- LinkedIn: **https://www.linkedin.com/in/david-e-gusmao/**
 - Portfolio: **https://d4davidg.github.io/**
 
-Thanks for visiting! Feel free to open issues or reach out if you’d like to collaborate.
+Thanks for stopping by — feel free to explore my projects or reach out if you’d like to collaborate!

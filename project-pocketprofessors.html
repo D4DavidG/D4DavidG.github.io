@@ -10,10 +10,13 @@
   <link rel="icon" type="image/png" href="/images/favicon-16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
-  <meta name="theme-color" content="#00ff00">
+  <meta name="theme-color" content="#ffd54a">
 </head>
-<body>
-  <header class="simple">
+
+<body class="theme-gold">
+  <div class="mouse-glow" aria-hidden="true"></div>
+
+<header class="simple glass">
     <nav aria-label="Breadcrumb">
       <a href="index.html">← Back to Resume</a>
     </nav>
@@ -101,7 +104,7 @@
         <li><strong>JWT lifecycle:</strong> Implemented token refresh and secure storage to balance UX and security.</li>
         <li><strong>Responsive design:</strong> Crafted a mobile-first layout that adapts cleanly across devices.</li>
         <li><strong>Database modeling:</strong> Designed efficient MongoDB schemas for users, cards, and collections.</li>
-        <li><strong>Testing:</strong> Wrote unit and integration tests to ensure reliability and catch regressions early.</li>    
+        <li><strong>Testing:</strong> Wrote unit and integration tests to ensure reliability and catch regressions early.</li>
       </ul>
 
       <details>
@@ -136,7 +139,29 @@ SENDGRID_API_KEY=...
     <p><a href="index.html">Back to Resume</a></p>
   </footer>
 
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
+      let raf = 0;
+      let x = window.innerWidth * 0.5;
+      let y = window.innerHeight * 0.35;
+
+      function apply(){
+        document.documentElement.style.setProperty('--mx', x + 'px');
+        document.documentElement.style.setProperty('--my', y + 'px');
+        raf = 0;
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        x = e.clientX;
+        y = e.clientY;
+        if (!raf) raf = requestAnimationFrame(apply);
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>
