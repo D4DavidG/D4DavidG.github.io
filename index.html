@@ -2,23 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>David Gusmao — Resume</title>
+  <title>David Gusmao — Software Engineer &amp; CS Student at UCF</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="David Gusmao — Computer Science student at UCF building full-stack web apps and doing empirical software engineering research on build-system security. Portfolio, projects, and resume.">
+  <meta name="author" content="David Gusmao">
+  <link rel="canonical" href="https://d4davidg.github.io/">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://d4davidg.github.io/">
+  <meta property="og:title" content="David Gusmao — Software Engineer &amp; CS Student at UCF">
+  <meta property="og:description" content="Full-stack projects (MERN, LAMP), undergraduate research on hardening build systems, and more.">
+  <meta property="og:image" content="https://d4davidg.github.io/images/profile.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="David Gusmao — Software Engineer &amp; CS Student at UCF">
+  <meta name="twitter:description" content="Full-stack projects (MERN, LAMP), undergraduate research on hardening build systems, and more.">
+
   <link rel="preload" href="styles.css" as="style">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/images/favicon-16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <meta name="theme-color" content="#00ff00">
+
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "David Gusmao",
+    "url": "https://d4davidg.github.io/",
+    "image": "https://d4davidg.github.io/images/profile.jpg",
+    "jobTitle": "Computer Science Student & Undergraduate Research Assistant",
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Central Florida" },
+    "sameAs": [
+      "https://www.linkedin.com/in/david-e-gusmao/",
+      "https://github.com/D4DavidG"
+    ]
+  }
+  </script>
 </head>
 
 <body class="theme-green">
   <div class="mouse-glow" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-<header class="hero glass">
+  <header class="hero glass">
     <div class="container">
       <div class="avatar">
         <img
@@ -31,73 +61,63 @@
 
       <div>
         <h1 class="neon">David Gusmao</h1>
+        <p class="tagline">Building full-stack apps &amp; researching secure build systems — CS @ UCF, class of 2027.</p>
         <address>
           <a href="mailto:davidegusmao@outlook.com">davidegusmao@outlook.com</a> ·
-          <a href="mailto:da045393@ucf.edu">da045393@ucf.edu</a> ·
           <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a> ·
-          <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
-          <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
-<a href="downloads/David_Gusmao_Resume.pdf" download>Resume</a>
+          <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a>
         </address>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="#projects">View Projects</a>
+          <a class="btn" href="downloads/David_Gusmao_Resume.pdf" download>Download Resume</a>
+        </div>
       </div>
     </div>
 
     <nav class="topnav" aria-label="Primary">
-      <a class="btn" href="#objective">Objective</a>
-      <a class="btn" href="#education">Education</a>
+      <a class="btn" href="#about">About</a>
       <a class="btn" href="#experience">Experience</a>
       <a class="btn" href="#projects">Projects</a>
       <a class="btn" href="#skills">Skills</a>
       <a class="btn" href="#awards">Awards</a>
+      <a class="btn" href="#contact">Contact</a>
     </nav>
   </header>
 
   <main id="main">
-    <section id="objective" aria-labelledby="h-objective">
-      <h2 id="h-objective">Professional Objective</h2>
-      <p>
-        Aspiring Frontend Software Engineer with a background as a Research Assistant and Project Manager, skilled in programming languages such as React JS, JavaScript, and HTML/CSS. Experienced in conducting experiments on collaborative programming, with a strong foundation in software development and problem-solving. Eager to leverage technical expertise and innovative thinking to contribute to impactful frontend projects.
+    <section id="about" aria-labelledby="h-about">
+      <h2 id="h-about">About</h2>
+      <p class="lead">
+        I'm a Computer Science junior at the University of Central Florida (GPA 3.49, expected May 2027).
+        I build full-stack web applications — from a MERN collectible-card app to a PHP/MySQL enrollment
+        system — and work as an undergraduate research assistant studying how to make software build
+        systems more secure and reliable. I care about accessible, responsive interfaces and
+        evidence-driven engineering, and I'm currently seeking software engineering internships.
       </p>
     </section>
 
-    <section id="education" aria-labelledby="h-education">
-      <h2 id="h-education">Education</h2>
-      <article>
-        <h3>University of Central Florida — B.S. Computer Science</h3>
-        <p>
-          <strong>Expected Graduation:</strong> May 2027 · <strong>GPA:</strong> 3.49<br>
-          <strong>Achievements:</strong> Bright Futures Academic Scholarship<br>
-          <strong>Milestones:</strong> Passed the Computer Science Foundation Exam
-        </p>
-      </article>
-    </section>
-
     <section id="experience" aria-labelledby="h-experience">
-      <h2 id="h-experience">Relevant Experience</h2>
+      <h2 id="h-experience">Experience</h2>
 
       <article>
-  <h3>Undergraduate Research Assistant — Hardening Build Systems</h3>
-  <p>
-    <time datetime="2025-10">Oct 2025</time> – Present · Orlando, FL ·
-    <!-- <a href="https://pappasbrent.com/research/hardening-build-systems" target="_blank" rel="noopener">
-      Project page ↗
-    </a> -->
-  </p>
-  <ul>
-    <li>Contribute to research focused on improving the security and reliability of software build systems through empirical analysis and tooling.</li>
-    <li>Develop and iterate on scripts/tools to summarize build artifacts and outcomes (e.g., generating LaTeX-ready tables and pgfplots-style visualizations from collected results).</li>
-    <li>Support reproducible research workflows by organizing datasets/results, validating outputs, and documenting analysis steps for the project.</li>
-  </ul>
-</article>
-
-
-      <article>
-        <h3>Research Assistant — Human Factors: Group Study</h3>
-        <p><time datetime="2025-02">Feb 2025</time> – Present · Orlando, FL</p>
+        <h3>Undergraduate Research Assistant — Hardening Build Systems</h3>
+        <p>
+          <time datetime="2025-10">Oct 2025</time> – Present · University of Central Florida ·
+          <a href="https://pappasbrent.com/research/hardening-build-systems" target="_blank" rel="noopener">Project page ↗</a>
+        </p>
         <ul>
-          <li>Conducted novel research experiments on how programmers debug code in groups, leading to insights on collaborative problem-solving techniques</li>
-          <li>Equipped participants with technology for tracking various biometrics, enhancing the accuracy of data collection for comprehensive analysis</li>
-          <li>Utilized biometric tracking technology, including heart rate, respiration, skin conductance, gaze data, and prefrontal cortex blood oxygenation levels, to gather comprehensive data for improving group debugging strategies</li>
+          <li>Contribute to research improving the security and reliability of software build systems through empirical analysis and tooling.</li>
+          <li>Build analysis scripts that summarize build artifacts and outcomes, generating LaTeX-ready tables and pgfplots visualizations from experimental data.</li>
+          <li>Support reproducible workflows: organizing datasets, validating outputs, and documenting analysis steps.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Research Assistant — Human Factors: Group Debugging Study</h3>
+        <p><time datetime="2025-02">Feb 2025</time> – Present · University of Central Florida</p>
+        <ul>
+          <li>Support experiments on how programmers debug code in groups, contributing to study setup and data-collection workflows.</li>
+          <li>Instrument participants with biometric sensors — heart rate, respiration, skin conductance, gaze, and prefrontal-cortex blood oxygenation — to improve measurement quality.</li>
         </ul>
       </article>
 
@@ -105,88 +125,143 @@
         <h3>Swim Instructor — Rosen Aquatic and Fitness Center</h3>
         <p><time datetime="2023-07">Jul 2023</time> – Present · Orlando, FL</p>
         <ul>
-          <li>Led 1–6 person sessions from Water Survival to Competitive Swimming; improved competency via targeted lesson plans.</li>
-          <li>Communicated effectively across age groups and language barriers to enhance participant experience.</li>
+          <li>Led 1–6 person sessions from water survival to competitive swimming with targeted lesson plans.</li>
+          <li>Communicated effectively across age groups and language barriers.</li>
         </ul>
       </article>
     </section>
 
     <section id="projects" aria-labelledby="h-projects">
       <h2 id="h-projects">Projects</h2>
-      <ul class="project-links">
-                <li><a href="fitnessfunctions.html">FitnessFunctions — Class Enrollment System (Admin/Member, PHP + MySQL)</a></li>
-        <li><a href="project-pocketprofessors.html">PocketProfessors — MERN app (packs, collections, JWT refresh)</a></li>
-        <li><a href="project-contact-manager.html">CS Majors vs Gorilla — Contact Manager (semantic forms + AJAX)</a></li>      </ul>
+      <div class="cards">
+
+        <article class="card">
+          <a href="fitnessfunctions.html">
+            <img src="images/fitnessfunctions/adminDashboard.png" alt="FitnessFunctions admin dashboard" loading="lazy">
+          </a>
+          <div class="card-body">
+            <h3><a href="fitnessfunctions.html">FitnessFunctions</a></h3>
+            <p class="card-meta">Solo project · Nov 2025</p>
+            <p>Role-based gym class enrollment system with Admin/Member dashboards, instructor and class CRUD, and capacity-aware enrollment backed by MySQL.</p>
+            <ul class="chips">
+              <li>PHP</li><li>MySQL</li><li>HTML/CSS</li><li>JavaScript</li>
+            </ul>
+            <p class="card-links">
+              <a href="fitnessfunctions.html">Case study →</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a href="project-pocketprofessors.html">
+            <img src="images/titlecardforpp.png" alt="PocketProfessors landing page" loading="lazy">
+          </a>
+          <div class="card-body">
+            <h3><a href="project-pocketprofessors.html">PocketProfessors</a></h3>
+            <p class="card-meta">Team of 6 · Project Manager &amp; Frontend · Jul 2025</p>
+            <p>Full-stack MERN collectible-card app: users log in, open packs, and collect hand-drawn UCF professor cards. Led theming, UX, and delivery; worked on API shape and JWT refresh lifecycle.</p>
+            <ul class="chips">
+              <li>React</li><li>TypeScript</li><li>Node.js</li><li>Express</li><li>MongoDB</li><li>JWT</li>
+            </ul>
+            <p class="card-links">
+              <a href="project-pocketprofessors.html">Case study →</a> ·
+              <a href="http://pocketprofessors.com" target="_blank" rel="noopener">Live ↗</a> ·
+              <a href="https://github.com/jm19pa/Group25-Large-Project-COP4331" target="_blank" rel="noopener">Repo ↗</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a href="project-contact-manager.html">
+            <img src="images/gorilla-home-page.png" alt="CS Majors vs Gorilla contact manager home page" loading="lazy">
+          </a>
+          <div class="card-body">
+            <h3><a href="project-contact-manager.html">CS Majors vs Gorilla — Contact Manager</a></h3>
+            <p class="card-meta">Team of 4 · Project Manager · Jun 2025</p>
+            <p>Semantic, accessible contact manager with live search and full CRUD via vanilla JS (XMLHttpRequest) talking to PHP endpoints on a LAMP stack.</p>
+            <ul class="chips">
+              <li>JavaScript</li><li>PHP</li><li>AJAX</li><li>MySQL</li><li>LAMP</li>
+            </ul>
+            <p class="card-links">
+              <a href="project-contact-manager.html">Case study →</a> ·
+              <a href="https://github.com/jm19pa/COP4331-Group16-Small-Project" target="_blank" rel="noopener">Repo ↗</a>
+            </p>
+          </div>
+        </article>
+
+      </div>
     </section>
 
     <section id="skills" aria-labelledby="h-skills">
       <h2 id="h-skills">Skills</h2>
+
+      <h3>Languages &amp; Frameworks</h3>
       <ul class="tags">
-        <li>React JS</li>
-        <li>JavaScript</li>
-        <li>TypeScript</li>
-        <li>HTML</li>
-        <li>CSS (Flexbox/Grid/Responsive)</li>
-        <li>Node.js</li>
-        <li>MongoDB</li>
-        <li>PHP</li>
-        <li>MySQL</li>
-        <li>Git</li>
-        <li>Linux</li>
+        <li>JavaScript</li><li>TypeScript</li><li>React</li><li>Node.js</li>
+        <li>Java</li><li>Python</li><li>C++</li><li>PHP</li><li>HTML</li><li>CSS</li>
+      </ul>
+
+      <h3>Databases &amp; Systems</h3>
+      <ul class="tags">
+        <li>MongoDB</li><li>MySQL</li><li>Linux</li><li>Apache (LAMP)</li><li>MERN</li>
+      </ul>
+
+      <h3>Tools &amp; Practices</h3>
+      <ul class="tags">
+        <li>Git/GitHub</li><li>Bash</li><li>Makefiles</li><li>Postman</li>
+        <li>LaTeX/Typst</li><li>Accessibility (a11y)</li><li>Secure coding</li><li>Reproducible research</li>
       </ul>
     </section>
 
     <section id="awards" aria-labelledby="h-awards">
-      <h2 id="h-awards">Awards & Honors</h2>
+      <h2 id="h-awards">Awards &amp; Certifications</h2>
       <ul>
         <li>3rd Place — UCF Horse Plinko Cyber Defense Competition (Oct 2024)</li>
         <li>Bright Futures Academic Scholarship</li>
+        <li>Passed the Computer Science Foundation Exam</li>
+        <li>Human Subjects Research — Social/Behavioral (Group 2) · Responsible Conduct of Research (Engineers)</li>
+        <li>MTA: Windows OS Fundamentals · MTA: Introduction to Programming Using Python</li>
+        <li>Certified Internet Business Associate · Red Cross Water Safety Instructor</li>
       </ul>
     </section>
 
-    <section id="certifications" aria-labelledby="h-certs">
-      <h2 id="h-certs">Certifications</h2>
-      <ul>
-        <li>Human Subjects Research — Social/Behavioral (Group 2)</li>
-        <li>Responsible Conduct of Research (Engineers)</li>
-        <li>Certified Internet Business Associate</li>
-        <li>MTA: Windows OS Fundamentals</li>
-        <li>MTA: Introduction to Programming Using Python</li>
-        <li>Red Cross Water Safety Instructor</li>
-      </ul>
+    <section id="contact" aria-labelledby="h-contact">
+      <h2 id="h-contact">Contact</h2>
+      <p>
+        The fastest way to reach me is email. I'm open to internships, research collaborations,
+        and frontend/full-stack opportunities.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="mailto:davidegusmao@outlook.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </section>
   </main>
 
   <footer>
     <p><span id="year"></span> David Gusmao ·
-      <a href="https://d4davidg.github.io/" target="_blank" rel="noopener">Portfolio</a> ·
       <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
       <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
-    <p><a href="index.html">Back to Resume</a></p>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mouse glow (shared “FitnessFunctions-style” flow)
     (function () {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce) return;
-
       let raf = 0;
       let x = window.innerWidth * 0.5;
       let y = window.innerHeight * 0.35;
-
       function apply(){
         document.documentElement.style.setProperty('--mx', x + 'px');
         document.documentElement.style.setProperty('--my', y + 'px');
         raf = 0;
       }
-
       window.addEventListener('mousemove', (e) => {
-        x = e.clientX;
-        y = e.clientY;
+        x = e.clientX; y = e.clientY;
         if (!raf) raf = requestAnimationFrame(apply);
       }, { passive: true });
     })();
