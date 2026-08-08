@@ -2,57 +2,136 @@
    Base / Reset
 ========================= */
 * { box-sizing: border-box; }
-html { color-scheme: dark; scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
+/* =========================
+   Design tokens — DARK (default)
+
+   Anything derived from --accent lives in the body.theme-* blocks below,
+   not here. A custom property that references another one resolves where it
+   is DECLARED, so `--x: var(--accent)` written at :root would freeze to the
+   :root accent and ignore the per-page theme.
+========================= */
 :root{
+  color-scheme: dark;
+
   --bg: #000;
-  --panel: rgba(10, 12, 14, .72);
-  --panel-2: rgba(10, 12, 14, .55);
-  --border: rgba(255,255,255,.08);
+  --panel: rgba(10, 12, 10, .72);
+  --panel-2: rgba(10, 12, 10, .55);
 
   --text: #d7d7d7;
   --muted: #9aa09a;
 
-  /* Accent system (default green) */
-  --accent: #00ff00;
-  --neon: var(--accent);
+  /* neutral hairlines, sunken surfaces, drop shadows */
+  --hair: rgba(255,255,255,.13);
+  --sunken: rgba(0,0,0,.35);
+  --code-bg: rgba(0,0,0,.55);
+  --img-bg: rgba(0,0,0,.6);
+  --shadow-drop: rgba(0,0,0,.55);
 
-  /* per-theme “glow” vars (overridden by theme classes) */
-  --neon-soft: rgba(0,255,0,.55);
-  --neon-faint: rgba(0,255,0,.25);
+  /* background texture layers */
+  --grid-line: rgba(255,255,255,.045);
+  --wash-1: rgba(255,255,255,.06);
+  --wash-2: rgba(255,255,255,.02);
+  --vig-inner: rgba(0,0,0,.75);
+  --vig-a: rgba(0,0,0,.15);
+  --vig-b: rgba(0,0,0,.9);
 
-  /* mouse pos injected via JS */
+  /* glass panels */
+  --glass-1: rgba(14,18,20,.72);
+  --glass-2: rgba(14,18,20,.46);
+  --glass-border: rgba(255,255,255,.12);
+
+  /* nav bar height, expanded and collapsed */
+  --bar-h: 84px;
+  --bar-h-min: 46px;
+
+  /* mouse position, injected by main.js */
   --mx: 50vw;
   --my: 35vh;
 }
 
 /* =========================
-   Theme overrides (ONLY color)
+   Design tokens — LIGHT
+========================= */
+:root[data-mode="light"]{
+  color-scheme: light;
+
+  --bg: #eef1ee;
+  --panel: rgba(255,255,255,.78);
+  --panel-2: rgba(255,255,255,.62);
+
+  --text: #161a16;
+  --muted: #4c5450;
+
+  --hair: rgba(0,0,0,.14);
+  --sunken: rgba(0,0,0,.05);
+  --code-bg: rgba(0,0,0,.07);
+  --img-bg: rgba(0,0,0,.04);
+  --shadow-drop: rgba(0,0,0,.14);
+
+  --grid-line: rgba(0,0,0,.055);
+  --wash-1: rgba(0,0,0,.035);
+  --wash-2: rgba(0,0,0,.015);
+  --vig-inner: rgba(0,0,0,.06);
+  --vig-a: rgba(0,0,0,.02);
+  --vig-b: rgba(0,0,0,.10);
+
+  --glass-1: rgba(255,255,255,.84);
+  --glass-2: rgba(255,255,255,.62);
+  --glass-border: rgba(0,0,0,.12);
+}
+
+/* =========================
+   Themes (accent colour only)
+
+   --accent      the glow / fill colour, used for borders, shadows, the bar
+   --accent-ink  the same colour as TEXT. On light backgrounds the neon
+                 accents sit around 1.3:1, so links and headings switch to a
+                 darkened version that clears WCAG AA.
 ========================= */
 body.theme-green {
   --accent: #00ff00;
-  --neon-soft: rgba(0,255,0,.55);
-  --neon-faint: rgba(0,255,0,.25);
+  --accent-soft: rgba(0,255,0,.55);
+  --accent-faint: rgba(0,255,0,.25);
+  --accent-ink: var(--accent);
+  --border: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 body.theme-aqua {
   --accent: #2efcff;
-  --neon-soft: rgba(46,252,255,.55);
-  --neon-faint: rgba(46,252,255,.25);
+  --accent-soft: rgba(46,252,255,.55);
+  --accent-faint: rgba(46,252,255,.25);
+  --accent-ink: var(--accent);
+  --border: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 body.theme-gold {
   --accent: #ffd54a;
-  --neon-soft: rgba(255,213,74,.55);
-  --neon-faint: rgba(255,213,74,.25);
+  --accent-soft: rgba(255,213,74,.55);
+  --accent-faint: rgba(255,213,74,.25);
+  --accent-ink: var(--accent);
+  --border: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* Readable ink + a stronger border once the page goes light. */
+:root[data-mode="light"] body.theme-green { --accent-ink: #0a7d18; }
+:root[data-mode="light"] body.theme-aqua  { --accent-ink: #0b6f75; }
+:root[data-mode="light"] body.theme-gold  { --accent-ink: #7a5600; }
+
+:root[data-mode="light"] body.theme-green,
+:root[data-mode="light"] body.theme-aqua,
+:root[data-mode="light"] body.theme-gold {
+  --border: color-mix(in srgb, var(--accent-ink) 30%, transparent);
 }
 
 /* =========================
-   Body / Background “flow”
+   Body / background layers
 ========================= */
 body{
   margin: 0;
+  padding-top: var(--bar-h);   /* clear the fixed nav bar */
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.6;
   color: var(--text);
@@ -61,36 +140,34 @@ body{
   overflow-x: hidden;
 }
 
-/* grid + vignette layer */
+/* grid + top wash */
 body::before{
   content:"";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: -3;
-
-  /* subtle grid + slight gradient */
   background:
-    radial-gradient(1200px 700px at 30% 10%, rgba(255,255,255,.06), transparent 55%),
-    linear-gradient(to bottom, rgba(255,255,255,.02), transparent 30%),
+    radial-gradient(1200px 700px at 30% 10%, var(--wash-1), transparent 55%),
+    linear-gradient(to bottom, var(--wash-2), transparent 30%),
     repeating-linear-gradient(
       to right,
-      rgba(255,255,255,.045) 0,
-      rgba(255,255,255,.045) 1px,
+      var(--grid-line) 0,
+      var(--grid-line) 1px,
       transparent 1px,
       transparent 46px
     ),
     repeating-linear-gradient(
       to bottom,
-      rgba(255,255,255,.045) 0,
-      rgba(255,255,255,.045) 1px,
+      var(--grid-line) 0,
+      var(--grid-line) 1px,
       transparent 1px,
       transparent 46px
     );
   opacity: .22;
-  filter: blur(.0px);
 }
 
+/* vignette */
 body::after{
   content:"";
   position: fixed;
@@ -98,11 +175,11 @@ body::after{
   pointer-events: none;
   z-index: -2;
   background:
-    radial-gradient(1200px 900px at 50% 20%, transparent 35%, rgba(0,0,0,.75) 80%),
-    radial-gradient(900px 600px at 70% 85%, rgba(0,0,0,.15), rgba(0,0,0,.9));
+    radial-gradient(1200px 900px at 50% 20%, transparent 35%, var(--vig-inner) 80%),
+    radial-gradient(900px 600px at 70% 85%, var(--vig-a), var(--vig-b));
 }
 
-/* mouse glow “halo” */
+/* cursor-tracked halo */
 .mouse-glow{
   position: fixed;
   inset: 0;
@@ -114,7 +191,7 @@ body::after{
       transparent 62%
     ),
     radial-gradient(520px 520px at var(--mx) var(--my),
-      var(--neon-faint),
+      var(--accent-faint),
       transparent 72%
     );
   opacity: .95;
@@ -122,31 +199,58 @@ body::after{
   transition: opacity .25s ease;
 }
 
+/* `screen` only ever brightens, so it does nothing on a near-white page.
+   Light mode multiplies a darker halo instead. */
+:root[data-mode="light"] .mouse-glow{
+  background:
+    radial-gradient(260px 260px at var(--mx) var(--my),
+      rgba(0,0,0,.05),
+      transparent 62%
+    ),
+    radial-gradient(520px 520px at var(--mx) var(--my),
+      var(--accent-soft),
+      transparent 72%
+    );
+  mix-blend-mode: multiply;
+  opacity: .55;
+}
+
 @media (prefers-reduced-motion: reduce){
   .mouse-glow{ display:none; }
 }
 
 /* =========================
-   Links / Headings
+   Links / headings
 ========================= */
-a { color: var(--neon); text-decoration: none; }
+a { color: var(--accent-ink); text-decoration: none; }
 a:hover, a:focus-visible { text-decoration: underline; }
 
-h1, h2{
-  text-shadow: 0 0 10px var(--neon-faint);
-}
+h1, h2{ text-shadow: 0 0 10px var(--accent-faint); }
 h2 { margin-top: 0; }
 h3 { margin: 0 0 .25rem; }
+
+.neon{
+  color: var(--accent-ink);
+  text-shadow: 0 0 8px var(--accent-soft), 0 0 16px var(--accent-faint);
+}
+
+.subtitle{
+  margin: 0;
+  color: var(--text);
+  opacity: .9;
+}
+.subtitle strong{ color: var(--accent-ink); }
 
 /* Accessible skip link */
 .skip-link { position: absolute; left: -999px; top: -999px; }
 .skip-link:focus {
-  left: 12px; top: 12px;
+  left: 12px; top: calc(var(--bar-h) + 12px);
+  z-index: 60;
   padding: .55rem .85rem;
-  background: var(--neon);
+  background: var(--accent);
   color: #000;
   border-radius: 10px;
-  box-shadow: 0 0 14px var(--neon-soft);
+  box-shadow: 0 0 14px var(--accent-soft);
 }
 
 /* =========================
@@ -160,48 +264,171 @@ section, article{
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1rem 1.05rem;
-  box-shadow:
-    0 0 0 transparent,
-    inset 0 0 0 transparent;
   transition: box-shadow .2s ease, transform .08s ease, border-color .2s ease;
 }
 
+/* Panels glow slightly weaker than the header */
 section:hover, article:hover{
-  border-color: rgba(255,255,255,.12);
+  border-color: var(--hair);
   box-shadow:
-    0 0 14px var(--neon-faint),
-    0 0 28px rgba(0,0,0,.55);
+    0 0 16px var(--accent-faint),
+    0 0 32px var(--shadow-drop);
 }
 
-/* target highlight when navigating via top buttons */
+/* highlight the section jumped to from the nav bar */
 :target{
-  scroll-margin-top: 12px;
-  outline: 2px solid var(--neon);
+  scroll-margin-top: calc(var(--bar-h) + 12px);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 6px;
   border-radius: 18px;
   animation: target-pop .9s ease 1;
 }
 @keyframes target-pop{
-  0% { box-shadow: 0 0 0 var(--neon-faint); }
-  40% { box-shadow: 0 0 18px var(--neon-soft); }
-  100% { box-shadow: 0 0 0 var(--neon-faint); }
+  0% { box-shadow: 0 0 0 var(--accent-faint); }
+  40% { box-shadow: 0 0 18px var(--accent-soft); }
+  100% { box-shadow: 0 0 0 var(--accent-faint); }
 }
 @media (prefers-reduced-motion: reduce){
   :target{ animation: none; }
 }
 
+/* The "Top" link points at an empty marker; it should not draw a highlight. */
+#top{ display: block; height: 0; }
+#top:target{ outline: none; animation: none; }
+
 /* =========================
-   Header / Nav
+   Glass surface
+========================= */
+.glass{
+  background: linear-gradient(180deg, var(--glass-1), var(--glass-2));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 18px 50px var(--shadow-drop),
+    0 0 0 1px rgba(0,0,0,0.2);
+  transition: box-shadow 220ms ease, border-color 220ms ease;
+}
+
+/* =========================
+   Nav bar
+   Accent-filled bar across the top with black lettering. Icon above label;
+   collapses to small icons only while scrolling down.
+========================= */
+.navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--bar-h);
+  z-index: 50;
+
+  display: flex;
+  align-items: stretch;
+  padding: 0 .5rem;
+
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 18px var(--accent-faint);
+  transition: height .22s ease, box-shadow .25s ease;
+}
+
+/* The whole bar lifts when the cursor is anywhere over it. */
+.navbar:hover,
+.navbar:focus-within{
+  box-shadow:
+    0 0 34px var(--accent-soft),
+    0 0 72px var(--accent-faint);
+}
+
+/* Only the links scroll; the switch sits outside so it is always reachable. */
+.navbar-scroll{
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: .2rem;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+}
+
+.navbar-item{
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: .25rem;
+
+  padding: .4rem .55rem;
+  border-radius: 12px;
+
+  /* the bar is already accent-filled, so ink is black in both modes */
+  color: #000;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color .18s ease, transform .12s ease;
+}
+
+.navbar-item:hover,
+.navbar-item:focus-visible{
+  background: rgba(0,0,0,.16);
+  text-decoration: none;
+}
+.navbar-item:focus-visible{
+  outline: 2px solid #000;
+  outline-offset: -2px;
+}
+.navbar-item:active{ transform: scale(.96); }
+
+.navbar-item svg{
+  display: block;
+  width: 30px;
+  height: 30px;
+  transition: width .22s ease, height .22s ease;
+}
+
+/* Scrolled down: small icons only. */
+.navbar.is-collapsed{ height: var(--bar-h-min); }
+.navbar.is-collapsed .navbar-label{ display: none; }
+.navbar.is-collapsed .navbar-item{ padding: .3rem .5rem; }
+.navbar.is-collapsed .navbar-item svg{ width: 21px; height: 21px; }
+
+/* Light / dark switch, set slightly apart at the end of the bar. */
+.navbar-toggle{
+  flex: 0 0 auto;
+  align-self: center;
+  appearance: none;
+  border: 0;
+  border-left: 1px solid rgba(0,0,0,.22);
+  border-radius: 0;
+  padding-left: .8rem;
+  margin-left: .4rem;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+/* Only one of the two icons shows, depending on the active mode. */
+.navbar-toggle .icon-dark{ display: none; }
+:root[data-mode="light"] .navbar-toggle .icon-dark{ display: block; }
+:root[data-mode="light"] .navbar-toggle .icon-light{ display: none; }
+
+@media (prefers-reduced-motion: reduce){
+  .navbar, .navbar-item, .navbar-item svg{ transition: none; }
+}
+
+/* =========================
+   Page header
 ========================= */
 header{
-  background: rgba(0,0,0,.75);
-  color: var(--neon);
-  padding: 1rem;
-  border: 1px solid var(--neon);
-  border-radius: 22px;
-  box-shadow: 0 0 14px var(--neon-faint), inset 0 0 10px var(--neon-faint);
   max-width: 960px;
   margin: 1rem auto 0;
+  padding: 1rem;
+  color: var(--accent-ink);
 }
 
 header .container{
@@ -215,66 +442,47 @@ header h1{
   font-size: clamp(1.25rem, 3.5vw, 2rem);
 }
 
-header address a{ color: var(--neon); }
-header address a:hover{ text-decoration: underline; }
+header address a{ color: var(--accent-ink); }
 
 header.simple{
   display:grid;
   gap: .45rem;
 }
 
-.neon{
-  color: var(--neon);
-  text-shadow: 0 0 8px var(--neon-soft), 0 0 16px var(--neon-faint);
+/* Header reads hotter than the panels below it */
+header.glass{
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow:
+    0 0 18px var(--accent-faint),
+    inset 0 0 12px var(--accent-faint);
+  outline-color: var(--accent);
 }
 
-.subtitle{
-  margin: 0;
-  color: var(--text);
-  opacity: .9;
+header.glass:hover{
+  border-color: var(--accent);
+  box-shadow:
+    0 0 26px var(--accent-soft),
+    0 0 60px var(--accent-faint),
+    inset 0 0 16px var(--accent-faint);
 }
 
-/* top nav buttons */
-.topnav{
-  margin: .75rem auto 0;
-  display:flex;
-  flex-wrap: wrap;
-  gap: .55rem .7rem;
-  justify-content: center;
-  padding-bottom: .25rem;
+header.glass:hover h1,
+header.glass:hover .neon{
+  text-shadow:
+    0 0 34px var(--accent-soft),
+    0 0 14px var(--accent-faint);
 }
-
-.btn{
-  appearance:none;
-  display:inline-block;
-  padding: .55rem .95rem;
-  border-radius: 999px;
-  border: 1px solid var(--neon);
-  background: rgba(0,0,0,.65);
-  color: var(--neon);
-  text-decoration:none;
-  font-weight: 750;
-  letter-spacing: .2px;
-  box-shadow: 0 0 0 transparent;
-  transition: box-shadow .18s ease, transform .06s ease, background-color .18s ease;
-}
-.btn:hover, .btn:focus-visible{
-  outline: none;
-  background: rgba(0,0,0,.85);
-  box-shadow: 0 0 10px var(--neon-soft), 0 0 22px var(--neon-faint);
-}
-.btn:active{ transform: translateY(1px) scale(.985); }
 
 /* =========================
-   Avatar / Profile
+   Avatar / profile
 ========================= */
 .avatar{
   width: clamp(86px, 14vw, 140px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--neon-faint);
-  box-shadow: 0 2px 10px rgba(0,0,0,.6);
+  border: 2px solid var(--accent-faint);
+  box-shadow: 0 2px 10px var(--shadow-drop);
   transition: box-shadow .2s ease, border-color .2s ease;
 }
 
@@ -289,19 +497,17 @@ header.simple{
 }
 
 .avatar:hover{
-  border-color: var(--neon);
-  box-shadow: 0 0 10px var(--neon-soft), 0 0 28px var(--neon-faint);
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-soft), 0 0 28px var(--accent-faint);
 }
 .avatar:hover .profile{
-  filter: drop-shadow(0 0 4px var(--neon-faint));
+  filter: drop-shadow(0 0 4px var(--accent-faint));
 }
 
 /* =========================
-   Lists / Tags / Projects
+   Lists / tags / projects
 ========================= */
 .project-links{ padding-left: 1.25rem; }
-.project-links a{ text-decoration: none; }
-.project-links a:hover{ text-decoration: underline; }
 
 .tags{
   display:flex;
@@ -312,17 +518,16 @@ header.simple{
   margin: .5rem 0 0;
 }
 .tags li{
-  border: 1px solid rgba(255,255,255,.14);
+  border: 1px solid var(--hair);
   border-radius: 999px;
   padding: .28rem .6rem;
   font-size: .95rem;
   color: var(--text);
   background: var(--panel-2);
-  box-shadow: 0 0 10px rgba(0,0,0,.35);
 }
 
 /* =========================
-   Figures / Images
+   Figures / images
 ========================= */
 figure{ margin: 0; }
 figure + figure{ margin-top: .95rem; }
@@ -330,16 +535,15 @@ figure + figure{ margin-top: .95rem; }
 figure img{
   width: 100%;
   height: auto;
-  border: 1px solid rgba(255,255,255,.10);
+  border: 1px solid var(--hair);
   border-radius: 14px;
-  background: rgba(0,0,0,.6);
-  box-shadow: 0 0 0 transparent;
+  background: var(--img-bg);
   transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
 }
 
 figure:hover img{
-  border-color: rgba(255,255,255,.16);
-  box-shadow: 0 0 16px var(--neon-faint);
+  border-color: var(--border);
+  box-shadow: 0 0 16px var(--accent-faint);
 }
 
 figcaption{
@@ -352,8 +556,8 @@ figcaption{
    Details / code blocks
 ========================= */
 details{
-  background: rgba(0,0,0,.35);
-  border: 1px solid rgba(255,255,255,.10);
+  background: var(--sunken);
+  border: 1px solid var(--hair);
   border-radius: 14px;
   padding: .75rem .9rem;
 }
@@ -365,8 +569,8 @@ pre{
   overflow:auto;
   border-radius: 12px;
   padding: .75rem;
-  background: rgba(0,0,0,.55);
-  border: 1px solid rgba(255,255,255,.10);
+  background: var(--code-bg);
+  border: 1px solid var(--hair);
 }
 
 /* =========================
@@ -375,186 +579,38 @@ pre{
 footer{
   max-width: 960px;
   margin: 1rem auto 2rem;
-  border-top: 1px solid rgba(255,255,255,.08);
+  border-top: 1px solid var(--hair);
   padding: 1rem;
   text-align:center;
   color: var(--muted);
 }
 
-/* Shared glass container (header + sections) */
-.glass{
-  background: linear-gradient(180deg, rgba(14,18,20,0.72), rgba(14,18,20,0.46));
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 24px;
-  backdrop-filter: blur(10px);
-  box-shadow:
-    0 18px 50px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(0,0,0,0.2);
-  transition: box-shadow 220ms ease, border-color 220ms ease;
-}
-
-/* Glow interaction — THIS is what you were missing */
-.glass:hover,
-.panel:hover{
-  border-color: color-mix(in oklab, var(--accent) 45%, rgba(255,255,255,0.12));
-  box-shadow:
-    0 22px 70px rgba(0,0,0,0.65),
-    0 0 40px var(--glow);
-}
-
-/* Stronger header hover (requested) */
-header.glass:hover h1,
-header.glass:hover .neon{
-  text-shadow:
-    0 0 26px var(--glow),
-    0 0 4px rgba(255,255,255,0.25);
-}
-
-
 /* =========================
-   Responsive tweaks
+   Responsive
 ========================= */
+@media (max-width: 760px){
+  :root{ --bar-h: 74px; --bar-h-min: 42px; }
+
+  .navbar-scroll{
+    justify-content: flex-start;
+    gap: .05rem;
+  }
+  .navbar-item{
+    padding: .3rem .34rem;
+    font-size: .64rem;
+  }
+  .navbar-item svg{ width: 25px; height: 25px; }
+  .navbar.is-collapsed .navbar-item svg{ width: 19px; height: 19px; }
+
+  .navbar-toggle{
+    padding-left: .5rem;
+    margin-left: .25rem;
+  }
+}
+
 @media (max-width: 640px){
   header .container{
     flex-direction: column;
     align-items: flex-start;
   }
-  .topnav{ justify-content: flex-start; }
-}
-
-/* =========================
-   STRONGER HEADER GLOW
-   ========================= */
-
-.project-header {
-  position: relative;
-  border-radius: 18px;
-  box-shadow:
-    0 0 14px rgba(0, 255, 180, 0.35),
-    0 0 30px rgba(0, 255, 180, 0.22);
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
-}
-
-.project-header:hover {
-  box-shadow:
-    0 0 18px rgba(0, 255, 200, 0.55),
-    0 0 45px rgba(0, 255, 200, 0.35),
-    0 0 70px rgba(0, 255, 200, 0.18);
-  transform: translateY(-2px);
-}
-
-/* =========================
-   FITNESS FUNCTIONS COLORS
-   ========================= */
-
-.fitness-functions,
-.fitness-functions a,
-.fitness-functions span,
-.fitness-functions strong {
-  color: var(--fitness-accent, #3fffd6);
-}
-
-.fitness-functions a:hover {
-  text-shadow: 0 0 8px rgba(63, 255, 214, 0.8);
-}
-
-/* =========================
-   POCKET PROFESSORS COLORS
-   ========================= */
-
-.pocket-professors,
-.pocket-professors a,
-.pocket-professors span,
-.pocket-professors strong {
-  color: var(--pocket-accent, #ffd84d);
-}
-
-.pocket-professors a:hover {
-  text-shadow: 0 0 10px rgba(255, 216, 77, 0.9);
-}
-
-
-/* =========================================================
-   FIX 1: define --glow so the existing glass hover works
-   (your .glass:hover rule uses var(--glow) but it wasn't defined)
-   ========================================================= */
-:root{
-  --glow: var(--neon-soft);
-}
-
-/* =========================================================
-   FIX 2: Header glow stronger than section/article panels
-   Applies to your real header: <header class="simple glass">
-   ========================================================= */
-header.glass{
-  /* keep your current look, but ensure glow reads */
-  box-shadow:
-    0 0 18px var(--neon-faint),
-    inset 0 0 12px var(--neon-faint);
-}
-
-header.glass:hover{
-  border-color: var(--neon);
-  box-shadow:
-    0 0 26px var(--neon-soft),
-    0 0 60px var(--neon-faint),
-    inset 0 0 16px var(--neon-faint);
-}
-
-/* Keep header text a bit hotter than panels on hover */
-header.glass:hover .neon,
-header.glass:hover h1{
-  text-shadow:
-    0 0 34px var(--neon-soft),
-    0 0 14px var(--neon-faint);
-}
-
-/* =========================================================
-   FIX 3: Panels stay slightly weaker than header
-   (your pages use <article> for the big panels)
-   ========================================================= */
-article:hover, section:hover{
-  box-shadow:
-    0 0 16px var(--neon-faint),
-    0 0 32px rgba(0,0,0,.55);
-}
-
-/* =========================================================
-   FIX 4: Remove "random green" by forcing theme color on accents
-   (no new classes needed; uses your existing body.theme-* classes)
-   ========================================================= */
-body.theme-aqua .neon,
-body.theme-aqua a{
-  color: var(--accent);
-}
-
-body.theme-gold .neon,
-body.theme-gold a{
-  color: var(--accent);
-}
-
-/* Optional: stop any <strong> inside subtitles from looking "extra green" */
-.subtitle strong{
-  color: var(--accent);
-}
-
-/* =========================================================
-   REMOVE STRAY GREEN BORDER ON HEADERS
-   Force header border to use page accent ONLY
-   ========================================================= */
-
-/* Override any leftover neon-green border */
-header.glass{
-  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-}
-
-/* Hover state — still stronger glow, but no green rim */
-header.glass:hover{
-  border-color: var(--accent);
-}
-
-/* Safety net: kill any hardcoded neon green borders */
-header.glass,
-header.glass *{
-  outline-color: var(--accent);
 }
