@@ -5,20 +5,71 @@
   <title>Contact Manager — Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/images/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/images/favicon-16.png" sizes="16x16">
-  <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <meta name="theme-color" content="#00ff00">
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
 </head>
 
 <body class="theme-green">
   <div class="mouse-glow" aria-hidden="true"></div>
 
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="#top">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+        <span class="navbar-label">Top</span>
+      </a>
+      <a class="navbar-item" href="#overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 2.4h7L18.6 7.6v12.2a1.8 1.8 0 0 1-1.8 1.8H6.2a1.8 1.8 0 0 1-1.8-1.8V4.2a1.8 1.8 0 0 1 1.8-1.8Z"/><path d="M12.9 2.6v5.2h5.5"/><path d="M7.6 12.4h7.8M7.6 15.4h7.8M7.6 18.4h4.8"/></svg>
+        <span class="navbar-label">Overview</span>
+      </a>
+      <a class="navbar-item" href="#role">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.4" width="18" height="17.2" rx="2.6"/><circle cx="12" cy="10" r="2.8"/><path d="M7.6 17.6a4.7 4.7 0 0 1 8.8 0"/></svg>
+        <span class="navbar-label">My Role</span>
+      </a>
+      <a class="navbar-item" href="#features">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2.6 2.9 5.88 6.5.95-4.7 4.58 1.11 6.47L12 17.42l-5.81 3.06 1.11-6.47-4.7-4.58 6.5-.95L12 2.6Z"/></svg>
+        <span class="navbar-label">Features</span>
+      </a>
+      <a class="navbar-item" href="#architecture">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2.8 9 4.6-9 4.6-9-4.6 9-4.6Z"/><path d="m3 12.4 9 4.6 9-4.6"/><path d="m3 17 9 4.6 9-4.6"/></svg>
+        <span class="navbar-label">Architecture</span>
+      </a>
+      <a class="navbar-item" href="#contributions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.4" cy="5.2" r="2.3"/><circle cx="6.4" cy="18.8" r="2.3"/><circle cx="17.6" cy="9.6" r="2.3"/><path d="M6.4 7.5v9"/><path d="M15.3 9.6h-3.2a5.7 5.7 0 0 0-5.7 5.7v1.2"/></svg>
+        <span class="navbar-label">Contributions</span>
+      </a>
+      <a class="navbar-item" href="#lessons">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 15.4A6.6 6.6 0 1 1 15.4 15.4c-.9.8-1.4 1.6-1.5 2.6h-3.8c-.1-1-.6-1.8-1.5-2.6Z"/><path d="M10.1 20.4h3.8M10.8 22.6h2.4"/></svg>
+        <span class="navbar-label">Lessons</span>
+      </a>
+      <a class="navbar-item" href="#skills">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="3.4" r="1.9"/><circle cx="3.7" cy="7.4" r="1.9"/><circle cx="20.3" cy="7.4" r="1.9"/><path d="M12 5.3v3.3M5.4 8.5l3.3 1.9M18.6 8.5l-3.3 1.9"/><circle cx="12" cy="12.4" r="2.9"/><path d="M7.2 20a4.9 4.9 0 0 1 9.6 0"/></svg>
+        <span class="navbar-label">Skills</span>
+      </a>
+      <a class="navbar-item" href="#links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13.6a4.2 4.2 0 0 0 6.3.46l2.5-2.5a4.2 4.2 0 0 0-5.94-5.94l-1.43 1.42"/><path d="M14 10.4a4.2 4.2 0 0 0-6.3-.46l-2.5 2.5a4.2 4.2 0 0 0 5.94 5.94l1.42-1.42"/></svg>
+        <span class="navbar-label">Links</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
 <header class="hero glass">
     <nav aria-label="Breadcrumb">
-      <a href="index.html">← Back to Resume</a>
+      <a href="index.html#projects">← Back to Resume</a>
     </nav>
     <h1 class="neon">Contact Manager</h1>
     <p class="subtitle">
@@ -35,11 +86,12 @@
   <main>
     <article>
       <figure>
-        <img src="images/gorilla-home-page.png" alt="CS Majors vs Gorilla — main home page" />
+        <img src="images/gorilla-home-page.webp" alt="CS Majors vs Gorilla — main home page"
+             width="1595" height="705" decoding="async">
         <figcaption>Main Home Page is all that is accessable due to website being down.</figcaption>
       </figure>
 
-      <h2>Overview</h2>
+      <h2 id="overview">Overview</h2>
       <p>
         A clean, semantic, and responsive contact manager built as a small-group project.
         The interface supports searching, adding, editing, and deleting contacts. The front end uses
@@ -47,7 +99,7 @@
         and updates the page without reloads.
       </p>
 
-      <h2>My Role — Project Manager</h2>
+      <h2 id="role">My Role — Project Manager</h2>
       <ul>
         <li><strong>Planning & scope:</strong> defined functional requirements, split milestones (search → add/edit → delete → polish), tracked progress using a Gantt chart.</li>
         <li><strong>Coordination:</strong> scheduled group meetings, tracked members, assigned issues/PRs, and enforced code-review checklists.</li>
@@ -56,7 +108,7 @@
         <li><strong>DevOps:</strong> coordinated hosting and transfers (GoDaddy/DigitalOcean), SFTP/SSH (FileZilla, PuTTY), and environment setup documentation.</li>
       </ul>
 
-      <h2>Features</h2>
+      <h2 id="features">Features</h2>
       <ul>
         <li><strong>Live search:</strong> debounced input calls <code>search.php</code> and renders results dynamically.</li>
         <li><strong>CRUD:</strong> create/update/delete via PHP endpoints with optimistic UI and error fallback.</li>
@@ -65,7 +117,7 @@
         <li><strong>Accessible UI:</strong> proper labels/ids, descriptive buttons, visible focus states, logical tab order.</li>
       </ul>
 
-      <h2>Architecture</h2>
+      <h2 id="architecture">Architecture</h2>
       <ul>
         <li><strong>Front-end:</strong> Semantic HTML sections, CSS (flex/grid), unobtrusive JS for DOM updates.</li>
         <li><strong>Transport:</strong> <code>XMLHttpRequest</code> with JSON payloads/responses; centralized request helpers.</li>
@@ -73,14 +125,14 @@
         <li><strong>Data:</strong> MySQL schema for contacts (name, email, phone, etc.), parameterized queries.</li>
       </ul>
 
-      <h2>Technical Contributions</h2>
+      <h2 id="contributions">Technical Contributions</h2>
       <ul>
         <li>Implemented the delete flow and fixed a null-DOM reference bug by guarding queries and deferring lookups until content mount.</li>
         <li>Wrote XHR utilities for GET/POST, standardized success/error handling, and added status toasts.</li>
         <li>Authored the form accessibility pattern (labels, error regions, focus management) and responsive form grid.</li>
       </ul>
 
-      <h2>Challenges & Lessons</h2>
+      <h2 id="lessons">Challenges & Lessons</h2>
       <ul>
         <li><strong>Race conditions:</strong> solved null element references with safe selectors and render timing.</li>
         <li><strong>Validation UX:</strong> combined native constraints with concise custom messages for clarity and screen-reader compatibility.</li>
@@ -88,7 +140,7 @@
         <li><strong>Collaboration:</strong> Learned to manage a team, delegate tasks, and enforce quality through reviews and checklists.</li>
       </ul>
 
-      <h2>Skills Demonstrated</h2>
+      <h2 id="skills">Skills Demonstrated</h2>
       <ul>
         <li>Project management (scope, milestones, issue/PR workflow, stand-ups)</li>
         <li>Semantic HTML & accessible forms (labels, aria-live, focus order)</li>
@@ -97,7 +149,7 @@
         <li>Basic DevOps (GoDaddy/DigitalOcean, FileZilla, PuTTY)</li>
       </ul>
 
-      <h2>Links</h2>
+      <h2 id="links">Links</h2>
       <ul>
         <li>Source Code:
           <a href="https://github.com/jm19pa/COP4331-Group16-Small-Project" target="_blank" rel="noopener">
@@ -123,53 +175,5 @@
     </p>
     <p><a href="index.html">Back to Resume</a></p>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
-
-      let raf = 0;
-      let x = window.innerWidth * 0.5;
-      let y = window.innerHeight * 0.35;
-
-      function apply(){
-        document.documentElement.style.setProperty('--mx', x + 'px');
-        document.documentElement.style.setProperty('--my', y + 'px');
-        raf = 0;
-      }
-
-      window.addEventListener('mousemove', (e) => {
-        x = e.clientX;
-        y = e.clientY;
-        if (!raf) raf = requestAnimationFrame(apply);
-      }, { passive: true });
-    })();
-  </script>
-  <script>
-(function () {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return;
-
-  let raf = 0;
-  let x = innerWidth * 0.5;
-  let y = innerHeight * 0.35;
-
-  function apply(){
-    document.documentElement.style.setProperty('--mx', x + 'px');
-    document.documentElement.style.setProperty('--my', y + 'px');
-    raf = 0;
-  }
-
-  addEventListener('mousemove', (e) => {
-    x = e.clientX;
-    y = e.clientY;
-    if (!raf) raf = requestAnimationFrame(apply);
-  }, { passive: true });
-})();
-</script>
-
 </body>
 </html>

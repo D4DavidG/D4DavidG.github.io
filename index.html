@@ -6,26 +6,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preload" href="styles.css" as="style">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/images/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/images/favicon-16.png" sizes="16x16">
-  <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <meta name="theme-color" content="#00ff00">
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
 </head>
 
 <body class="theme-green">
   <div class="mouse-glow" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to main content</a>
 
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="#top">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+          <span class="navbar-label">Top</span>
+        </a>
+      <a class="navbar-item" href="#objective">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.5"/>
+        <path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/>
+        <circle cx="12" cy="10.2" r="2.5"/>
+        <path d="M7.9 16.9a4.5 4.5 0 0 1 8.2 0"/>
+      </svg>
+        <span class="navbar-label">Objective</span>
+      </a>
+      <a class="navbar-item" href="#education">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3.2 1.8 7.6 12 12l10.2-4.4L12 3.2Z"/>
+        <path d="M5.6 9.6v5.2c0 1.9 2.9 3.4 6.4 3.4s6.4-1.5 6.4-3.4V9.6"/>
+        <path d="M3.4 8.5v6.9"/>
+        <circle cx="3.4" cy="16.6" r="1.2"/>
+      </svg>
+        <span class="navbar-label">Education</span>
+      </a>
+      <a class="navbar-item" href="#experience">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2.2" y="6.8" width="19.6" height="13.4" rx="2"/>
+        <path d="M8.6 6.8V5a1.6 1.6 0 0 1 1.6-1.6h3.6A1.6 1.6 0 0 1 15.4 5v1.8"/>
+        <path d="M2.2 12.4h19.6"/>
+        <path d="M10.4 12.4v2.2h3.2v-2.2"/>
+      </svg>
+        <span class="navbar-label">Experience</span>
+      </a>
+      <a class="navbar-item" href="#projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2.3 9.2V6.8a2.1 2.1 0 0 1 2.1-2.1h3.8l2.2 2h6.2a2.1 2.1 0 0 1 2.1 2.1v8.6a2.1 2.1 0 0 1-2.1 2.1H4.4a2.1 2.1 0 0 1-2.1-2.1V9.2Z"/>
+        <path d="m8.2 12.7 2.1 2.1 4.1-4.1"/>
+        <path d="m20.6 2.4.55 1.25 1.25.55-1.25.55-.55 1.25-.55-1.25-1.25-.55 1.25-.55.55-1.25Z"/>
+      </svg>
+        <span class="navbar-label">Projects</span>
+      </a>
+      <a class="navbar-item" href="#skills">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="3.4" r="1.9"/>
+        <circle cx="3.7" cy="7.4" r="1.9"/>
+        <circle cx="20.3" cy="7.4" r="1.9"/>
+        <path d="M12 5.3v3.3M5.4 8.5l3.3 1.9M18.6 8.5l-3.3 1.9"/>
+        <circle cx="12" cy="12.4" r="2.9"/>
+        <path d="M7.2 20a4.9 4.9 0 0 1 9.6 0"/>
+      </svg>
+        <span class="navbar-label">Skills</span>
+      </a>
+      <a class="navbar-item" href="#awards">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="1.8" y="3.2" width="20.4" height="13.6" rx="1.6"/>
+        <path d="M5.4 7.4h9.2M5.4 10h5.8M5.4 12.6h4.6"/>
+        <circle cx="17.2" cy="14.4" r="3.1"/>
+        <path d="m15.4 16.9-1.5 4.3 2.5-.8 1.3 2.1 1.3-2.1 2.5.8-1.5-4.3"/>
+      </svg>
+        <span class="navbar-label">Awards</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
 <header class="hero glass">
     <div class="container">
       <div class="avatar">
         <img
           class="profile"
-          src="images/profile.jpg"
+          src="images/profile.webp"
           alt="Professional headshot of David Gusmao"
-          width="512" height="512"
+          width="512" height="768"
           decoding="async">
       </div>
 
@@ -42,14 +122,6 @@
       </div>
     </div>
 
-    <nav class="topnav" aria-label="Primary">
-      <a class="btn" href="#objective">Objective</a>
-      <a class="btn" href="#education">Education</a>
-      <a class="btn" href="#experience">Experience</a>
-      <a class="btn" href="#projects">Projects</a>
-      <a class="btn" href="#skills">Skills</a>
-      <a class="btn" href="#awards">Awards</a>
-    </nav>
   </header>
 
   <main id="main">
@@ -163,33 +235,6 @@
       <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
       <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
-    <p><a href="index.html">Back to Resume</a></p>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mouse glow (shared “FitnessFunctions-style” flow)
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
-
-      let raf = 0;
-      let x = window.innerWidth * 0.5;
-      let y = window.innerHeight * 0.35;
-
-      function apply(){
-        document.documentElement.style.setProperty('--mx', x + 'px');
-        document.documentElement.style.setProperty('--my', y + 'px');
-        raf = 0;
-      }
-
-      window.addEventListener('mousemove', (e) => {
-        x = e.clientX;
-        y = e.clientY;
-        if (!raf) raf = requestAnimationFrame(apply);
-      }, { passive: true });
-    })();
-  </script>
 </body>
 </html>

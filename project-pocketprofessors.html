@@ -5,20 +5,67 @@
   <title>PocketProfessors — Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/images/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/images/favicon-16.png" sizes="16x16">
-  <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <meta name="theme-color" content="#ffd54a">
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
 </head>
 
 <body class="theme-gold">
   <div class="mouse-glow" aria-hidden="true"></div>
 
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="#top">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+        <span class="navbar-label">Top</span>
+      </a>
+      <a class="navbar-item" href="#overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 2.4h7L18.6 7.6v12.2a1.8 1.8 0 0 1-1.8 1.8H6.2a1.8 1.8 0 0 1-1.8-1.8V4.2a1.8 1.8 0 0 1 1.8-1.8Z"/><path d="M12.9 2.6v5.2h5.5"/><path d="M7.6 12.4h7.8M7.6 15.4h7.8M7.6 18.4h4.8"/></svg>
+        <span class="navbar-label">Overview</span>
+      </a>
+      <a class="navbar-item" href="#features">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2.6 2.9 5.88 6.5.95-4.7 4.58 1.11 6.47L12 17.42l-5.81 3.06 1.11-6.47-4.7-4.58 6.5-.95L12 2.6Z"/></svg>
+        <span class="navbar-label">Features</span>
+      </a>
+      <a class="navbar-item" href="#tech">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 7.4 3.4 12l5.2 4.6M15.4 7.4 20.6 12l-5.2 4.6M13.7 4.4l-3.4 15.2"/></svg>
+        <span class="navbar-label">Tech</span>
+      </a>
+      <a class="navbar-item" href="#how">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.3"/><circle cx="12" cy="12" r="7.4"/><path d="M12 1.8v2.8M12 19.4v2.8M22.2 12h-2.8M4.6 12H1.8M19.35 4.65l-1.98 1.98M6.63 17.37l-1.98 1.98M19.35 19.35l-1.98-1.98M6.63 6.63 4.65 4.65"/></svg>
+        <span class="navbar-label">How It Works</span>
+      </a>
+      <a class="navbar-item" href="#role">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.4" width="18" height="17.2" rx="2.6"/><circle cx="12" cy="10" r="2.8"/><path d="M7.6 17.6a4.7 4.7 0 0 1 8.8 0"/></svg>
+        <span class="navbar-label">My Role</span>
+      </a>
+      <a class="navbar-item" href="#credits">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.4" r="3.3"/><path d="M2.8 19.6a6.2 6.2 0 0 1 12.4 0"/><path d="M16.4 5.6a3.3 3.3 0 0 1 0 5.9"/><path d="M18 14.2a6.2 6.2 0 0 1 3.4 5.4"/></svg>
+        <span class="navbar-label">Credits</span>
+      </a>
+      <a class="navbar-item" href="#lessons">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 15.4A6.6 6.6 0 1 1 15.4 15.4c-.9.8-1.4 1.6-1.5 2.6h-3.8c-.1-1-.6-1.8-1.5-2.6Z"/><path d="M10.1 20.4h3.8M10.8 22.6h2.4"/></svg>
+        <span class="navbar-label">Lessons</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
 <header class="simple glass">
     <nav aria-label="Breadcrumb">
-      <a href="index.html">← Back to Resume</a>
+      <a href="index.html#projects">← Back to Resume</a>
     </nav>
     <h1 class="neon">PocketProfessors</h1>
     <p class="subtitle">
@@ -32,17 +79,18 @@
   <main>
     <article>
       <figure>
-        <img src="images/titlecardforpp.png" alt="PocketProfessors landing" />
+        <img src="images/titlecardforpp.webp" alt="PocketProfessors landing"
+             width="911" height="451" decoding="async">
       </figure>
 
-      <h2>Overview</h2>
+      <h2 id="overview">Overview</h2>
       <p>
         PocketProfessors is a full-stack web application where users log in, open card packs,
         and collect hand-drawn cards of professors and people at UCF (including special developer cards).
         It’s built to feel like a playful TCG while staying fast, responsive, and accessible.
       </p>
 
-      <h2>Key Features</h2>
+      <h2 id="features">Key Features</h2>
       <ul>
         <li><strong>User authentication</strong> with JWT (login/session).</li>
         <li><strong>MongoDB integration</strong> for card data and collections.</li>
@@ -51,7 +99,7 @@
         <li><strong>Responsive design</strong> across web and mobile.</li>
       </ul>
 
-      <h2>Technologies</h2>
+      <h2 id="tech">Technologies</h2>
       <ul>
         <li><strong>Frontend:</strong> React, TypeScript, Vite, CSS.</li>
         <li><strong>Backend:</strong> Node.js, Express.js.</li>
@@ -62,7 +110,7 @@
         <li><strong>Deployment:</strong> Nginx (Linux), GitHub.</li>
       </ul>
 
-      <h2>How It Works</h2>
+      <h2 id="how">How It Works</h2>
       <ol>
         <li><strong>Sign in</strong> with JWT auth.</li>
         <li><strong>Open packs</strong> to receive hand-drawn UCF/professor cards (with special dev cards).</li>
@@ -70,15 +118,17 @@
       </ol>
 
       <figure>
-        <img src="images/pocketprofessors.png" alt="PocketProfessors pack opening" />
+        <img src="images/pocketprofessors.webp" alt="PocketProfessors pack opening"
+             width="1588" height="700" loading="lazy" decoding="async">
         <figcaption>Open weighted packs.</figcaption>
       </figure>
       <figure>
-        <img src="images/professorpannel.png" alt="PocketProfessors collection views" />
+        <img src="images/professorpannel.webp" alt="PocketProfessors collection views"
+             width="1595" height="725" loading="lazy" decoding="async">
         <figcaption>Collect professors, track progress.</figcaption>
       </figure>
 
-      <h2>My Role & Contributions</h2>
+      <h2 id="role">My Role & Contributions</h2>
       <h3>Project Manager & Frontend Developer</h3>
       <ul>
         <li>Name & Website Theming, All Cards, All Art, Powerpoint, Gantt Chart, Recourse Allocation, Droplet, and Domain.</li>
@@ -87,7 +137,7 @@
         <li>Helped align component structure with React + TypeScript best practices.</li>
       </ul>
 
-      <h2>Credits & Links</h2>
+      <h2 id="credits">Credits & Links</h2>
       <ul>
         <li>Team project for UCF COP4331 (Group 25).</li>
         <li>Live site:
@@ -98,7 +148,7 @@
         </li>
       </ul>
 
-      <h2>Challenges & Lessons</h2>
+      <h2 id="lessons">Challenges & Lessons</h2>
       <ul>
         <li><strong>Collaboration:</strong> Learned to manage a team, delegate tasks, and enforce quality through reviews and checklists.</li>
         <li><strong>JWT lifecycle:</strong> Implemented token refresh and secure storage to balance UX and security.</li>
@@ -138,30 +188,5 @@ SENDGRID_API_KEY=...
     </p>
     <p><a href="index.html">Back to Resume</a></p>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
-
-      let raf = 0;
-      let x = window.innerWidth * 0.5;
-      let y = window.innerHeight * 0.35;
-
-      function apply(){
-        document.documentElement.style.setProperty('--mx', x + 'px');
-        document.documentElement.style.setProperty('--my', y + 'px');
-        raf = 0;
-      }
-
-      window.addEventListener('mousemove', (e) => {
-        x = e.clientX;
-        y = e.clientY;
-        if (!raf) raf = requestAnimationFrame(apply);
-      }, { passive: true });
-    })();
-  </script>
 </body>
 </html>

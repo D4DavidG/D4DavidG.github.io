@@ -6,20 +6,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2efcff">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/images/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicon-16.png" sizes="16x16">
-<link rel="apple-touch-icon" href="/images/favicon-180.png">
-<link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
-
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
 </head>
 
 <body class="theme-aqua">
   <div class="mouse-glow" aria-hidden="true"></div>
 
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="#top">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+        <span class="navbar-label">Top</span>
+      </a>
+      <a class="navbar-item" href="#overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 2.4h7L18.6 7.6v12.2a1.8 1.8 0 0 1-1.8 1.8H6.2a1.8 1.8 0 0 1-1.8-1.8V4.2a1.8 1.8 0 0 1 1.8-1.8Z"/><path d="M12.9 2.6v5.2h5.5"/><path d="M7.6 12.4h7.8M7.6 15.4h7.8M7.6 18.4h4.8"/></svg>
+        <span class="navbar-label">Overview</span>
+      </a>
+      <a class="navbar-item" href="#features">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2.6 2.9 5.88 6.5.95-4.7 4.58 1.11 6.47L12 17.42l-5.81 3.06 1.11-6.47-4.7-4.58 6.5-.95L12 2.6Z"/></svg>
+        <span class="navbar-label">Features</span>
+      </a>
+      <a class="navbar-item" href="#tech">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 7.4 3.4 12l5.2 4.6M15.4 7.4 20.6 12l-5.2 4.6M13.7 4.4l-3.4 15.2"/></svg>
+        <span class="navbar-label">Tech</span>
+      </a>
+      <a class="navbar-item" href="#screenshots">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.4" y="4" width="19.2" height="13" rx="2"/><path d="M8.4 20.8h7.2M12 17v3.8"/><path d="m6.4 13.6 3-3 2.6 2.6 2.4-2.4 3.2 3.2"/></svg>
+        <span class="navbar-label">Screens</span>
+      </a>
+      <a class="navbar-item" href="#proof">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.4 5.8v6.1c0 4.6 3.2 8.4 7.6 9.5 4.4-1.1 7.6-4.9 7.6-9.5V5.8L12 2.6Z"/><path d="m8.6 12.2 2.4 2.4 4.4-4.4"/></svg>
+        <span class="navbar-label">Proof</span>
+      </a>
+      <a class="navbar-item" href="#download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2v10.4"/><path d="m7.8 9.6 4.2 4.2 4.2-4.2"/><path d="M3.6 15.6v3.2a2 2 0 0 0 2 2h12.8a2 2 0 0 0 2-2v-3.2"/></svg>
+        <span class="navbar-label">Download</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
 <header class="simple glass">
     <nav aria-label="Breadcrumb">
-      <a href="index.html">← Back to Resume</a>
+      <a href="index.html#projects">← Back to Resume</a>
     </nav>
 
     <h1 class="neon">FitnessFunctions</h1>
@@ -34,7 +76,7 @@
 
   <main>
     <article>
-      <h2>Overview</h2>
+      <h2 id="overview">Overview</h2>
       <p>
         FitnessFunctions is a <strong>solo-built</strong> role-based web app that manages gym instructors,
         class schedules, and member enrollments. I designed and implemented the full system end-to-end:
@@ -43,7 +85,7 @@
         and drop classes. Enrollment totals update per class to enforce capacity limits.
       </p>
 
-      <h2>Key Features</h2>
+      <h2 id="features">Key Features</h2>
       <ul>
         <li><strong>Solo Project:</strong> Role-based class enrollment system · PHP + MySQL</li>
         <li><strong>Authentication + Roles:</strong> users log in and are routed to Admin or Member dashboards.</li>
@@ -53,7 +95,7 @@
         <li><strong>Capacity Tracking:</strong> “Enrolled” count updates and classes can show <em>Full</em>.</li>
       </ul>
 
-      <h2>Technologies</h2>
+      <h2 id="tech">Technologies</h2>
       <ul>
         <li><strong>Frontend:</strong> HTML, CSS (custom neon dashboard UI)</li>
         <li><strong>Backend:</strong> PHP</li>
@@ -61,76 +103,89 @@
         <li><strong>Environment:</strong> Apache (localhost development)</li>
       </ul>
 
-      <h2>Screenshots</h2>
+      <h2 id="screenshots">Screenshots</h2>
 
       <figure>
-        <img src="images/fitnessfunctions/login.png" alt="FitnessFunctions login screen" />
+        <img src="images/fitnessfunctions/login.webp" alt="FitnessFunctions login screen"
+             width="1273" height="498" decoding="async">
         <figcaption>Login page with test accounts.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/adminDashboard.png" alt="FitnessFunctions admin dashboard" />
+        <img src="images/fitnessfunctions/adminDashboard.webp" alt="FitnessFunctions admin dashboard"
+             width="1192" height="424" loading="lazy" decoding="async">
         <figcaption>Admin dashboard navigation.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/manageInstructors.png" alt="Manage instructors page" />
+        <img src="images/fitnessfunctions/manageInstructors.webp" alt="Manage instructors page"
+             width="1337" height="619" loading="lazy" decoding="async">
         <figcaption>Admin: Manage instructors (CRUD).</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/manageClasses.png" alt="Manage classes page" />
+        <img src="images/fitnessfunctions/manageClasses.webp" alt="Manage classes page"
+             width="1200" height="702" loading="lazy" decoding="async">
         <figcaption>Admin: Manage classes (CRUD + capacity).</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/classEnrollments.png" alt="Class enrollments page" />
+        <img src="images/fitnessfunctions/classEnrollments.webp" alt="Class enrollments page"
+             width="1195" height="625" loading="lazy" decoding="async">
         <figcaption>Admin: View class enrollments (who is enrolled in each class).</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/memberDashboard.png" alt="Member dashboard" />
+        <img src="images/fitnessfunctions/memberDashboard.webp" alt="Member dashboard"
+             width="1202" height="484" loading="lazy" decoding="async">
         <figcaption>Member dashboard.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/availableClasses.png" alt="Available classes page" />
+        <img src="images/fitnessfunctions/availableClasses.webp" alt="Available classes page"
+             width="1196" height="699" loading="lazy" decoding="async">
         <figcaption>Member: Browse available classes and see enrollment counts.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/myClassess.png" alt="My classes page" />
+        <img src="images/fitnessfunctions/myClassess.webp" alt="My classes page"
+             width="1193" height="626" loading="lazy" decoding="async">
         <figcaption>Member: View enrolled classes and drop if needed.</figcaption>
       </figure>
 
-      <h2>Implementation Proof (Business Logic + Data)</h2>
+      <h2 id="proof">Implementation Proof (Business Logic + Data)</h2>
 
       <figure>
-        <img src="images/fitnessfunctions/addClass.png" alt="Add class form" />
+        <img src="images/fitnessfunctions/addClass.webp" alt="Add class form"
+             width="927" height="675" loading="lazy" decoding="async">
         <figcaption>Add Class form (admin). Scheduling + instructor assignment + capacity input.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/validationCheck.png" alt="Validation when submitting empty form" />
+        <img src="images/fitnessfunctions/validationCheck.webp" alt="Validation when submitting empty form"
+             width="308" height="493" loading="lazy" decoding="async">
         <figcaption>Client-side validation: required fields prevent submitting an empty form.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/capacityFull.png" alt="Capacity full example" />
+        <img src="images/fitnessfunctions/capacityFull.webp" alt="Capacity full example"
+             width="874" height="272" loading="lazy" decoding="async">
         <figcaption>Capacity logic: class marked <strong>Full</strong> when enrollment reaches capacity.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/databaseSchema.png" alt="Database schema in MySQL Workbench" />
+        <img src="images/fitnessfunctions/databaseSchema.webp" alt="Database schema in MySQL Workbench"
+             width="791" height="462" loading="lazy" decoding="async">
         <figcaption>Database schema (MySQL) showing core tables: users, instructors, classes, enrollments.</figcaption>
       </figure>
 
       <figure>
-        <img src="images/fitnessfunctions/codeStructure.png" alt="Project file structure in VS Code" />
+        <img src="images/fitnessfunctions/codeStructure.webp" alt="Project file structure in VS Code"
+             width="1152" height="810" loading="lazy" decoding="async">
         <figcaption>Project structure (PHP pages + handlers + DB connection).</figcaption>
       </figure>
 
-      <h2>Download</h2>
+      <h2 id="download">Download</h2>
       <p>
         You can download the full project files here:
         <a href="downloads/FitnessFunctions.zip" download>FitnessFunctions.zip</a>
@@ -145,30 +200,5 @@
     </p>
     <p><a href="index.html">Back to Resume</a></p>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
-
-      let raf = 0;
-      let x = window.innerWidth * 0.5;
-      let y = window.innerHeight * 0.35;
-
-      function apply(){
-        document.documentElement.style.setProperty('--mx', x + 'px');
-        document.documentElement.style.setProperty('--my', y + 'px');
-        raf = 0;
-      }
-
-      window.addEventListener('mousemove', (e) => {
-        x = e.clientX;
-        y = e.clientY;
-        if (!raf) raf = requestAnimationFrame(apply);
-      }, { passive: true });
-    })();
-  </script>
 </body>
 </html>
