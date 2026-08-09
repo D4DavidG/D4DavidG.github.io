@@ -39,8 +39,8 @@ html { scroll-behavior: smooth; }
   --vig-b: rgba(0,0,0,.9);
 
   /* glass panels */
-  --glass-1: rgba(14,18,20,.72);
-  --glass-2: rgba(14,18,20,.46);
+  --glass-1: rgba(14,18,14,.72);
+  --glass-2: rgba(14,18,14,.46);
   --glass-border: rgba(255,255,255,.12);
 
   /* nav bar height, expanded and collapsed */
@@ -96,7 +96,7 @@ body.theme-green {
   --accent-soft: rgba(0,255,0,.55);
   --accent-faint: rgba(0,255,0,.25);
   --accent-ink: var(--accent);
-  --border: color-mix(in srgb, var(--accent) 12%, transparent);
+  --border: color-mix(in srgb, var(--accent) 27.5%, transparent);
 }
 
 body.theme-aqua {
@@ -104,7 +104,7 @@ body.theme-aqua {
   --accent-soft: rgba(46,252,255,.55);
   --accent-faint: rgba(46,252,255,.25);
   --accent-ink: var(--accent);
-  --border: color-mix(in srgb, var(--accent) 12%, transparent);
+  --border: color-mix(in srgb, var(--accent) 27.5%, transparent);
 }
 
 body.theme-gold {
@@ -112,7 +112,7 @@ body.theme-gold {
   --accent-soft: rgba(255,213,74,.55);
   --accent-faint: rgba(255,213,74,.25);
   --accent-ink: var(--accent);
-  --border: color-mix(in srgb, var(--accent) 12%, transparent);
+  --border: color-mix(in srgb, var(--accent) 27.5%, transparent);
 }
 
 /* Readable ink + a stronger border once the page goes light. */
@@ -262,18 +262,19 @@ section + section, article + article{ margin-top: 1.25rem; }
 section, article{
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 14px;
   padding: 1rem 1.05rem;
   transition: box-shadow .2s ease, transform .08s ease, border-color .2s ease;
 }
 
 /* Panels glow slightly weaker than the header */
 section:hover, article:hover{
-  border-color: var(--hair);
+  border-color: var(--accent);
   box-shadow:
-    0 0 16px var(--accent-faint),
-    0 0 32px var(--shadow-drop);
+    0 0 16px var(--accent-soft),
+    0 0 32px var(--accent-faint);
 }
+
 
 /* highlight the section jumped to from the nav bar */
 :target{
