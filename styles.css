@@ -115,16 +115,75 @@ body.theme-gold {
   --border: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
+/* Knights Counsel — wine red, the colour law offices bind their books in.
+   Deep enough to read as burgundy, light enough to still carry a glow on a
+   near-black page. */
+body.theme-burgundy {
+  --accent: #e04a5f;
+  --accent-soft: rgba(224,74,95,.55);
+  --accent-faint: rgba(224,74,95,.25);
+  --accent-ink: var(--accent);
+  --border: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* Build-Recipe — a true blue, deliberately bluer than FitnessFunctions' cyan
+   so the two never read as the same project at a glance. */
+body.theme-sky {
+  --accent: #4d9fff;
+  --accent-soft: rgba(77,159,255,.55);
+  --accent-faint: rgba(77,159,255,.25);
+  --accent-ink: var(--accent);
+  --border: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* Contact Manager — leaf lime. Yellower than the site green so the two are
+   distinguishable side by side on the work index. */
+body.theme-lime {
+  --accent: #a3e635;
+  --accent-soft: rgba(163,230,53,.55);
+  --accent-faint: rgba(163,230,53,.25);
+  --accent-ink: var(--accent);
+  --border: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
 /* Readable ink + a stronger border once the page goes light. */
-:root[data-mode="light"] body.theme-green { --accent-ink: #0a7d18; }
-:root[data-mode="light"] body.theme-aqua  { --accent-ink: #0b6f75; }
-:root[data-mode="light"] body.theme-gold  { --accent-ink: #7a5600; }
+:root[data-mode="light"] body.theme-green    { --accent-ink: #0a7d18; }
+:root[data-mode="light"] body.theme-aqua     { --accent-ink: #0b6f75; }
+:root[data-mode="light"] body.theme-gold     { --accent-ink: #7a5600; }
+:root[data-mode="light"] body.theme-burgundy { --accent-ink: #9c1f36; }
+:root[data-mode="light"] body.theme-sky      { --accent-ink: #1257c9; }
+:root[data-mode="light"] body.theme-lime     { --accent-ink: #4a7c0f; }
 
 :root[data-mode="light"] body.theme-green,
 :root[data-mode="light"] body.theme-aqua,
-:root[data-mode="light"] body.theme-gold {
+:root[data-mode="light"] body.theme-gold,
+:root[data-mode="light"] body.theme-burgundy,
+:root[data-mode="light"] body.theme-sky,
+:root[data-mode="light"] body.theme-lime {
   --border: color-mix(in srgb, var(--accent-ink) 30%, transparent);
 }
+
+/* =========================
+   Accent overrides for a single element
+
+   Same five tokens as the theme blocks above, but scoped to one card rather
+   than the whole page. This is what lets a project card on the work index carry
+   the accent of the page it links to. Keep these values in sync with the
+   body.theme-* block of the same name.
+========================= */
+.accent-green  { --accent: #00ff00; --accent-soft: rgba(0,255,0,.55);     --accent-faint: rgba(0,255,0,.25);     --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+.accent-aqua   { --accent: #2efcff; --accent-soft: rgba(46,252,255,.55);  --accent-faint: rgba(46,252,255,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+.accent-gold   { --accent: #ffd54a; --accent-soft: rgba(255,213,74,.55);  --accent-faint: rgba(255,213,74,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+.accent-burgundy { --accent: #e04a5f; --accent-soft: rgba(224,74,95,.55);  --accent-faint: rgba(224,74,95,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+.accent-sky      { --accent: #4d9fff; --accent-soft: rgba(77,159,255,.55);  --accent-faint: rgba(77,159,255,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+.accent-lime     { --accent: #a3e635; --accent-soft: rgba(163,230,53,.55);  --accent-faint: rgba(163,230,53,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+:root[data-mode="light"] .accent-green    { --accent-ink: #0a7d18; }
+:root[data-mode="light"] .accent-aqua     { --accent-ink: #0b6f75; }
+:root[data-mode="light"] .accent-gold     { --accent-ink: #7a5600; }
+:root[data-mode="light"] .accent-burgundy { --accent-ink: #9c1f36; }
+:root[data-mode="light"] .accent-sky      { --accent-ink: #1257c9; }
+:root[data-mode="light"] .accent-lime     { --accent-ink: #4a7c0f; }
 
 /* =========================
    Body / background layers
@@ -259,20 +318,54 @@ h3 { margin: 0 0 .25rem; }
 main{ max-width: 960px; margin: 1rem auto; padding: 0 1rem; }
 section + section, article + article{ margin-top: 1.25rem; }
 
+/* ---- Body panel glow, at rest ----
+   BORDER thickness/colour and the resting GLOW for every body card live here.
+   Deliberately close to header.glass without matching it, so the header still
+   reads as the hottest thing on the page. */
 section, article{
   background: var(--panel);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
   border-radius: 18px;
   padding: 1rem 1.05rem;
+  box-shadow:
+    0 0 12px var(--accent-faint),
+    inset 0 0 8px color-mix(in srgb, var(--accent) 7%, transparent);
   transition: box-shadow .2s ease, transform .08s ease, border-color .2s ease;
 }
 
-/* Panels glow slightly weaker than the header */
+/* ---- Body panel glow, on hover ---- */
 section:hover, article:hover{
-  border-color: var(--hair);
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
   box-shadow:
-    0 0 16px var(--accent-faint),
-    0 0 32px var(--shadow-drop);
+    0 0 22px var(--accent-soft),
+    0 0 44px var(--accent-faint),
+    inset 0 0 12px var(--accent-faint);
+}
+
+/* An article nested inside a section is a sub-card; it should not compete with
+   its parent, so it stays quiet until hovered. */
+section article{
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+/* ---- Parent panels ----
+   A panel holding cards of its own reads hotter, the way the page header does.
+   :has() is what makes this general — any section that gains cards later picks
+   the treatment up without being told about it. */
+section:has(.work-card){
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow:
+    0 0 18px var(--accent-faint),
+    inset 0 0 12px var(--accent-faint);
+}
+
+section:has(.work-card):hover{
+  border-color: var(--accent);
+  box-shadow:
+    0 0 26px var(--accent-soft),
+    0 0 60px var(--accent-faint),
+    inset 0 0 16px var(--accent-faint);
 }
 
 /* highlight the section jumped to from the nav bar */
@@ -449,6 +542,196 @@ header.simple{
   gap: .45rem;
 }
 
+/* Hero centered layout */
+.hero-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 1rem 1rem;
+}
+
+.hero-content h1{
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+/* Logo flip animation
+   .logo-flipper must NOT set overflow — a non-visible overflow forces
+   transform-style back to `flat` and the flip stops being 3D. The circle crop
+   therefore lives on each .logo-face instead. */
+.logo-container{
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+}
+
+.logo-flipper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform .6s ease;
+}
+
+.logo-container:hover .logo-flipper{
+  transform: rotateY(180deg);
+}
+
+/* backface-visibility is what keeps the two faces from painting over each
+   other — without it the later sibling always wins and the front never shows.
+   The halo sits here rather than on the container so it turns with the coin;
+   that also means backface-visibility hides it at the halfway point instead of
+   leaving a bare glowing ring floating behind the edge-on card. */
+.logo-face{
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 0 16px var(--accent-soft), 0 0 34px var(--accent-faint);
+  transition: box-shadow .3s ease;
+}
+
+.logo-container:hover .logo-face{
+  box-shadow: 0 0 30px var(--accent), 0 0 64px var(--accent-soft);
+}
+
+.logo-face img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 1.png has a wide black margin around the ring; scaling up crops it away so
+   the ring sits flush against the coin border. */
+.logo-front img{ object-position: 50% 50.021400%; transform: scale(1.24); }
+
+/* The logo ships in two versions with identical geometry: 1.png on black,
+   2.png on white. Swapping the file rather than recolouring keeps the framing
+   above pixel-identical between modes — both are 1200x1800. */
+.logo-front .logo-on-light{ display: none; }
+:root[data-mode="light"] .logo-front .logo-on-dark{ display: none; }
+:root[data-mode="light"] .logo-front .logo-on-light{ display: block; }
+
+.logo-back{
+  transform: rotateY(180deg);
+}
+
+/* your framing for the face shot */
+.logo-back img{ object-position: 200% -20%; transform: scale(1.40); width: 90%;
+  height: 120%; }
+
+/* Hero buttons — one horizontal row.
+   The email dropdown below is absolutely positioned, so it would paint over
+   whatever follows. The bottom margin reserves its height inside the header
+   card instead. */
+.hero-buttons{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: .6rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: .3rem;
+  margin-bottom: 5.25rem;
+}
+
+.hero-btn-wrapper{
+  position: relative;
+  display: flex;
+  gap: .3rem;
+}
+
+.hero-btn{
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--accent-ink);
+  border-radius: 10px;
+  padding: .4rem .6rem;
+  font-size: .75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+  width: 56px;
+  height: 56px;
+  justify-content: center;
+}
+
+.hero-btn svg{
+  width: 24px;
+  height: 24px;
+  transition: width .2s ease, height .2s ease;
+}
+
+.hero-btn:hover, .hero-btn:focus-visible{
+  box-shadow: 0 0 12px var(--accent-faint);
+  border-color: var(--accent);
+}
+
+.hero-btn:focus-visible{
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+.hero-btn:active{ transform: scale(.95); }
+
+a.hero-btn{
+  text-decoration: none;
+}
+
+/* Email dropdown — always opens straight down, centred under its button, at
+   every width. Space for it is reserved by .hero-buttons' bottom margin. */
+.hero-dropdown{
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: .4rem;
+  transform: translateX(-50%);
+  padding: .5rem;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  min-width: 160px;
+  display: none;
+  flex-direction: column;
+  gap: .3rem;
+  box-shadow: 0 0 12px var(--accent-faint);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.hero-btn-wrapper:hover .hero-dropdown,
+.hero-dropdown:hover{
+  display: flex;
+}
+
+.hero-dropdown a{
+  padding: .4rem .5rem;
+  font-size: .75rem;
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background .2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-dropdown a:hover{
+  background: var(--accent-faint);
+  text-decoration: none;
+}
+
 /* Header reads hotter than the panels below it */
 header.glass{
   border-color: color-mix(in srgb, var(--accent) 55%, transparent);
@@ -586,6 +869,384 @@ footer{
 }
 
 /* =========================
+   Hero copy
+   The thesis line carries the positioning; the lede backs it with evidence.
+========================= */
+.hero-thesis{
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 2.4vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--accent-ink);
+  text-shadow: 0 0 10px var(--accent-faint);
+}
+
+/* Boxed like a callout, but with an even border all the way round — no accent
+   bar down one side. It is supporting detail, not a notice. */
+.hero-lede{
+  margin: .15rem 0 .1rem;
+  max-width: 62ch;
+  text-align: center;
+  color: var(--text);
+  padding: .75rem 1rem;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: .95rem;
+}
+
+/* Availability line — the thing most portfolios leave out. */
+.hero-looking{
+  margin: 0;
+  padding: .4rem .85rem;
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  font-size: .9rem;
+  color: var(--text);
+  background: var(--panel-2);
+}
+.hero-looking strong{ color: var(--accent-ink); }
+
+/* =========================
+   Selected work cards
+========================= */
+.work-grid{
+  display: grid;
+  gap: 1rem;
+  margin-top: .9rem;
+}
+
+/* ---- Project card glow ----
+   Each card carries its own accent through an .accent-* class, so the border,
+   the halo and the heading all take the colour of the page it links to. */
+.work-card{
+  display: block;
+  background: var(--panel-2);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 16px;
+  padding: .9rem 1rem;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 0 12px var(--accent-faint);
+  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+}
+
+.work-card:hover,
+.work-card:focus-visible{
+  border-color: var(--accent);
+  box-shadow:
+    0 0 24px var(--accent-soft),
+    0 0 48px var(--accent-faint);
+  text-decoration: none;
+}
+.work-card:focus-visible{
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 3px;
+}
+.work-card:active{ transform: scale(.995); }
+
+.work-card h3{
+  margin: 0 0 .2rem;
+  color: var(--accent-ink);
+  font-size: 1.12rem;
+}
+
+/* Role · team · date. Mono so it reads as data, not prose. */
+.card-meta{
+  margin: 0 0 .5rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: .78rem;
+  letter-spacing: .01em;
+  color: var(--muted);
+}
+
+.card-body{ margin: 0 0 .6rem; }
+
+.card-status{
+  margin: .5rem 0 0;
+  font-size: .85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.card-more{
+  display: inline-block;
+  margin-top: .55rem;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+/* ---- Section header with an action ----
+   Heading on the left, the link to the fuller page on the right, so a reader
+   who only wants the full list can find it before reading the highlights. */
+.section-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-bottom: .35rem;
+}
+.section-head h2{ margin: 0; }
+
+/* The same link repeated at the end of the section, left-aligned — a reader who
+   has just finished the highlights shouldn't have to scroll back up for it. */
+.section-foot{
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.section-btn{
+  flex: 0 0 auto;
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  border-radius: 999px;
+  padding: .3rem .8rem;
+  background: var(--panel-2);
+  color: var(--accent-ink);
+  font-size: .82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0 10px var(--accent-faint);
+  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+}
+
+.section-btn:hover,
+.section-btn:focus-visible{
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-soft), 0 0 32px var(--accent-faint);
+  text-decoration: none;
+}
+.section-btn:focus-visible{
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+.section-btn:active{ transform: scale(.97); }
+
+/* Stack chips — smaller and denser than .tags */
+.stack{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+.stack li{
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: .12rem .5rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: .72rem;
+  color: var(--muted);
+  background: var(--sunken);
+}
+
+/* The stack list standing alone under a facts strip, rather than inside a card. */
+.stack-standalone{ margin-bottom: 1rem; }
+
+/* =========================
+   Currently / status
+   Cheap to maintain, and it is what makes the site read as live.
+========================= */
+.currently p{ margin: 0 0 .5rem; }
+
+.updated{
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: .74rem;
+  color: var(--muted);
+}
+
+/* =========================
+   Skills — six labelled groups
+   Grouping is what keeps a long list from reading as keyword stuffing.
+========================= */
+.skill-groups{
+  display: grid;
+  gap: .8rem;
+  margin: 0;
+}
+
+.skill-groups dt{
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: .92rem;
+  margin-bottom: .15rem;
+}
+
+.skill-groups dd{
+  margin: 0;
+  color: var(--text);
+  font-size: .95rem;
+  opacity: .92;
+}
+
+/* =========================
+   Case-study furniture
+========================= */
+
+/* Facts strip: role, team, duration, status, stack. Skimmable in seconds. */
+.facts{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: .7rem 1.1rem;
+  margin: 0 0 1rem;
+  padding: .85rem 1rem;
+  background: var(--sunken);
+  border: 1px solid var(--hair);
+  border-radius: 14px;
+}
+
+.facts div{ min-width: 0; }
+
+.facts dt{
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: .12rem;
+}
+
+.facts dd{
+  margin: 0;
+  font-size: .92rem;
+  color: var(--text);
+}
+
+/* The one-sentence thesis that opens every case study. */
+.thesis{
+  margin: 0 0 1rem;
+  padding-left: .9rem;
+  border-left: 3px solid var(--accent);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* Confidentiality / scope notice. Stating the boundary is a credential. */
+.callout{
+  margin: 0 0 1rem;
+  padding: .8rem 1rem;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  font-size: .92rem;
+  color: var(--text);
+}
+.callout strong{ color: var(--accent-ink); }
+
+/* A decision: what was chosen, what was rejected, why. */
+.decision{
+  margin: 0 0 .9rem;
+  padding: .8rem 1rem;
+  background: var(--sunken);
+  border: 1px solid var(--hair);
+  border-radius: 14px;
+}
+.decision:last-child{ margin-bottom: 0; }
+.decision h3{
+  margin: 0 0 .35rem;
+  color: var(--accent-ink);
+  font-size: 1rem;
+}
+.decision p{ margin: 0 0 .4rem; }
+.decision p:last-child{ margin-bottom: 0; }
+
+.decision-rejected{
+  font-size: .9rem;
+  color: var(--muted);
+}
+.decision-rejected strong{ color: var(--text); }
+
+/* =========================
+   Writing entries
+========================= */
+.writing-item{
+  padding: .85rem 0;
+  border-top: 1px solid var(--hair);
+}
+.writing-item:first-of-type{ border-top: 0; padding-top: 0; }
+
+.writing-item h3{
+  margin: 0 0 .15rem;
+  color: var(--accent-ink);
+  font-size: 1.02rem;
+}
+
+.writing-role{
+  margin: 0 0 .4rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: .76rem;
+  color: var(--muted);
+}
+
+.writing-item p{ margin: 0; }
+
+/* =========================
+   Credentials strip
+   One compact band rather than a section per line item.
+========================= */
+.creds{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: .8rem 1.2rem;
+  margin: 0;
+}
+
+.creds dt{
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: .15rem;
+}
+
+.creds dd{
+  margin: 0;
+  font-size: .93rem;
+  color: var(--text);
+}
+
+/* =========================
+   Print — index and resume should print as a usable document
+========================= */
+@media print{
+  .navbar, .mouse-glow, .skip-link, .hero-buttons, .logo-container,
+  .navbar-toggle, .card-more{ display: none !important; }
+
+  body{
+    padding-top: 0;
+    background: #fff;
+    color: #000;
+  }
+  body::before, body::after{ display: none; }
+
+  header, section, article, .work-card, .facts, .decision, .callout{
+    background: none;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    padding: 0;
+  }
+
+  h1, h2, h3, .neon{
+    color: #000;
+    text-shadow: none;
+  }
+
+  a{ color: #000; text-decoration: underline; }
+
+  section, article{ break-inside: avoid; }
+}
+
+/* =========================
    Responsive
 ========================= */
 @media (max-width: 760px){
@@ -613,4 +1274,17 @@ footer{
     flex-direction: column;
     align-items: flex-start;
   }
+
+  /* Wider so the addresses aren't ellipsised, and anchored to the button's left
+     edge rather than centred — centring a 78vw panel under a button sitting
+     near the left margin would push it off-screen. */
+  .hero-dropdown{
+    left: 0;
+    transform: none;
+    min-width: min(78vw, 260px);
+  }
+  .hero-dropdown a{ white-space: normal; overflow-wrap: anywhere; }
+
+  .facts{ grid-template-columns: 1fr; }
+  .creds{ grid-template-columns: 1fr; }
 }

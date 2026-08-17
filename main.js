@@ -90,4 +90,30 @@
     y = e.clientY;
     if (!raf) raf = requestAnimationFrame(apply);
   }, { passive: true });
+
+  /* ---- Email dropdown ----
+     Show/hide dropdown on button hover, stay open when hovering dropdown. */
+  var emailBtn = document.querySelector('.hero-btn-wrapper .hero-btn');
+  var emailDropdown = document.querySelector('.hero-dropdown');
+  if (emailBtn && emailDropdown) {
+    var dropdownTimeout;
+
+    function showDropdown() {
+      clearTimeout(dropdownTimeout);
+      emailDropdown.style.display = 'flex';
+      emailBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function hideDropdown() {
+      dropdownTimeout = setTimeout(function() {
+        emailDropdown.style.display = 'none';
+        emailBtn.setAttribute('aria-expanded', 'false');
+      }, 100);
+    }
+
+    emailBtn.addEventListener('mouseenter', showDropdown);
+    emailBtn.addEventListener('mouseleave', hideDropdown);
+    emailDropdown.addEventListener('mouseenter', showDropdown);
+    emailDropdown.addEventListener('mouseleave', hideDropdown);
+  }
 })();

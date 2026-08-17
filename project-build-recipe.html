@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Build-Recipe Inference — Case Study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A containerized LLM agent that infers build recipes for unfamiliar source archives, structured as a cross-tool comparison to separate genuine capability from benchmark fit.">
+  <link rel="canonical" href="https://d4davidg.github.io/project-build-recipe.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#4d9fff">
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
+</head>
+
+<body class="theme-sky">
+  <div class="mouse-glow" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+        <span class="navbar-label">Home</span>
+      </a>
+      <a class="navbar-item" href="#problem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.4"/><path d="M9.6 9.2a2.5 2.5 0 0 1 4.85.85c0 1.7-2.45 2.55-2.45 2.55"/><path d="M12 16.6h.01"/></svg>
+        <span class="navbar-label">Problem</span>
+      </a>
+      <a class="navbar-item" href="#design">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="2"/><path d="M3.2 9.4h17.6M9.4 9.4v11.4"/></svg>
+        <span class="navbar-label">Design</span>
+      </a>
+      <a class="navbar-item" href="#constraints">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.4" y="10.4" width="15.2" height="10.2" rx="2"/><path d="M8 10.4V7.2a4 4 0 0 1 8 0v3.2"/></svg>
+        <span class="navbar-label">Scope</span>
+      </a>
+      <a class="navbar-item" href="#evidence">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6V13M9.1 20.6V8.4M14.8 20.6v-9M20.5 20.6V4.2"/></svg>
+        <span class="navbar-label">Evidence</span>
+      </a>
+      <a class="navbar-item" href="#status">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.4"/><path d="M12 6.6V12l3.6 2.2"/></svg>
+        <span class="navbar-label">Status</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
+  <header class="simple glass">
+    <nav aria-label="Breadcrumb">
+      <a href="index.html#work">← Back to Selected Work</a>
+    </nav>
+    <h1 class="neon">Build-Recipe Inference Agent</h1>
+    <p class="subtitle">
+      Recovering the specification nobody writes down: how to build software you have never seen.
+    </p>
+  </header>
+
+  <main id="main">
+    <article>
+      <p class="thesis">
+        Software almost never ships with a reliable specification of how to build it. This project
+        treats that missing specification as the artifact worth recovering, and treats the question
+        of <em>where</em> automated recovery works as a measurement problem rather than a
+        scoreboard.
+      </p>
+
+      <dl class="facts">
+        <div>
+          <dt>Type</dt>
+          <dd>Independent research and engineering project</dd>
+        </div>
+        <div>
+          <dt>Started</dt>
+          <dd>May 2026 – ongoing</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>Harness in progress; comparison design complete</dd>
+        </div>
+        <div>
+          <dt>Build systems</dt>
+          <dd>Autotools, Make, CMake, Maven, Gradle, Ant</dd>
+        </div>
+        <div>
+          <dt>Ground truth</dt>
+          <dd>~370 hand-verified build recipes</dd>
+        </div>
+        <div>
+          <dt>Corpora</dt>
+          <dd>Three, cross-compared</dd>
+        </div>
+      </dl>
+
+      <ul class="stack stack-standalone">
+        <li>Python 3.12</li>
+        <li>Docker</li>
+        <li>Anthropic API</li>
+        <li>Linux / WSL2</li>
+        <li>Bash</li>
+      </ul>
+
+      <h2 id="problem">The problem</h2>
+      <p>
+        The dependency list, the required compiler or JDK version, the exact phase commands and
+        flags — all of it usually lives in the head of whoever last got it working. Engineers lose
+        days getting an unfamiliar codebase to build. Companies cannot reproduce old builds, and
+        legacy projects quietly become unbuildable.
+      </p>
+      <p>
+        The insight is that the recipe is recoverable, just not by reading. An agent attempts a
+        build in a clean container, reads the failure, adjusts the environment, and retries; the
+        trace of what finally worked <em>is</em> the recipe.
+      </p>
+      <p>
+        The concrete case that explains why: a legacy Apache Java project fails to compile because
+        it only works under an older JDK, and nothing in the source tree says so. The only path to
+        that answer is to build it, read the error, and try a different JDK. That loop is the
+        problem, and it is also why filename-based heuristics cannot solve it.
+      </p>
+
+      <h2 id="design">The comparison design</h2>
+      <p>
+        This is the part worth leading with, because it is what separates the project from a
+        single-tool demo. Every existing system in this space reports results on the program set
+        its own authors chose. Running three tools over all three corpora exposes how much of each
+        reported success rate is capability and how much is corpus fit.
+      </p>
+      <p>
+        That is a measurement question, and answering it is the contribution. The deliverable is a
+        map rather than a score — a grid of where builds succeed and fail, broken down by tool,
+        build ecosystem, corpus, recipe field, and failure category.
+      </p>
+
+      <h3>The hypothesis the map tests</h3>
+      <p>
+        Inference accuracy should track how <em>declared</em> a field is. A build system is
+        declared by the presence of <code>pom.xml</code> or <code>configure.ac</code>, so it should
+        be inferred nearly perfectly. A required JDK version is often declared nowhere in the
+        source tree and only surfaces as a compile error, so it should be inferred poorly by
+        anything that does not actually attempt the build and read the error.
+      </p>
+      <p>
+        Evidence that the hypothesis is worth testing, drawn from hand-labeled build data across
+        roughly 1,000 candidate programs:
+      </p>
+      <ul>
+        <li>92 of 161 projects with a recorded Java version need JDK 8, 11, or 17 rather than the default JDK 21, and nothing in the file tree says so.</li>
+        <li>103 programs where the default build commands fail outright.</li>
+        <li>25 projects where a plain <code>mvn verify</code> does not succeed and module exclusions or flags are required.</li>
+        <li>19 programs that will not compile under the default compiler flags.</li>
+        <li>Configure invocations that depend on non-obvious compatibility flags such as <code>CFLAGS+=-fcommon</code> or <code>FORCE_UNSAFE_CONFIGURE=1</code>.</li>
+      </ul>
+      <p>
+        None of that is recoverable from filenames. All of it is recoverable by building, failing,
+        and reading the error.
+      </p>
+
+      <h2 id="constraints">Scope and limits</h2>
+      <p>
+        Stating the limit before being asked is the point, so here it is up front.
+      </p>
+      <ul>
+        <li>
+          <strong>Deliberately scoped</strong> to programs whose dependencies are installable
+          through the system package manager. That excludes projects needing pip, npm, cargo,
+          specific hardware, or unpackaged legacy versions — roughly 141 of the 1,000 candidate
+          programs.
+        </li>
+        <li>
+          <strong>Two of the six build systems have very few examples</strong> in the corpus, so
+          those results will be suggestive rather than statistically solid.
+        </li>
+        <li>
+          <strong>The cross-tool comparison depends on the other systems being runnable.</strong>
+          One is confirmed public; the other's artifacts are not yet confirmed available. Until
+          both are verified this remains a comparison <em>design</em>, not a completed result.
+        </li>
+        <li>
+          <strong>The ground-truth corpus is one I contributed to</strong>, not one I built alone.
+          It came out of lab work with multiple contributors.
+        </li>
+      </ul>
+
+      <h2 id="evidence">How the pass criterion is defined</h2>
+      <p>
+        The criterion was fixed before anything ran: the inferred recipe, executed in a clean
+        container, produces a successful build. Every attempt runs in a fresh container with state
+        reset. Results are scored against recipes a human already recorded by hand for the same
+        programs.
+      </p>
+      <p>
+        Two design choices follow from treating this as evaluation work rather than tool-building:
+      </p>
+      <ul>
+        <li>
+          <strong>Constrained action space.</strong> The agent gets domain-specific tool wrappers
+          rather than raw shell access, with an ablation designed to measure the effect on success
+          rate and on invalid actions.
+        </li>
+        <li>
+          <strong>Append-only event logging</strong> for deterministic replay, plus per-run cost
+          and token accounting, so a result can be re-examined rather than only re-run.
+        </li>
+      </ul>
+
+      <h2 id="status">Status</h2>
+      <p class="callout">
+        <strong>Environment and harness in progress; comparison design complete, results pending.</strong>
+        Splitting what is designed from what is running is deliberate — it is the same honesty that
+        makes the evaluation argument credible in the first place.
+      </p>
+
+      <h3>Done and defensible now</h3>
+      <ul>
+        <li>Environment and repository setup.</li>
+        <li>Six build systems worked with directly, hands-on.</li>
+        <li>Build-failure diagnosis and failure-category construction.</li>
+        <li>Study design, metric definition, and the cross-tool comparison design.</li>
+        <li>Literature synthesis across the existing systems in this space.</li>
+      </ul>
+
+      <h3>In progress</h3>
+      <ul>
+        <li>The containerized executor and build-system detection.</li>
+        <li>The LLM inference call and failure-recovery loop with attempt budgets.</li>
+        <li>Per-ecosystem results, ablation results, and the finished map.</li>
+      </ul>
+
+      <h2>What I would do differently</h2>
+      <ul>
+        <li>
+          Verify the availability of the external systems' artifacts before designing the
+          comparison around them. The design is sound, but one leg of it is still contingent on
+          something outside my control.
+        </li>
+        <li>
+          Sample the corpus for build-system balance earlier. Two ecosystems ended up thin enough
+          that their cells in the map will carry a caveat rather than a finding.
+        </li>
+      </ul>
+
+      <hr>
+
+      <p>
+        More work on the <a href="work.html">projects page</a>, or back to
+        <a href="index.html#work">Selected Work</a>.
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p><span id="year"></span> David Gusmao ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p><a href="index.html">Back to home</a></p>
+  </footer>
+</body>
+</html>

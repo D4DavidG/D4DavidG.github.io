@@ -1,116 +1,85 @@
-# Hi, I'm David Gusmao 👋
+# D4DavidG.github.io
 
-Aspiring Software Engineer and Undergraduate Research Assistant with experience spanning full-stack web development, frontend engineering, and empirical software engineering research. I enjoy building clean, responsive, and accessible interfaces while applying evidence-driven insights from research to improve developer workflows and system reliability.
+Source for [d4davidg.github.io](https://d4davidg.github.io/) — my portfolio and resume site.
 
-- 🌐 Portfolio: https://d4davidg.github.io/
-- 💼 LinkedIn: https://www.linkedin.com/in/david-e-gusmao/
-- 🧑‍💻 GitHub: https://github.com/D4DavidG
-- 📄 Resume (Google Doc): https://docs.google.com/document/d/1mnhtiJgajjSWrU0dFwDjUrdSREeE9Zyv7mdi1qzmO4o/edit?usp=sharing
-- ✉️ Email: davidegusmao@outlook.com · da045393@ucf.edu
+Hand-written HTML and CSS. No framework, no build step, no dependencies. What is in this
+repository is exactly what the browser receives.
 
----
+## Running it locally
 
-## 🧰 Skills
+There is nothing to install and nothing to compile. Serve the directory over HTTP so that
+root-relative asset paths resolve:
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
-![Accessibility](https://img.shields.io/badge/Accessibility-A11y-000000)
+```bash
+python -m http.server 8000
+# then open http://localhost:8000
+```
 
----
+Opening `index.html` directly via `file://` mostly works, but the favicon and a few
+root-relative paths will not resolve.
 
-## 🔬 Research Experience
+## Structure
 
-### Undergraduate Research Assistant — Hardening Build Systems  
-**University of Central Florida** · Oct 2025 – Present  
-🔗 Project: https://pappasbrent.com/research/hardening-build-systems
+```
+index.html                      Home: positioning, selected work, writing, skills, background
+work.html                       Every project, newest first
+writing.html                    Technical documents and research work
+resume.html                     HTML resume mirror; links the PDF and CV
 
-- Contribute to research focused on improving the **security and reliability of software build systems**.
-- Analyze build artifacts and outcomes to identify patterns related to hardening and reproducibility.
-- Develop and iterate on **analysis scripts and tooling**, including:
-  - Generating LaTeX-ready tables
-  - Producing pgfplots-style visualizations from experimental data
-- Support **reproducible research workflows** by organizing datasets, validating results, and documenting analysis steps.
-- Collaborate with faculty and graduate researchers on experimental design and reporting.
+project-knights-counsel.html    Case study — AI retrieval agent (NDA-scoped)
+project-build-recipe.html       Case study — build-inference research
+project-pocketprofessors.html   Case study — MERN collectible app
+project-fitnessfunctions.html   Case study — PHP/MySQL enrollment system
+project-contact-manager.html    Case study — contact manager
+project-this-site.html          Colophon: how this site is built
+fitnessfunctions.html           Redirect stub for the pre-rename URL
 
----
+styles.css                      All styling, one file
+main.js                         ~120 lines: year, colour mode, nav collapse, email dropdown
+sitemap.xml  robots.txt         Discovery
+downloads/                      Resume PDF, CV PDF, project archives
+images/                         Logo, headshot, favicons, project screenshots
+```
 
-## 📌 Featured Projects
+## Conventions
 
-### 🃏 PocketProfessors — MERN / TypeScript Collectible Study App
-- **Live Site:** http://pocketprofessors.com/
-- **Repository:** https://github.com/jm19pa/Group25-Large-Project-COP4331
-- **Project Page:** https://d4davidg.github.io/project-pocketprofessors.html
+**Two independent theming axes.** Light/dark is a `data-mode` attribute on `<html>`, applied by
+a small inline script in every `<head>` *before first paint* so the page never flashes. The accent
+colour is a class on `<body>` — `theme-green`, `theme-aqua`, `theme-gold`, `theme-burgundy`,
+`theme-sky`, `theme-lime`.
 
-**What I did**
-- Frontend UX for pack opening and collection views (responsive grid, focus states, ARIA labels).
-- Collaborated on API design and JWT authentication lifecycle.
-- Led project branding, theming, visuals, planning artifacts (Gantt chart, resource allocation).
-- Helped align frontend architecture with React + TypeScript best practices.
+**Derived tokens live in the theme block, not `:root`.** A custom property that references another
+resolves where it is *declared*. Writing `--accent-soft: var(--accent)` at `:root` would freeze it
+to the root accent and silently ignore the per-page theme.
 
----
+**Light mode needs its own ink.** Neon accents sit near 1.3:1 against white, so each theme declares
+a separate `--accent-ink` for text and links that clears WCAG AA, while the bright value stays for
+glows and borders.
 
-### 🏋️ FitnessFunctions — Role-Based Class Enrollment System
-- **Project Page:** https://d4davidg.github.io/fitnessfunctions.html
-- **Stack:** PHP, MySQL, HTML, CSS (custom neon UI)
+**Accessibility is not optional here.** Skip link first in the tab order, `aria-labelledby` on every
+section pointing at its real heading, visible `:focus-visible` outlines (never suppressed),
+`prefers-reduced-motion` honored on scroll and the cursor glow, explicit `width`/`height` on images.
 
-**Highlights**
-- Solo-built full-stack system with Admin and Member dashboards.
-- Authentication + role-based routing.
-- Full CRUD for instructors and classes.
-- Capacity-aware enrollment logic with real-time availability.
-- MySQL-backed relational schema with clean separation of concerns.
+## Adding a project page
 
----
+1. Copy `project-build-recipe.html` as the template — it follows the case-study structure:
+   thesis → facts strip → problem → constraints → decisions → evidence → status.
+2. Set `<title>`, `<meta name="description">`, `<link rel="canonical">`, and `<meta name="theme-color">`
+   to match the accent you pick.
+3. Set the accent class on `<body>`. If you need a new accent, add a `body.theme-*` block in
+   `styles.css` alongside the existing ones, plus its `--accent-ink` override in the light-mode rule.
+4. Add a card to `work.html`, and to `index.html` if it belongs in Selected Work.
+5. Add the URL to `sitemap.xml`.
 
-### 🦍 CS Majors vs Gorilla — Contact Manager (Small Project)
-- **Repository:** https://github.com/jm19pa/COP4331-Group16-Small-Project
-- **Project Page:** https://d4davidg.github.io/project-contact-manager.html
+## Known gaps
 
-**Role: Project Manager**
-- Defined scope, milestones, and issue/PR workflow.
-- Coordinated team communication and reviews.
-- Contributed frontend logic using `XMLHttpRequest` for AJAX-based CRUD.
-- Focused on semantic HTML, accessibility, and responsive layout.
+- The nav bar is duplicated in every file. At around a dozen pages a static site generator starts
+  to earn its keep; see the [colophon](https://d4davidg.github.io/project-this-site.html).
+- No automated accessibility testing — the keyboard pass is manual.
+- The logo flip is hover-only, so it does not fire on touch devices.
 
----
+## Contact
 
-## 🏆 Highlights & Honors
-
-- 🥉 3rd Place — **UCF Horse Plinko Cyber Defense Competition** (Oct 2024)
-- 🎓 **Bright Futures Academic Scholarship**
-- ✅ Passed the **Computer Science Foundation Exam**
-- 📜 Certifications:
-  - Human Subjects Research — Social/Behavioral (Group 2)
-  - Responsible Conduct of Research (Engineers)
-  - Certified Internet Business Associate
-  - MTA: Windows OS Fundamentals
-  - MTA: Introduction to Programming Using Python
-  - Red Cross Water Safety Instructor
-
----
-
-## 📊 GitHub Stats
-
-> If these cards don’t render, they may be temporarily rate-limited by GitHub.
-
-![David's GitHub Stats](https://github-readme-stats.vercel.app/api?username=D4DavidG&show_icons=true&hide_rank=false)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=D4DavidG&layout=compact)
-
----
-
-## 📫 Contact
-
-- Email: **davidegusmao@outlook.com**
-- LinkedIn: **https://www.linkedin.com/in/david-e-gusmao/**
-- Portfolio: **https://d4davidg.github.io/**
-
-Thanks for stopping by — feel free to explore my projects or reach out if you’d like to collaborate!
+- Email: davidegusmao@outlook.com
+- LinkedIn: <https://www.linkedin.com/in/david-e-gusmao/>
+- GitHub: <https://github.com/D4DavidG>

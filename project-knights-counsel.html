@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Knights Counsel — Case Study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Permission-aware AI retrieval agent for a university legal office. What I specified it must refuse to do, and the evaluation suite built to tell whether it actually refused.">
+  <link rel="canonical" href="https://d4davidg.github.io/project-knights-counsel.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#e04a5f">
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
+</head>
+
+<body class="theme-burgundy">
+  <div class="mouse-glow" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+        <span class="navbar-label">Home</span>
+      </a>
+      <a class="navbar-item" href="#problem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.4"/><path d="M9.6 9.2a2.5 2.5 0 0 1 4.85.85c0 1.7-2.45 2.55-2.45 2.55"/><path d="M12 16.6h.01"/></svg>
+        <span class="navbar-label">Problem</span>
+      </a>
+      <a class="navbar-item" href="#constraints">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.4" y="10.4" width="15.2" height="10.2" rx="2"/><path d="M8 10.4V7.2a4 4 0 0 1 8 0v3.2"/></svg>
+        <span class="navbar-label">Constraints</span>
+      </a>
+      <a class="navbar-item" href="#decisions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.4 3.4v10.4"/><circle cx="6.4" cy="17.2" r="2.6"/><path d="M17.6 20.6V10.2"/><circle cx="17.6" cy="6.8" r="2.6"/><path d="M8.9 5.4h6.2a2.5 2.5 0 0 1 2.5 2.5"/></svg>
+        <span class="navbar-label">Decisions</span>
+      </a>
+      <a class="navbar-item" href="#evidence">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6V13M9.1 20.6V8.4M14.8 20.6v-9M20.5 20.6V4.2"/></svg>
+        <span class="navbar-label">Evidence</span>
+      </a>
+      <a class="navbar-item" href="#broke">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 2.4 3.1 15.4a2 2 0 0 0 1.72 3h14.36a2 2 0 0 0 1.72-3L13.7 2.4a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.2M12 17h.01"/></svg>
+        <span class="navbar-label">What Broke</span>
+      </a>
+      <a class="navbar-item" href="#artifacts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 12.4v6.2a2 2 0 0 1-2 2H5.4a2 2 0 0 1-2-2v-6.2"/><path d="m7.6 8 4.4-4.4L16.4 8"/><path d="M12 3.6v11.6"/></svg>
+        <span class="navbar-label">Artifacts</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
+  <header class="simple glass">
+    <nav aria-label="Breadcrumb">
+      <a href="index.html#work">← Back to Selected Work</a>
+    </nav>
+    <h1 class="neon">Knights Counsel</h1>
+    <p class="subtitle">
+      A permission-aware AI retrieval agent for a university legal office.
+    </p>
+  </header>
+
+  <main id="main">
+    <article>
+      <p class="callout">
+        <strong>Client work under NDA.</strong> This page describes system design, my role, and
+        evaluation method. No document contents, tenant identifiers, matter details, or names
+        other than my own appear here.
+      </p>
+
+      <p class="thesis">
+        An AI assistant for a legal office is only useful if it never invents an answer. Most of
+        the engineering was in specifying what it must refuse to do, and building the evaluation
+        that could tell whether it actually refused.
+      </p>
+
+      <dl class="facts">
+        <div>
+          <dt>Role</dt>
+          <dd>Project manager &amp; technical lead</dd>
+        </div>
+        <div>
+          <dt>Team</dt>
+          <dd>5 people</dd>
+        </div>
+        <div>
+          <dt>Duration</dt>
+          <dd>Jun 2026 – Present, two semesters</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>MVP reached August 2026; pilot phase</dd>
+        </div>
+        <div>
+          <dt>Context</dt>
+          <dd>UCF Senior Design, sponsored capstone</dd>
+        </div>
+        <div>
+          <dt>Users</dt>
+          <dd>~10 attorneys</dd>
+        </div>
+      </dl>
+
+      <ul class="stack stack-standalone">
+        <li>Microsoft Copilot Studio</li>
+        <li>SharePoint Online</li>
+        <li>Microsoft Entra ID</li>
+        <li>Power Automate</li>
+        <li>React</li>
+        <li>TypeScript</li>
+        <li>Fluent UI</li>
+        <li>SPFx</li>
+      </ul>
+
+      <h2 id="problem">The problem</h2>
+      <p>
+        The client is an in-house university legal team of roughly ten attorneys. Decades of
+        contracts, memoranda, and prior advice live scattered across Teams, OneDrive, and legacy
+        drives, and the knowledge of where things live is held informally by individual staff.
+        When a senior attorney leaves, a meaningful portion of that institutional memory leaves
+        with them.
+      </p>
+      <p>
+        Knights Counsel replaces manual folder-tree searching with a conversational interface
+        inside Microsoft Teams. An authorized user asks a question and receives an answer drawn
+        only from the office's own documents, with citations linking back to the source files. A
+        second capability lets a user file new documents through the same conversation, with the
+        assistant proposing a category and metadata for the user to confirm before anything is
+        written.
+      </p>
+      <p>
+        The cost of getting this wrong is not a bad search result. An assistant that appears to
+        give legal advice creates real professional risk for the attorneys relying on it.
+      </p>
+
+      <h2 id="constraints">Constraints</h2>
+      <ul>
+        <li>
+          <strong>Relay, not advise.</strong> The system reports what documents say. It does not
+          interpret them, recommend a course of action, or predict an outcome. This boundary was
+          set by the nature of the work, not chosen for convenience, and it shapes nearly every
+          behavior in the system.
+        </li>
+        <li>
+          <strong>Hard tenant boundary.</strong> All work inside the client's enterprise Microsoft
+          365 environment. No external servers, no personal cloud, no third-party AI tools
+          touching client material, no privileged material on personal machines.
+        </li>
+        <li>
+          <strong>Inherited access, not reinvented access.</strong> The agent authenticates each
+          user through the enterprise identity provider and operates under that user's existing
+          document permissions, so privilege handling is not something the team implemented and
+          could get wrong.
+        </li>
+        <li>
+          <strong>A non-technical executive sponsor.</strong> The client is a domain expert with
+          no software background, which made the ownership boundary explicit: the sponsor owns
+          the document taxonomy, because only they know how the office thinks about its own work.
+          The team owns the mechanism.
+        </li>
+        <li>
+          <strong>An 8,000-character instruction budget.</strong> A real engineering constraint
+          that forced case-by-case decisions about which rules live in instructions and which
+          have to be pushed into topics, metadata, or flows.
+        </li>
+      </ul>
+
+      <h2 id="decisions">What I decided</h2>
+
+      <div class="decision">
+        <h3>Two agents, not six</h3>
+        <p>
+          I originally designed a six-agent architecture: one agent per document category, plus a
+          dedicated search agent and a conflict-resolution agent. It was clean on paper and I had
+          already written the specification documents for it.
+        </p>
+        <p>
+          When I looked at the evaluation logs, there were zero retrieval-precision failures
+          caused by mixed document types — which was the entire justification for splitting by
+          category. Child agents also inherit the parent's knowledge source, which removed the
+          folder scoping the split was supposed to buy. Meanwhile every orchestration hop cost
+          latency and per-message credits.
+        </p>
+        <p>
+          I collapsed it to two: an <strong>Agent Manager</strong> owning all search, citation,
+          conflict handling, and every reply the user sees, and a <strong>Document Sorting</strong>
+          child agent owning classification and all writes. Only the Agent Manager speaks to the
+          user, stated as a standing principle so that adding a delegation target later is an
+          addition rather than a rewrite.
+        </p>
+        <p>
+          Testing then produced a standing architectural rule: attaching the same document path to
+          both a parent and a child produced duplicate retrieval and unstable citations, so a given
+          path is now attached to exactly one agent — never to both a parent and a child, and never
+          to two children.
+        </p>
+        <p class="decision-rejected">
+          <strong>Rejected:</strong> the six-agent topology. Recorded as an architecture decision
+          record rather than quietly deleted, so the reasoning survives for whoever picks this up
+          next.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>Where the line between relay and advice actually falls</h3>
+        <p>
+          A naive reading of "no legal advice" would make the tool useless. Surfacing a clause the
+          user intends to reuse is relay — the agent is reporting what exists. What converts a
+          response into advice is a recommendation or prediction layered on top of the citation.
+        </p>
+        <p>
+          The area the original specification left vague was calculation, so I drew the boundary
+          explicitly: arithmetic on an explicit, cited figure or date is permitted, because
+          computing a ninety-day deadline from a stated renewal date is addition applied to two
+          stated facts. Any calculation that requires the agent to choose <em>which</em> rule
+          applies is not, because selecting among several notice provisions is legal judgment.
+          Characterising urgency, ranking, or predicting an outcome is not, because that is
+          evaluative framing on top of a fact.
+        </p>
+        <p class="decision-rejected">
+          <strong>Rejected:</strong> treating any question containing a judgment component as
+          wholly unanswerable. Refusing the retrievable half along with the rest is a defect, not
+          caution — the specified behavior is to relay the facts with citation first, then redirect
+          the judgment.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>Two kinds of not-found, kept separate</h3>
+        <p>
+          Silence and guessing are both unacceptable when the library has no answer, but the two
+          cases mean different things to an attorney. Nothing relevant in the corpus gets a plain
+          statement that the office materials do not cover the question, plus a redirect. Related
+          documents that exist but do not directly address the question get named, with a
+          suggestion to review them or follow up.
+        </p>
+        <p>
+          The first case could not be enforced from the agent's instructions at all. With
+          ungrounded responses disabled, a query returning zero matches never reaches the model,
+          so the platform's default fallback fires first. That wording had to be set on the
+          fallback topic instead — the first of several behaviors that had to migrate out of
+          instructions entirely.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>The agent proposes, the human disposes</h3>
+        <p>
+          The second half of the system is document intake, and it mirrors the relay boundary on
+          the retrieval side: the agent does the mechanical work and the human keeps the decision.
+          It never writes on its own judgment. It reads the file, proposes a category and a
+          complete set of metadata in one message, and a write happens only after explicit
+          confirmation.
+        </p>
+        <p>
+          The rule that took a revision to get right is that it always proposes. A field it cannot
+          determine is shown as not determined rather than left blank or invented; a low-confidence
+          classification is still presented, marked as such, with the alternative it considered. An
+          earlier draft routed uncertain files to an unsorted holding area, which was wrong — an
+          uncertain proposal a human can correct in one word beats no proposal, and a file quietly
+          parked in a holding area is a file nobody is prompted to fix.
+        </p>
+        <p class="decision-rejected">
+          <strong>Rejected:</strong> asking the user field-by-field questions. Filing a document
+          should cost one message in the common case, and the cost of a batch should scale with the
+          number of corrections needed, not the number of files.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>A managed platform over a custom build</h3>
+        <p>
+          I evaluated two candidate architectures on answer reliability, cost, build time, and
+          organizational supportability: a managed low-code agent platform grounded on SharePoint,
+          versus a custom search-plus-model-plus-blob-storage build. I selected the managed path
+          and drove it to a locked decision, confirmed independently by enterprise IT.
+        </p>
+        <p class="decision-rejected">
+          <strong>Rejected:</strong> the custom build. It would have been more interesting to
+          write and considerably harder for the client's own IT organization to support after the
+          capstone ended.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>Directive language, never advisory</h3>
+        <p>
+          Testing established that soft prompt language — "prefer", "may ask" — is treated as
+          advisory by the model and dropped under pressure. I converted every required behavior to
+          directive language and made that a standing authoring rule for the team.
+        </p>
+        <p>
+          The related finding: any behavior that must occur when retrieval returns nothing cannot
+          live in instructions at all, because instructions shape how the model answers and do not
+          run when the model is never invoked. Those behaviors had to move into topics.
+        </p>
+      </div>
+
+      <div class="decision">
+        <h3>Descoping the custom front end</h3>
+        <p>
+          I scoped and stood up a SharePoint Framework web part in React, TypeScript, and Fluent
+          UI as a potential custom surface, including its real toolchain constraints. Once the
+          native delivery surface was confirmed to meet the client's needs, I recommended
+          descoping it from the MVP critical path to a stretch goal.
+        </p>
+        <p class="decision-rejected">
+          <strong>Rejected:</strong> shipping the custom front end in the MVP. It added build risk
+          without adding user-visible value at pilot scale.
+        </p>
+      </div>
+
+      <h2 id="evidence">How I knew it worked</h2>
+      <p>
+        This is the part I would lead with. Anyone can say they built an agent; the harder claim is
+        knowing whether it behaves as specified.
+      </p>
+      <ul>
+        <li>
+          <strong>An 18-case evaluation suite</strong> covering every specified behavior: citation
+          format, advice refusal, the relay/advice boundary, both forms of not-found, ambiguity
+          handling, document conflicts, greetings and off-topic requests, session memory, tone,
+          set-scoping filters, and comparison queries. It grew from 15 cases as new failure modes
+          surfaced.
+        </li>
+        <li>
+          <strong>A custom seven-label grading rubric</strong> with strict precedence, first
+          failure wins: overstepped into advice, accepted unsupported task, ungrounded or uncited,
+          unsupported filtering, off-topic leak, wrongly declined, missing required closer, and
+          correct behavior.
+        </li>
+        <li>
+          <strong>A multi-run testing methodology.</strong> Thirteen of fifteen responses changed
+          between two runs taken eighteen minutes apart with no configuration change of any kind.
+          Static topic messages were byte-identical across both runs while every generated
+          response drifted. Single-run results on generated responses are noise, so every proposed
+          change now requires two to three runs plus a version bump before any behavioral delta
+          can be attributed to it.
+        </li>
+        <li>
+          <strong>A fixed grading rule:</strong> only the visible response text for a turn is
+          judged, never internal orchestration or which retrieval path fired. That keeps a test
+          case valid regardless of whether the behavior is later implemented in instructions, in a
+          topic, or in a flow.
+        </li>
+      </ul>
+
+      <h3>Why the built-in grader had to be replaced</h3>
+      <p>
+        The platform's own quality grader scores whether a question was answered. This system's
+        defining feature is that it refuses in defined circumstances: it declines to give legal
+        advice, it says so when a document does not exist, and it redirects judgment calls to an
+        attorney. Every one of those correct behaviors registered as a failure.
+      </p>
+      <p>
+        On one run the built-in grader reported 60% against a result that was correct on eleven of
+        thirteen cases by the design criteria. Rather than tune the agent toward a metric measuring
+        the wrong thing, I built the replacement rubric. That is the distinction the whole project
+        turns on: a system failing and a metric being wrong look identical on a dashboard.
+      </p>
+
+      <h2 id="broke">What broke</h2>
+      <p>
+        The most consequential defect surfaced through evaluation, not through use. The agent
+        answered single-fact questions well, so on the surface it looked fine. But when a question
+        scoped a <em>set</em> rather than asking for a single fact — which agreements are governed
+        by law outside this state, the five most recent agreements for a given unit — the agent ran
+        a semantic search and then presented the unfiltered results as though they had been
+        filtered and ordered.
+      </p>
+      <p>
+        Every individual citation was correct, which is exactly why it was dangerous. It did not
+        look like a hallucination. It looked like an answer. I caught it by running the same filter
+        question three times inside one session and getting three different document sets.
+      </p>
+      <p>
+        The root cause was an absent query predicate: semantic similarity cannot function as a
+        filter, and no amount of instruction tuning changes that. The fix lived in structured
+        metadata columns — a workstream the team had been treating as a refinement. I moved it onto
+        the critical path.
+      </p>
+      <p>
+        A second class of defect: an agent component's <em>description text</em> alone caused the
+        orchestrator to assert that files had been uploaded and processed when the component's
+        actions performed no such write. I confirmed the diagnosis against the platform's own
+        reasoning trace and turned it into a standing requirement — any component whose safety
+        property depends on a confirmation step must have a description that affirmatively rules
+        out unperformed actions.
+      </p>
+
+      <h3>Two quiet failures worth naming</h3>
+      <p>
+        <strong>Filenames over 100 characters, or containing parentheses, are silently skipped by
+        the indexer.</strong> A skipped file is invisible to retrieval while looking perfectly
+        normal in the library — the most dangerous failure mode in the system, because nothing
+        anywhere reports it. Rather than rely on user discipline, intake validates and renames on
+        upload and retains the original name in its own column. The internal working target is 80
+        characters, so the margin absorbs category codes and dates without anyone hand-counting.
+      </p>
+      <p>
+        <strong>Agent-written metadata can become a grounding hazard.</strong> Several schema
+        fields — summary, key issues — are authored by the agent rather than read from the
+        document. Stored without distinction, a later retrieval could surface an agent-written
+        sentence and cite it as though it were document content, violating the grounding rule
+        through a metadata pathway rather than a prompting one. Those fields therefore carry an
+        explicit generated-and-unverified marker, so the retrieval side treats them as navigational
+        aids and never as citable source text.
+      </p>
+
+      <h2 id="change">What I would do differently</h2>
+      <ul>
+        <li>
+          Build the evaluation suite before the agent, not alongside it. Several instruction
+          revisions were spent chasing behaviors that a test case would have specified precisely in
+          the first place.
+        </li>
+        <li>
+          Establish the multi-run rule at the start. Early single-run comparisons produced
+          conclusions I later had to discard, because I could not distinguish a real improvement
+          from run-to-run drift.
+        </li>
+        <li>
+          Treat metadata as infrastructure from day one. I classified it as a refinement because it
+          looked like data entry rather than engineering, and the evaluation eventually proved that
+          wrong.
+        </li>
+      </ul>
+
+      <h2 id="artifacts">Artifacts</h2>
+      <ul>
+        <li>
+          <strong>Technical white paper, v1.0</strong> (August 2026) — co-author, and sole author
+          of the system design and behavior specification sections. Available on request.
+        </li>
+        <li>
+          <strong>Final design document, v2</strong> — contributing author, sole author of the
+          system design section, including the behavior test set and the architecture decision
+          records. Available on request.
+        </li>
+        <li>
+          <strong>No live demo.</strong> The system runs inside a client tenant under NDA and
+          cannot be shown. That constraint is worth stating plainly rather than working around.
+        </li>
+      </ul>
+
+      <hr>
+
+      <p>
+        More work on the <a href="work.html">projects page</a>, or back to
+        <a href="index.html#work">Selected Work</a>.
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p><span id="year"></span> David Gusmao ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p><a href="index.html">Back to home</a></p>
+  </footer>
+</body>
+</html>

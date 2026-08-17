@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How This Site Is Built — Colophon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A colophon for a hand-written portfolio: no framework, no build step, and the accessibility and theming decisions behind it, explained from inside the artifact.">
+  <link rel="canonical" href="https://d4davidg.github.io/project-this-site.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#00ff00">
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
+</head>
+
+<body class="theme-green">
+  <div class="mouse-glow" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+        <span class="navbar-label">Home</span>
+      </a>
+      <a class="navbar-item" href="#stack">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2.6 9.2 4.6L12 11.8 2.8 7.2 12 2.6Z"/><path d="m2.8 12 9.2 4.6L21.2 12"/><path d="m2.8 16.8 9.2 4.6 9.2-4.6"/></svg>
+        <span class="navbar-label">Stack</span>
+      </a>
+      <a class="navbar-item" href="#access">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.4"/><circle cx="12" cy="7.4" r="1.5"/><path d="M7.4 10.6h9.2M12 10.9v5M12 15.9l-2.6 4.1M12 15.9l2.6 4.1"/></svg>
+        <span class="navbar-label">Access</span>
+      </a>
+      <a class="navbar-item" href="#theming">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.4"/><circle cx="8.4" cy="9.2" r="1.3"/><circle cx="15.6" cy="9.2" r="1.3"/><circle cx="9.4" cy="15.4" r="1.3"/><circle cx="15" cy="15" r="1.3"/></svg>
+        <span class="navbar-label">Theming</span>
+      </a>
+      <a class="navbar-item" href="#limits">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 2.4 3.1 15.4a2 2 0 0 0 1.72 3h14.36a2 2 0 0 0 1.72-3L13.7 2.4a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.2M12 17h.01"/></svg>
+        <span class="navbar-label">Limits</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
+  <header class="simple glass">
+    <nav aria-label="Breadcrumb">
+      <a href="work.html">← Back to Work</a>
+    </nav>
+    <h1 class="neon">How this site is built</h1>
+    <p class="subtitle">You are standing inside the artifact. Here is what holds it up.</p>
+  </header>
+
+  <main id="main">
+    <article>
+      <p class="thesis">
+        Hand-written HTML and CSS. No framework, no build step, no dependency tree, no package
+        manager. Every accessibility feature described below is running on the page you are
+        reading right now.
+      </p>
+
+      <dl class="facts">
+        <div>
+          <dt>Source</dt>
+          <dd>Flat HTML, one stylesheet, one script</dd>
+        </div>
+        <div>
+          <dt>Dependencies</dt>
+          <dd>None</dd>
+        </div>
+        <div>
+          <dt>Build step</dt>
+          <dd>None</dd>
+        </div>
+        <div>
+          <dt>Hosting</dt>
+          <dd>GitHub Pages, static</dd>
+        </div>
+        <div>
+          <dt>JavaScript</dt>
+          <dd>~120 lines, progressive</dd>
+        </div>
+        <div>
+          <dt>Started</dt>
+          <dd>2025, still maintained</dd>
+        </div>
+      </dl>
+
+      <h2 id="stack">The stack, such as it is</h2>
+      <p>
+        Every page is a flat <code>.html</code> file at the repository root. They share one
+        <code>styles.css</code> and one <code>main.js</code>, loaded with <code>defer</code>. There
+        is no bundler, no template engine, and no generated output — what is in the repository is
+        what the browser receives.
+      </p>
+      <p>
+        That is a deliberate choice rather than a limitation I have not yet outgrown. At this size,
+        a build step would add a dependency tree to audit, a lockfile to keep current, and a
+        failure mode between writing a change and seeing it. What it would buy in return —
+        component reuse across nine pages — I currently pay for by editing the nav in nine places.
+        That trade flips somewhere around a dozen pages; see <a href="#limits">Limits</a>.
+      </p>
+
+      <h2 id="access">Accessibility, and why each piece is there</h2>
+      <ul>
+        <li>
+          <strong>A skip link</strong> as the first focusable element on every page. It is
+          positioned off-screen and pulled back with <code>:focus</code>, not hidden with
+          <code>display:none</code> — a display-hidden element cannot receive focus at all, which
+          defeats the purpose.
+        </li>
+        <li>
+          <strong>Semantic landmarks with <code>aria-labelledby</code></strong> on every section,
+          pointing at that section's real heading. A screen-reader user gets a landmark list that
+          reads like the page's table of contents rather than "region, region, region."
+        </li>
+        <li>
+          <strong>Visible <code>:focus-visible</code> outlines</strong> rather than suppressed
+          ones. Removing focus rings is the single most common accessibility regression on
+          portfolio sites, and it makes a page unusable by keyboard while looking fine in a
+          screenshot.
+        </li>
+        <li>
+          <strong><code>prefers-reduced-motion</code> honored</strong> on the smooth scroll, the
+          cursor-tracked glow, and the section-target animation. The glow is removed entirely
+          rather than slowed, because a cursor-following element is the specific thing that
+          triggers discomfort for some readers.
+        </li>
+        <li>
+          <strong>Colour is never the only signal.</strong> Links carry an underline on hover and
+          focus; the accent is decoration on top of structure, not a replacement for it.
+        </li>
+        <li>
+          <strong>Explicit <code>width</code>/<code>height</code> and
+          <code>decoding="async"</code></strong> on images, so the layout does not shift as they
+          load.
+        </li>
+      </ul>
+
+      <h2 id="theming">The theming system</h2>
+      <p>
+        Colour lives entirely in CSS custom properties. There are two independent axes, and keeping
+        them independent is the whole idea:
+      </p>
+      <ul>
+        <li>
+          <strong>Light or dark</strong> is set on the root element as a <code>data-mode</code>
+          attribute. A tiny inline script in every <code>&lt;head&gt;</code> applies the stored or
+          system preference <em>before first paint</em> — if it ran in the deferred script instead,
+          the page would flash dark before switching to light.
+        </li>
+        <li>
+          <strong>The accent</strong> is a class on <code>&lt;body&gt;</code>. Each project page
+          carries its own: green for the site itself, burgundy for Knights Counsel, sky for
+          Build-Recipe, gold for PocketProfessors, aqua for FitnessFunctions, lime for the
+          Contact Manager.
+        </li>
+      </ul>
+      <p>
+        One subtlety worth recording, because it cost me an afternoon: a custom property that
+        references another one resolves <em>where it is declared</em>, not where it is used. Writing
+        <code>--accent-soft: var(--accent)</code> at <code>:root</code> would freeze it to the root
+        accent and silently ignore the per-page theme. Everything derived from
+        <code>--accent</code> therefore has to be declared inside the <code>body.theme-*</code>
+        block, not at <code>:root</code>.
+      </p>
+      <p>
+        Light mode also needs more than an inverted background. Neon accents sit at roughly 1.3:1
+        against white, so each theme declares a separate <code>--accent-ink</code> — a darkened
+        version used for text and links that clears WCAG AA — while the bright value stays for
+        glows and borders where contrast does not apply.
+      </p>
+
+      <h2>The JavaScript</h2>
+      <p>
+        About 120 lines, and the page works without it. It does four things: fills the footer year,
+        toggles colour mode and persists the choice, collapses the nav bar on downward scroll, and
+        drives the email dropdown. The scroll handler is <code>passive</code> and coalesced through
+        <code>requestAnimationFrame</code>; the cursor-glow handler returns early when
+        <code>prefers-reduced-motion</code> matches, so the listener is never attached at all.
+      </p>
+
+      <h2 id="limits">Limits, and when I would change my mind</h2>
+      <p>
+        Being honest about where this approach stops working is more useful than defending it.
+      </p>
+      <ul>
+        <li>
+          <strong>The nav bar is duplicated in every file.</strong> Nine copies today. It is the
+          clearest signal that a template layer is coming — at around a dozen pages the editing
+          cost overtakes the cost of a build step, and I would reach for a static site generator
+          rather than a framework.
+        </li>
+        <li>
+          <strong>No automated accessibility testing.</strong> The keyboard pass is manual, which
+          means it is only as reliable as my memory to run it.
+        </li>
+        <li>
+          <strong>The logo flip is hover-only</strong>, so it does not fire on touch devices. It is
+          decorative and nothing depends on it, but it is a gap.
+        </li>
+        <li>
+          <strong>Four glow effects share one idea.</strong> The cursor halo, the heading glow, the
+          button glow, and the logo halo are variations on the same trick. That is one or two more
+          than the design needs, and restraint would read better than repetition.
+        </li>
+      </ul>
+
+      <hr>
+
+      <p>
+        Source on <a href="https://github.com/D4DavidG/D4DavidG.github.io" target="_blank" rel="noopener">GitHub</a>,
+        or back to <a href="work.html">Work</a>.
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p><span id="year"></span> David Gusmao ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p><a href="index.html">Back to home</a></p>
+  </footer>
+</body>
+</html>

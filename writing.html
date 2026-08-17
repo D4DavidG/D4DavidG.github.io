@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Writing — David Gusmao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Technical writing: the Knights Counsel white paper and design document, plus research work on build-system reliability and reproducibility.">
+  <link rel="canonical" href="https://d4davidg.github.io/writing.html">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#00ff00">
+  <link rel="icon" href="/images/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <script>/* set the colour mode before first paint to avoid a flash */
+  (function(){try{var m=localStorage.getItem('mode')||
+  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  document.documentElement.dataset.mode=m;}catch(e){}})();</script>
+  <script src="main.js" defer></script>
+</head>
+
+<body class="theme-green">
+  <div class="mouse-glow" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-scroll">
+      <a class="navbar-item" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
+        <span class="navbar-label">Home</span>
+      </a>
+      <a class="navbar-item" href="work.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.3 9.2V6.8a2.1 2.1 0 0 1 2.1-2.1h3.8l2.2 2h6.2a2.1 2.1 0 0 1 2.1 2.1v8.6a2.1 2.1 0 0 1-2.1 2.1H4.4a2.1 2.1 0 0 1-2.1-2.1V9.2Z"/><path d="m8.2 12.7 2.1 2.1 4.1-4.1"/></svg>
+        <span class="navbar-label">Work</span>
+      </a>
+      <a class="navbar-item" href="writing.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 2.4h7L18.6 7.6v12.2a1.8 1.8 0 0 1-1.8 1.8H6.2a1.8 1.8 0 0 1-1.8-1.8V4.2a1.8 1.8 0 0 1 1.8-1.8Z"/><path d="M12.9 2.6v5.2h5.5"/><path d="M7.6 12.4h7.8M7.6 15.4h7.8M7.6 18.4h4.8"/></svg>
+        <span class="navbar-label">Writing</span>
+      </a>
+      <a class="navbar-item" href="resume.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.2 2.6H6.6a1.9 1.9 0 0 0-1.9 1.9v15a1.9 1.9 0 0 0 1.9 1.9h10.8a1.9 1.9 0 0 0 1.9-1.9V7.8Z"/><path d="M14.2 2.6v5.2h5.1"/><path d="M8.6 12.6h6.8M8.6 16h4.6"/></svg>
+        <span class="navbar-label">Resume</span>
+      </a>
+      <a class="navbar-item" href="index.html#contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.2" y="4.4" width="19.6" height="15.2" rx="2"/><path d="m21.4 7-8.8 5.6a1.9 1.9 0 0 1-2 0L2.6 7"/></svg>
+        <span class="navbar-label">Contact</span>
+      </a>
+    </div>
+    <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
+            aria-label="Switch to light mode">
+      <span class="icon-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.85 1.85M6.65 17.35 4.8 19.2M19.2 19.2l-1.85-1.85M6.65 6.65 4.8 4.8"/></svg></span>
+      <span class="icon-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.4A8.6 8.6 0 0 1 9.6 3.4 8.6 8.6 0 1 0 20.6 14.4Z"/></svg></span>
+      <span class="navbar-label">Light</span>
+    </button>
+  </nav>
+  <span id="top" aria-hidden="true"></span>
+
+  <header class="simple glass">
+    <nav aria-label="Breadcrumb">
+      <a href="index.html">← Back to home</a>
+    </nav>
+    <h1 class="neon">Writing</h1>
+    <p class="subtitle">Technical documentation, design records, and research work.</p>
+  </header>
+
+  <main id="main">
+    <section aria-labelledby="h-docs">
+      <h2 id="h-docs">Technical documents</h2>
+
+      <p class="callout">
+        Both documents below were produced for a client engagement under NDA. They are described
+        accurately here and are <strong>available on request</strong>; a public version would need
+        a redaction pass and sponsor sign-off first.
+      </p>
+
+      <div class="writing-item">
+        <h3>Knights Counsel: Technical White Paper, v1.0</h3>
+        <p class="writing-role">Co-author · sole author, system design and behavior specification sections · August 2026</p>
+        <p>
+          A full technical account of the system's architecture, behavior specification, evaluation
+          methodology, and results, prepared for enterprise IT and the client. The sections I wrote
+          cover the two-agent orchestration topology, the thirteen numbered behavioral
+          requirements, the grounding and citation enforcement model, and the configuration
+          baseline treated as version-controlled.
+        </p>
+      </div>
+
+      <div class="writing-item">
+        <h3>Knights Counsel: Final Design Document, v2</h3>
+        <p class="writing-role">Contributing author · sole author, system design section · 2026</p>
+        <p>
+          Requirements, architecture, and design rationale for the sponsored capstone. Includes the
+          behavior test set and the architecture decision record covering the six-agent to
+          two-agent reversal — written up as a record rather than deleted, so the reasoning survives
+          for whoever picks the project up next.
+        </p>
+      </div>
+
+      <div class="writing-item">
+        <h3>Architecture decision records</h3>
+        <p class="writing-role">Author · ongoing through the engagement</p>
+        <p>
+          A running set covering platform selection, delivery surface, access model, session
+          memory, citation rendering, prompt-language requirements, naming enforcement, and
+          fallback strategy. Each captures context, decision, consequences, and status — including
+          the records that document reversals of the team's own earlier decisions.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-research">
+      <h2 id="h-research">Research work</h2>
+
+      <div class="writing-item">
+        <h3>Hardening Build Systems</h3>
+        <p class="writing-role">Undergraduate research assistant · University of Central Florida · Oct 2025 – May 2026</p>
+        <p>
+          Empirical research on the security and reliability of open-source software build systems.
+          I diagnosed build failures by hand across six build systems, and built the tooling that
+          converts raw experimental output into LaTeX-ready tables and pgfplots figures used in
+          project reporting. The failure categories that came out of that work are what the
+          <a href="project-build-recipe.html">Build-Recipe project</a> is now built to measure.
+        </p>
+      </div>
+
+      <div class="writing-item">
+        <h3>Human Factors Group Study</h3>
+        <p class="writing-role">Research assistant · University of Central Florida · Feb 2025 – May 2026</p>
+        <p>
+          A study of how programmers debug code collaboratively in groups. I ran experimental
+          sessions and instrumented participants with biometric equipment measuring heart rate,
+          respiration, skin conductance, gaze, and prefrontal cortex blood oxygenation. Worked
+          under human-subjects research protocol with the associated ethics training completed.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-interests">
+      <h2 id="h-interests">Research interests</h2>
+      <p>
+        Applied AI systems and the evaluation methods that validate them: LLM agent design,
+        retrieval grounding and citation enforcement, guardrail and refusal behavior, and the
+        measurement problem of separating genuine capability from fit to a chosen benchmark.
+      </p>
+      <p>
+        Secondary interests in empirical software engineering — particularly build-system
+        reliability and reproducibility — and in human-computer interaction at the level of
+        accessible, well-structured interfaces.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p><span id="year"></span> David Gusmao ·
+      <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p><a href="index.html">Back to home</a></p>
+  </footer>
+</body>
+</html>
