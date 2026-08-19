@@ -11,23 +11,25 @@
   <link rel="icon" href="/images/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <script>/* set the colour mode before first paint to avoid a flash */
+  <script>/* Set the colour mode before first paint, or the page flashes.
+     A saved choice wins; otherwise the browser's own preference decides, and
+     light is the default when the browser states no preference either way. */
   (function(){try{var m=localStorage.getItem('mode')||
-  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
   document.documentElement.dataset.mode=m;}catch(e){}})();</script>
   <script src="main.js" defer></script>
 </head>
 
 <body class="theme-green">
-  <div class="mouse-glow" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <nav class="navbar" aria-label="Primary">
-    <div class="navbar-scroll">
-      <a class="navbar-item" href="index.html">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
-        <span class="navbar-label">Home</span>
+      <a class="navbar-item navbar-home" href="index.html">
+        <img src="images/DGsqarecircle.png" alt="" aria-hidden="true"
+             width="1181" height="1181" decoding="async">
+        <span class="navbar-label">David Gusmao</span>
       </a>
+    <div class="navbar-scroll">
       <a class="navbar-item" href="#stack">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2.6 9.2 4.6L12 11.8 2.8 7.2 12 2.6Z"/><path d="m2.8 12 9.2 4.6L21.2 12"/><path d="m2.8 16.8 9.2 4.6 9.2-4.6"/></svg>
         <span class="navbar-label">Stack</span>
@@ -37,11 +39,11 @@
         <span class="navbar-label">Access</span>
       </a>
       <a class="navbar-item" href="#theming">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.4"/><circle cx="8.4" cy="9.2" r="1.3"/><circle cx="15.6" cy="9.2" r="1.3"/><circle cx="9.4" cy="15.4" r="1.3"/><circle cx="15" cy="15" r="1.3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.9 2.9a2.3 2.3 0 0 1 3.25 3.25l-7.6 7.6-3.25-3.25 7.6-7.6Z"/><path d="m10.3 10.5 3.25 3.25"/><path d="M8.9 12.4a2.9 2.9 0 0 1 2.9 2.9c0 2.4-2.25 4.3-5.4 4.3-1.1 0-2.1-.2-3-.6 1.2-.8 1.65-1.8 1.75-3a3.55 3.55 0 0 1 3.75-3.6Z"/></svg>
         <span class="navbar-label">Theming</span>
       </a>
       <a class="navbar-item" href="#limits">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 2.4 3.1 15.4a2 2 0 0 0 1.72 3h14.36a2 2 0 0 0 1.72-3L13.7 2.4a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.2M12 17h.01"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9.2v4.4"/><circle cx="12" cy="17.3" r=".95"/></svg>
         <span class="navbar-label">Limits</span>
       </a>
     </div>
@@ -162,7 +164,7 @@
         </li>
         <li>
           <strong>The accent</strong> is a class on <code>&lt;body&gt;</code>. Each project page
-          carries its own: green for the site itself, burgundy for Knights Counsel, sky for
+          carries its own: green for the site itself, amber for Knights Counsel, sky for
           Build-Recipe, gold for PocketProfessors, aqua for FitnessFunctions, lime for the
           Contact Manager.
         </li>

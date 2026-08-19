@@ -9,22 +9,24 @@
   <link rel="icon" href="/images/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <script>/* set the colour mode before first paint to avoid a flash */
+  <script>/* Set the colour mode before first paint, or the page flashes.
+     A saved choice wins; otherwise the browser's own preference decides, and
+     light is the default when the browser states no preference either way. */
   (function(){try{var m=localStorage.getItem('mode')||
-  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
   document.documentElement.dataset.mode=m;}catch(e){}})();</script>
   <script src="main.js" defer></script>
 </head>
 
 <body class="theme-lime">
-  <div class="mouse-glow" aria-hidden="true"></div>
 
   <nav class="navbar" aria-label="Primary">
-    <div class="navbar-scroll">
-      <a class="navbar-item" href="#top">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
-        <span class="navbar-label">Top</span>
+      <a class="navbar-item navbar-home" href="index.html">
+        <img src="images/DGsqarecircle.png" alt="" aria-hidden="true"
+             width="1181" height="1181" decoding="async">
+        <span class="navbar-label">David Gusmao</span>
       </a>
+    <div class="navbar-scroll">
       <a class="navbar-item" href="#overview">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 2.4h7L18.6 7.6v12.2a1.8 1.8 0 0 1-1.8 1.8H6.2a1.8 1.8 0 0 1-1.8-1.8V4.2a1.8 1.8 0 0 1 1.8-1.8Z"/><path d="M12.9 2.6v5.2h5.5"/><path d="M7.6 12.4h7.8M7.6 15.4h7.8M7.6 18.4h4.8"/></svg>
         <span class="navbar-label">Overview</span>
@@ -67,7 +69,7 @@
   </nav>
   <span id="top" aria-hidden="true"></span>
 
-<header class="hero glass">
+<header class="simple glass">
     <nav aria-label="Breadcrumb">
       <a href="index.html#work">← Back to Selected Work</a>
     </nav>

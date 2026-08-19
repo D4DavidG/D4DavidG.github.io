@@ -44,12 +44,15 @@ html { scroll-behavior: smooth; }
   --glass-border: rgba(255,255,255,.12);
 
   /* nav bar height, expanded and collapsed */
-  --bar-h: 84px;
-  --bar-h-min: 46px;
+  --bar-h: 76px;
 
-  /* mouse position, injected by main.js */
-  --mx: 50vw;
-  --my: 35vh;
+  /* opaque panel — for surfaces that must not let the page show through,
+     such as the email dropdown */
+  --panel-solid: #0b0e0b;
+
+  /* how long a card takes to reach full glow. Slow on purpose: an instant
+     switch reads as a flicker when the cursor crosses a grid of cards. */
+  --glow-t: .9s;
 }
 
 /* =========================
@@ -58,9 +61,10 @@ html { scroll-behavior: smooth; }
 :root[data-mode="light"]{
   color-scheme: light;
 
-  --bg: #eef1ee;
-  --panel: rgba(255,255,255,.78);
-  --panel-2: rgba(255,255,255,.62);
+  --bg: #e4e9e4;
+  --panel: rgba(255,255,255,.44);
+  --panel-2: rgba(255,255,255,.24);
+  --panel-solid: #ffffff;
 
   --text: #161a16;
   --muted: #4c5450;
@@ -71,15 +75,15 @@ html { scroll-behavior: smooth; }
   --img-bg: rgba(0,0,0,.04);
   --shadow-drop: rgba(0,0,0,.14);
 
-  --grid-line: rgba(0,0,0,.055);
-  --wash-1: rgba(0,0,0,.035);
+  --grid-line: rgba(0,0,0,.075);
+  --wash-1: rgba(0,0,0,.05);
   --wash-2: rgba(0,0,0,.015);
   --vig-inner: rgba(0,0,0,.06);
   --vig-a: rgba(0,0,0,.02);
   --vig-b: rgba(0,0,0,.10);
 
-  --glass-1: rgba(255,255,255,.84);
-  --glass-2: rgba(255,255,255,.62);
+  --glass-1: rgba(255,255,255,.5);
+  --glass-2: rgba(255,255,255,.28);
   --glass-border: rgba(0,0,0,.12);
 }
 
@@ -115,13 +119,12 @@ body.theme-gold {
   --border: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
-/* Knights Counsel — wine red, the colour law offices bind their books in.
-   Deep enough to read as burgundy, light enough to still carry a glow on a
-   near-black page. */
-body.theme-burgundy {
-  --accent: #e04a5f;
-  --accent-soft: rgba(224,74,95,.55);
-  --accent-faint: rgba(224,74,95,.25);
+/* Knights Counsel — amber. Warmer and distinctly more orange than
+   PocketProfessors' yellow gold, so the two never blur together in a list. */
+body.theme-amber {
+  --accent: #ff9d2e;
+  --accent-soft: rgba(255,157,46,.55);
+  --accent-faint: rgba(255,157,46,.25);
   --accent-ink: var(--accent);
   --border: color-mix(in srgb, var(--accent) 12%, transparent);
 }
@@ -129,9 +132,9 @@ body.theme-burgundy {
 /* Build-Recipe — a true blue, deliberately bluer than FitnessFunctions' cyan
    so the two never read as the same project at a glance. */
 body.theme-sky {
-  --accent: #4d9fff;
-  --accent-soft: rgba(77,159,255,.55);
-  --accent-faint: rgba(77,159,255,.25);
+  --accent: #5fb0ff;
+  --accent-soft: rgba(95,176,255,.55);
+  --accent-faint: rgba(95,176,255,.25);
   --accent-ink: var(--accent);
   --border: color-mix(in srgb, var(--accent) 12%, transparent);
 }
@@ -150,14 +153,14 @@ body.theme-lime {
 :root[data-mode="light"] body.theme-green    { --accent-ink: #0a7d18; }
 :root[data-mode="light"] body.theme-aqua     { --accent-ink: #0b6f75; }
 :root[data-mode="light"] body.theme-gold     { --accent-ink: #7a5600; }
-:root[data-mode="light"] body.theme-burgundy { --accent-ink: #9c1f36; }
+:root[data-mode="light"] body.theme-amber    { --accent-ink: #9c5200; }
 :root[data-mode="light"] body.theme-sky      { --accent-ink: #1257c9; }
 :root[data-mode="light"] body.theme-lime     { --accent-ink: #4a7c0f; }
 
 :root[data-mode="light"] body.theme-green,
 :root[data-mode="light"] body.theme-aqua,
 :root[data-mode="light"] body.theme-gold,
-:root[data-mode="light"] body.theme-burgundy,
+:root[data-mode="light"] body.theme-amber,
 :root[data-mode="light"] body.theme-sky,
 :root[data-mode="light"] body.theme-lime {
   --border: color-mix(in srgb, var(--accent-ink) 30%, transparent);
@@ -174,14 +177,14 @@ body.theme-lime {
 .accent-green  { --accent: #00ff00; --accent-soft: rgba(0,255,0,.55);     --accent-faint: rgba(0,255,0,.25);     --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
 .accent-aqua   { --accent: #2efcff; --accent-soft: rgba(46,252,255,.55);  --accent-faint: rgba(46,252,255,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
 .accent-gold   { --accent: #ffd54a; --accent-soft: rgba(255,213,74,.55);  --accent-faint: rgba(255,213,74,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
-.accent-burgundy { --accent: #e04a5f; --accent-soft: rgba(224,74,95,.55);  --accent-faint: rgba(224,74,95,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
-.accent-sky      { --accent: #4d9fff; --accent-soft: rgba(77,159,255,.55);  --accent-faint: rgba(77,159,255,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+.accent-amber    { --accent: #ff9d2e; --accent-soft: rgba(255,157,46,.55); --accent-faint: rgba(255,157,46,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
+.accent-sky      { --accent: #5fb0ff; --accent-soft: rgba(95,176,255,.55); --accent-faint: rgba(95,176,255,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
 .accent-lime     { --accent: #a3e635; --accent-soft: rgba(163,230,53,.55);  --accent-faint: rgba(163,230,53,.25);  --accent-ink: var(--accent); --border: color-mix(in srgb, var(--accent) 12%, transparent); }
 
 :root[data-mode="light"] .accent-green    { --accent-ink: #0a7d18; }
 :root[data-mode="light"] .accent-aqua     { --accent-ink: #0b6f75; }
 :root[data-mode="light"] .accent-gold     { --accent-ink: #7a5600; }
-:root[data-mode="light"] .accent-burgundy { --accent-ink: #9c1f36; }
+:root[data-mode="light"] .accent-amber    { --accent-ink: #9c5200; }
 :root[data-mode="light"] .accent-sky      { --accent-ink: #1257c9; }
 :root[data-mode="light"] .accent-lime     { --accent-ink: #4a7c0f; }
 
@@ -238,46 +241,6 @@ body::after{
     radial-gradient(900px 600px at 70% 85%, var(--vig-a), var(--vig-b));
 }
 
-/* cursor-tracked halo */
-.mouse-glow{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background:
-    radial-gradient(260px 260px at var(--mx) var(--my),
-      rgba(255,255,255,.08),
-      transparent 62%
-    ),
-    radial-gradient(520px 520px at var(--mx) var(--my),
-      var(--accent-faint),
-      transparent 72%
-    );
-  opacity: .95;
-  mix-blend-mode: screen;
-  transition: opacity .25s ease;
-}
-
-/* `screen` only ever brightens, so it does nothing on a near-white page.
-   Light mode multiplies a darker halo instead. */
-:root[data-mode="light"] .mouse-glow{
-  background:
-    radial-gradient(260px 260px at var(--mx) var(--my),
-      rgba(0,0,0,.05),
-      transparent 62%
-    ),
-    radial-gradient(520px 520px at var(--mx) var(--my),
-      var(--accent-soft),
-      transparent 72%
-    );
-  mix-blend-mode: multiply;
-  opacity: .55;
-}
-
-@media (prefers-reduced-motion: reduce){
-  .mouse-glow{ display:none; }
-}
-
 /* =========================
    Links / headings
 ========================= */
@@ -308,7 +271,7 @@ h3 { margin: 0 0 .25rem; }
   padding: .55rem .85rem;
   background: var(--accent);
   color: #000;
-  border-radius: 10px;
+  border-radius: 0;
   box-shadow: 0 0 14px var(--accent-soft);
 }
 
@@ -325,12 +288,14 @@ section + section, article + article{ margin-top: 1.25rem; }
 section, article{
   background: var(--panel);
   border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
-  border-radius: 18px;
+  border-radius: 0;
   padding: 1rem 1.05rem;
   box-shadow:
     0 0 12px var(--accent-faint),
+    0 0 24px transparent,
     inset 0 0 8px color-mix(in srgb, var(--accent) 7%, transparent);
-  transition: box-shadow .2s ease, transform .08s ease, border-color .2s ease;
+  transition: box-shadow var(--glow-t) ease, border-color var(--glow-t) ease,
+              transform .08s ease;
 }
 
 /* ---- Body panel glow, on hover ---- */
@@ -357,6 +322,7 @@ section:has(.work-card){
   border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   box-shadow:
     0 0 18px var(--accent-faint),
+    0 0 30px transparent,
     inset 0 0 12px var(--accent-faint);
 }
 
@@ -373,7 +339,7 @@ section:has(.work-card):hover{
   scroll-margin-top: calc(var(--bar-h) + 12px);
   outline: 2px solid var(--accent-ink);
   outline-offset: 6px;
-  border-radius: 18px;
+  border-radius: 0;
   animation: target-pop .9s ease 1;
 }
 @keyframes target-pop{
@@ -395,12 +361,12 @@ section:has(.work-card):hover{
 .glass{
   background: linear-gradient(180deg, var(--glass-1), var(--glass-2));
   border: 1px solid var(--glass-border);
-  border-radius: 24px;
+  border-radius: 0;
   backdrop-filter: blur(10px);
   box-shadow:
     0 18px 50px var(--shadow-drop),
     0 0 0 1px rgba(0,0,0,0.2);
-  transition: box-shadow 220ms ease, border-color 220ms ease;
+  transition: box-shadow var(--glow-t) ease, border-color var(--glow-t) ease;
 }
 
 /* =========================
@@ -418,12 +384,17 @@ section:has(.work-card):hover{
 
   display: flex;
   align-items: stretch;
-  padding: 0 .5rem;
+  /* The menu sits inside a centred 1180px lane on a wide monitor and closes up
+     once the viewport is narrower than that. Only the LEFT edge is padded —
+     the mode switch is pushed out past the lane so it always lands in the
+     corner of the screen. */
+  --nav-inset: max(clamp(.6rem, 4vw, 3.5rem), calc((100% - 1180px) / 2));
+  padding: 0 .55rem 0 var(--nav-inset);
 
   background: var(--accent);
   color: #000;
-  box-shadow: 0 0 18px var(--accent-faint);
-  transition: height .22s ease, box-shadow .25s ease;
+  box-shadow: 0 0 18px var(--accent-faint), 0 0 40px transparent;
+  transition: box-shadow var(--glow-t) ease;
 }
 
 /* The whole bar lifts when the cursor is anywhere over it. */
@@ -439,8 +410,8 @@ section:has(.work-card):hover{
   flex: 1 1 auto;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: .2rem;
+  justify-content: flex-end;
+  gap: clamp(.2rem, 2.4vw, 2.4rem);
   min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -454,12 +425,12 @@ section:has(.work-card):hover{
   align-content: center;
   gap: .25rem;
 
-  padding: .4rem .55rem;
-  border-radius: 12px;
+  padding: clamp(.18rem, .55vw, .3rem) clamp(.22rem, .9vw, .6rem);
+  border-radius: 0;
 
   /* the bar is already accent-filled, so ink is black in both modes */
   color: #000;
-  font-size: .8rem;
+  font-size: clamp(.6rem, 1.3vw, .92rem);
   font-weight: 700;
   line-height: 1.15;
   text-align: center;
@@ -478,18 +449,15 @@ section:has(.work-card):hover{
 }
 .navbar-item:active{ transform: scale(.96); }
 
+/* Everything in the bar is sized against the viewport rather than stepped at a
+   breakpoint. A step leaves one width where the labels have already outgrown
+   the bar but the smaller size has not kicked in yet — which is exactly how
+   "Writing" ended up sheared in half. */
 .navbar-item svg{
   display: block;
-  width: 30px;
-  height: 30px;
-  transition: width .22s ease, height .22s ease;
+  width: clamp(19px, 2.1vw, 27px);
+  height: clamp(19px, 2.1vw, 27px);
 }
-
-/* Scrolled down: small icons only. */
-.navbar.is-collapsed{ height: var(--bar-h-min); }
-.navbar.is-collapsed .navbar-label{ display: none; }
-.navbar.is-collapsed .navbar-item{ padding: .3rem .5rem; }
-.navbar.is-collapsed .navbar-item svg{ width: 21px; height: 21px; }
 
 /* Light / dark switch, set slightly apart at the end of the bar. */
 .navbar-toggle{
@@ -499,8 +467,8 @@ section:has(.work-card):hover{
   border: 0;
   border-left: 1px solid rgba(0,0,0,.22);
   border-radius: 0;
-  padding-left: .8rem;
-  margin-left: .4rem;
+  padding-left: clamp(.6rem, 1.4vw, 1.15rem);
+  margin-left: calc(var(--nav-inset) + clamp(.5rem, 2.2vw, 1.75rem));
   background: transparent;
   font: inherit;
   cursor: pointer;
@@ -510,8 +478,33 @@ section:has(.work-card):hover{
 :root[data-mode="light"] .navbar-toggle .icon-dark{ display: block; }
 :root[data-mode="light"] .navbar-toggle .icon-light{ display: none; }
 
+/* ---- Home button ----
+   The DG mark and the name are one target, flush to the left edge of the bar.
+   Deliberately borderless: it is the wordmark, not a chip. */
+.navbar-home{
+  flex: 0 0 auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .3rem .6rem .3rem .2rem;
+  margin-right: .4rem;
+  font-size: clamp(.88rem, 2vw, 1.42rem);
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+.navbar-home img{
+  display: block;
+  width: clamp(27px, 3.2vw, 40px);
+  height: clamp(27px, 3.2vw, 40px);
+  border-radius: 50%;
+  object-fit: cover;
+  background: #000;
+}
+
 @media (prefers-reduced-motion: reduce){
-  .navbar, .navbar-item, .navbar-item svg{ transition: none; }
+  .navbar, .navbar-item{ transition: none; }
 }
 
 /* =========================
@@ -520,7 +513,7 @@ section:has(.work-card):hover{
 header{
   max-width: 960px;
   margin: 1rem auto 0;
-  padding: 1rem;
+  padding: 0rem;
   color: var(--accent-ink);
 }
 
@@ -542,18 +535,55 @@ header.simple{
   gap: .45rem;
 }
 
-/* Hero centered layout */
+/* ---- Hero ----
+   Not a card. The name block sits directly on the page background, the way
+   an academic homepage does, and the divider below does the separating. */
+header.hero{
+  max-width: 960px;
+  margin: 1.5rem auto .5rem;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
 .hero-content{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .5rem;
-  padding: 1rem 1rem;
+  gap: .55rem;
+  padding: 1rem;
 }
 
-.hero-content h1{
+/* No glow on the name — the subtitle under it does the explaining. */
+.hero-name{
+  margin: .4rem 0 0;
+  font-size: clamp(2.1rem, 6.5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--accent-ink);
+  text-shadow: none;
+}
+
+.hero-role{
   margin: 0;
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  font-weight: 500;
+  text-align: center;
+  color: var(--text);
+}
+
+/* A glowing rule, near-full-bleed, standing in for the header card's edge. */
+.divider{
+  border: 0;
+  height: 1px;
+  width: calc(100% - 3rem);
+  margin: .75rem auto 1.75rem;
+  background: var(--accent);
+  box-shadow:
+    0 0 10px var(--accent),
+    0 0 26px var(--accent-soft),
+    0 0 52px var(--accent-faint);
 }
 
 /* Logo flip animation
@@ -561,8 +591,8 @@ header.simple{
    transform-style back to `flat` and the flip stops being 3D. The circle crop
    therefore lives on each .logo-face instead. */
 .logo-container{
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   perspective: 1000px;
 }
 
@@ -594,7 +624,7 @@ header.simple{
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   box-shadow: 0 0 16px var(--accent-soft), 0 0 34px var(--accent-faint);
-  transition: box-shadow .3s ease;
+  transition: box-shadow var(--glow-t) ease;
 }
 
 .logo-container:hover .logo-face{
@@ -609,27 +639,24 @@ header.simple{
 
 /* 1.png has a wide black margin around the ring; scaling up crops it away so
    the ring sits flush against the coin border. */
-.logo-front img{ object-position: 50% 50.021400%; transform: scale(1.24); }
+.logo-dg img{ object-position: 50% 50.021400%; transform: scale(1.24); }
 
 /* The logo ships in two versions with identical geometry: 1.png on black,
    2.png on white. Swapping the file rather than recolouring keeps the framing
    above pixel-identical between modes — both are 1200x1800. */
-.logo-front .logo-on-light{ display: none; }
-:root[data-mode="light"] .logo-front .logo-on-dark{ display: none; }
-:root[data-mode="light"] .logo-front .logo-on-light{ display: block; }
+.logo-dg .logo-on-light{ display: none; }
+:root[data-mode="light"] .logo-dg .logo-on-dark{ display: none; }
+:root[data-mode="light"] .logo-dg .logo-on-light{ display: block; }
 
 .logo-back{
   transform: rotateY(180deg);
 }
 
 /* your framing for the face shot */
-.logo-back img{ object-position: 200% -20%; transform: scale(1.40); width: 90%;
+.logo-pfp img{ object-position: 200% -20%; transform: scale(1.40); width: 90%;
   height: 120%; }
 
-/* Hero buttons — one horizontal row.
-   The email dropdown below is absolutely positioned, so it would paint over
-   whatever follows. The bottom margin reserves its height inside the header
-   card instead. */
+/* Hero buttons — one horizontal row. */
 .hero-buttons{
   display: flex;
   flex-direction: row;
@@ -637,9 +664,46 @@ header.simple{
   gap: .6rem;
   align-items: flex-start;
   justify-content: center;
-  margin-top: .3rem;
-  margin-bottom: 5.25rem;
+  margin-top: .5rem;
 }
+
+/* The About button sits on its own line directly below the row. The email
+   dropdown is absolutely positioned and overlaps it while open; the dropdown's
+   z-index puts it on top for the moment it is showing.
+   --- change this margin to move About further from the row above --- */
+.hero-about-row{
+  display: flex;
+  justify-content: center;
+  margin-top: .6rem;
+}
+
+/* --- change width/height to resize the About button itself --- */
+.hero-btn-about{
+  width: 64px;
+  height: 64px;
+  gap: .25rem;
+  font-size: .76rem;
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 0 14px var(--accent-faint), 0 0 28px transparent;
+}
+
+.hero-btn-about:hover,
+.hero-btn-about:focus-visible{
+  box-shadow: 0 0 20px var(--accent),0 0 40px var(--accent-soft), 0 0 60px var(--accent-faint);
+}
+
+/* --- change these two to resize the DG mark on the About button --- */
+.hero-btn-about img{
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-btn-about .about-light{ display: none; }
+:root[data-mode="light"] .hero-btn-about .about-dark{ display: none; }
+:root[data-mode="light"] .hero-btn-about .about-light{ display: block; }
 
 .hero-btn-wrapper{
   position: relative;
@@ -652,7 +716,8 @@ header.simple{
   border: 1px solid var(--border);
   background: var(--panel);
   color: var(--accent-ink);
-  border-radius: 10px;
+  border-radius: 10px;   /* header buttons are the one rounded exception */
+  box-shadow: 0 0 12px transparent;
   padding: .4rem .6rem;
   font-size: .75rem;
   font-weight: 600;
@@ -661,7 +726,8 @@ header.simple{
   flex-direction: column;
   align-items: center;
   gap: .2rem;
-  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+  transition: box-shadow var(--glow-t) ease, border-color var(--glow-t) ease,
+              transform .08s ease;
   width: 56px;
   height: 56px;
   justify-content: center;
@@ -674,7 +740,7 @@ header.simple{
 }
 
 .hero-btn:hover, .hero-btn:focus-visible{
-  box-shadow: 0 0 12px var(--accent-faint);
+  box-shadow: 0 0 12px var(--accent-soft);
   border-color: var(--accent);
 }
 
@@ -698,17 +764,52 @@ a.hero-btn{
   margin-top: .4rem;
   transform: translateX(-50%);
   padding: .5rem;
-  background: var(--panel);
+  background: var(--panel-solid);
   border: 1px solid var(--accent);
-  border-radius: 10px;
+  border-radius: 0;
   min-width: 160px;
   display: none;
   flex-direction: column;
   gap: .3rem;
   box-shadow: 0 0 12px var(--accent-faint);
-  z-index: 10;
+  z-index: 20;
   white-space: nowrap;
 }
+
+/* address on the left, copy control on the right */
+.hero-dropdown-row{
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+.hero-dropdown-row a{ flex: 1 1 auto; }
+
+.copy-btn{
+  flex: 0 0 auto;
+  appearance: none;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--accent-ink);
+  border-radius: 0;
+  padding: .3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s ease, background .2s ease;
+}
+.copy-btn svg{ display: block; width: 15px; height: 15px; }
+.copy-btn:hover, .copy-btn:focus-visible{
+  border-color: var(--accent);
+  background: var(--accent-faint);
+}
+.copy-btn:focus-visible{ outline: 2px solid var(--accent-ink); outline-offset: 1px; }
+
+/* Swapped in by main.js for a moment after a successful copy. */
+.copy-btn.is-copied{ border-color: var(--accent); }
+.copy-btn .icon-copied{ display: none; }
+.copy-btn.is-copied .icon-copy{ display: none; }
+.copy-btn.is-copied .icon-copied{ display: block; }
 
 .hero-btn-wrapper:hover .hero-dropdown,
 .hero-dropdown:hover{
@@ -720,7 +821,7 @@ a.hero-btn{
   font-size: .75rem;
   color: var(--accent-ink);
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 0;
   transition: background .2s ease;
   white-space: nowrap;
   overflow: hidden;
@@ -737,6 +838,7 @@ header.glass{
   border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   box-shadow:
     0 0 18px var(--accent-faint),
+    0 0 30px transparent,
     inset 0 0 12px var(--accent-faint);
   outline-color: var(--accent);
 }
@@ -749,7 +851,6 @@ header.glass:hover{
     inset 0 0 16px var(--accent-faint);
 }
 
-header.glass:hover h1,
 header.glass:hover .neon{
   text-shadow:
     0 0 34px var(--accent-soft),
@@ -765,8 +866,8 @@ header.glass:hover .neon{
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid var(--accent-faint);
-  box-shadow: 0 2px 10px var(--shadow-drop);
-  transition: box-shadow .2s ease, border-color .2s ease;
+  box-shadow: 0 2px 10px var(--shadow-drop), 0 0 28px transparent;
+  transition: box-shadow var(--glow-t) ease, border-color var(--glow-t) ease;
 }
 
 .profile{
@@ -781,7 +882,7 @@ header.glass:hover .neon{
 
 .avatar:hover{
   border-color: var(--accent);
-  box-shadow: 0 0 10px var(--accent-soft), 0 0 28px var(--accent-faint);
+  box-shadow: 0 2px 10px var(--accent-soft), 0 0 28px var(--accent-faint);
 }
 .avatar:hover .profile{
   filter: drop-shadow(0 0 4px var(--accent-faint));
@@ -802,7 +903,7 @@ header.glass:hover .neon{
 }
 .tags li{
   border: 1px solid var(--hair);
-  border-radius: 999px;
+  border-radius: 0;
   padding: .28rem .6rem;
   font-size: .95rem;
   color: var(--text);
@@ -819,9 +920,11 @@ figure img{
   width: 100%;
   height: auto;
   border: 1px solid var(--hair);
-  border-radius: 14px;
+  border-radius: 0;
   background: var(--img-bg);
-  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+  box-shadow: 0 0 16px transparent;
+  transition: box-shadow var(--glow-t) ease, border-color var(--glow-t) ease,
+              transform .08s ease;
 }
 
 figure:hover img{
@@ -841,7 +944,7 @@ figcaption{
 details{
   background: var(--sunken);
   border: 1px solid var(--hair);
-  border-radius: 14px;
+  border-radius: 0;
   padding: .75rem .9rem;
 }
 details summary{
@@ -850,7 +953,7 @@ details summary{
 }
 pre{
   overflow:auto;
-  border-radius: 12px;
+  border-radius: 0;
   padding: .75rem;
   background: var(--code-bg);
   border: 1px solid var(--hair);
@@ -873,12 +976,12 @@ footer{
    The thesis line carries the positioning; the lede backs it with evidence.
 ========================= */
 .hero-thesis{
-  margin: 0;
-  max-width: 46ch;
+  margin: .15rem 0 .1rem;
+  max-width: 62ch;
   font-size: clamp(1rem, 2.4vw, 1.22rem);
   font-weight: 600;
   line-height: 1.45;
-  text-align: center;
+  text-align: right;
   color: var(--accent-ink);
   text-shadow: 0 0 10px var(--accent-faint);
 }
@@ -893,7 +996,7 @@ footer{
   padding: .75rem 1rem;
   background: var(--panel-2);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 0;
   font-size: .95rem;
 }
 
@@ -902,7 +1005,7 @@ footer{
   margin: 0;
   padding: .4rem .85rem;
   border: 1px dashed var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   font-size: .9rem;
   color: var(--text);
   background: var(--panel-2);
@@ -920,37 +1023,44 @@ footer{
 
 /* ---- Project card glow ----
    Each card carries its own accent through an .accent-* class, so the border,
-   the halo and the heading all take the colour of the page it links to. */
+   the halo and the heading all take the colour of the page it links to.
+
+   The card itself is no longer a link. Only the title and the MORE button
+   navigate, which leaves the body free to be a hover/click disclosure. */
 .work-card{
   display: block;
   background: var(--panel-2);
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-  border-radius: 16px;
+  border-radius: 0;
   padding: .9rem 1rem;
   color: inherit;
   text-decoration: none;
-  box-shadow: 0 0 12px var(--accent-faint);
-  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+  box-shadow: 0 0 12px var(--accent-faint), 0 0 24px transparent;
+  transition: box-shadow var(--glow-t) ease, border-color var(--glow-t) ease,
+              transform .08s ease;
 }
 
 .work-card:hover,
-.work-card:focus-visible{
+.work-card:focus-within,
+.work-card.is-open{
   border-color: var(--accent);
   box-shadow:
     0 0 24px var(--accent-soft),
     0 0 48px var(--accent-faint);
   text-decoration: none;
 }
-.work-card:focus-visible{
-  outline: 2px solid var(--accent-ink);
-  outline-offset: 3px;
-}
-.work-card:active{ transform: scale(.995); }
 
 .work-card h3{
   margin: 0 0 .2rem;
+  font-size: 1.28rem;
+}
+.work-card h3 a{
   color: var(--accent-ink);
-  font-size: 1.12rem;
+  text-shadow: none;
+}
+.work-card h3 a:focus-visible{
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 3px;
 }
 
 /* Role · team · date. Mono so it reads as data, not prose. */
@@ -962,6 +1072,31 @@ footer{
   color: var(--muted);
 }
 
+/* ---- Body disclosure ----
+   The summary is hidden until you hover, focus inside, or tap the card, so a
+   reader scanning the list sees six titles rather than six paragraphs.
+   grid-template-rows 0fr -> 1fr is what makes an auto height animatable. */
+.card-reveal{
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--glow-t) ease, opacity var(--glow-t) ease;
+}
+.card-reveal > *{ overflow: hidden; }
+
+.work-card:hover .card-reveal,
+.work-card:focus-within .card-reveal,
+.work-card.is-open .card-reveal{
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* No animation to fight when the reader has asked for less motion — and the
+   text is simply always there, since a hover-only reveal is a poor default. */
+@media (prefers-reduced-motion: reduce){
+  .card-reveal{ grid-template-rows: 1fr; opacity: 1; transition: none; }
+}
+
 .card-body{ margin: 0 0 .6rem; }
 
 .card-status{
@@ -971,26 +1106,64 @@ footer{
   font-style: italic;
 }
 
+/* Filled with the project's own colour, black lettering — the same treatment
+   as the section buttons, so "go to the page" always looks the same. */
 .card-more{
-  display: inline-block;
-  margin-top: .55rem;
-  font-size: .88rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .7rem;
+  padding: .4rem .95rem;
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  background: var(--accent);
+  color: #000;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  box-shadow: 0 0 8px transparent, 0 0 18px transparent;
+  transition: box-shadow var(--glow-t) ease, transform .08s ease;
+}
+.card-more:hover,
+.card-more:focus-visible{
+  text-decoration: none;
+  box-shadow: 0 0 18px var(--accent-soft), 0 0 40px var(--accent-faint);
+}
+.card-more:focus-visible{ outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+.card-more:active{ transform: scale(.97); }
+.card-more svg{ display: block; width: 17px; height: 17px; }
+
+/* ---- Section headings ----
+   Centred, accent-coloured and set well above body copy, so the page reads as
+   a sequence of named parts rather than one long column. */
+section > h2,
+article > h2,
+.section-head h2{
   color: var(--accent-ink);
+  text-align: center;
+  font-size: clamp(1.55rem, 3.4vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  margin: .1rem 0 .6rem;
 }
 
-/* ---- Section header with an action ----
-   Heading on the left, the link to the fuller page on the right, so a reader
-   who only wants the full list can find it before reading the highlights. */
+/* Three equal-ish tracks keep the heading optically centred in the full width
+   while the action still sits hard right. The empty first track is load-bearing. */
 .section-head{
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  align-items: center;
   gap: .75rem;
-  flex-wrap: wrap;
   margin-bottom: .35rem;
 }
-.section-head h2{ margin: 0; }
+.section-head h2{ grid-column: 2; margin: 0 0 .2rem; }
+.section-head .section-btn{ grid-column: 3; justify-self: end; }
+
+@media (max-width: 640px){
+  .section-head{ grid-template-columns: 1fr; }
+  .section-head h2{ grid-column: 1; }
+  .section-head .section-btn{ grid-column: 1; justify-self: center; }
+}
 
 /* The same link repeated at the end of the section, left-aligned — a reader who
    has just finished the highlights shouldn't have to scroll back up for it. */
@@ -1000,24 +1173,30 @@ footer{
   margin-top: 1rem;
 }
 
+/* Solid accent fill with black lettering. Loud on purpose: these two are the
+   only links on the page that go to a full index. */
 .section-btn{
   flex: 0 0 auto;
-  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
-  border-radius: 999px;
-  padding: .3rem .8rem;
-  background: var(--panel-2);
-  color: var(--accent-ink);
-  font-size: .82rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  padding: .38rem .95rem;
+  background: var(--accent);
+  color: #000;
+  font-size: .95rem;
+  font-weight: 800;
+  letter-spacing: .01em;
   white-space: nowrap;
-  box-shadow: 0 0 10px var(--accent-faint);
-  transition: box-shadow .2s ease, border-color .2s ease, transform .08s ease;
+  box-shadow: 0 0 10px var(--accent-faint), 0 0 20px transparent;
+  transition: box-shadow var(--glow-t) ease, transform .08s ease;
 }
+.section-btn svg{ display: block; width: 17px; height: 17px; }
 
 .section-btn:hover,
 .section-btn:focus-visible{
-  border-color: var(--accent);
-  box-shadow: 0 0 16px var(--accent-soft), 0 0 32px var(--accent-faint);
+  box-shadow: 0 0 20px var(--accent-soft), 0 0 44px var(--accent-faint);
   text-decoration: none;
 }
 .section-btn:focus-visible{
@@ -1037,7 +1216,7 @@ footer{
 }
 .stack li{
   border: 1px solid var(--hair);
-  border-radius: 999px;
+  border-radius: 0;
   padding: .12rem .5rem;
   font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
   font-size: .72rem;
@@ -1098,7 +1277,7 @@ footer{
   padding: .85rem 1rem;
   background: var(--sunken);
   border: 1px solid var(--hair);
-  border-radius: 14px;
+  border-radius: 0;
 }
 
 .facts div{ min-width: 0; }
@@ -1135,7 +1314,7 @@ footer{
   background: var(--panel-2);
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
-  border-radius: 12px;
+  border-radius: 0;
   font-size: .92rem;
   color: var(--text);
 }
@@ -1147,7 +1326,7 @@ footer{
   padding: .8rem 1rem;
   background: var(--sunken);
   border: 1px solid var(--hair);
-  border-radius: 14px;
+  border-radius: 0;
 }
 .decision:last-child{ margin-bottom: 0; }
 .decision h3{
@@ -1218,8 +1397,11 @@ footer{
    Print — index and resume should print as a usable document
 ========================= */
 @media print{
-  .navbar, .mouse-glow, .skip-link, .hero-buttons, .logo-container,
-  .navbar-toggle, .card-more{ display: none !important; }
+  .navbar, .skip-link, .hero-buttons, .hero-about-row, .logo-container,
+  .navbar-toggle, .card-more, .divider{ display: none !important; }
+
+  /* the disclosure is a screen affordance; on paper everything is visible */
+  .card-reveal{ grid-template-rows: 1fr !important; opacity: 1 !important; }
 
   body{
     padding-top: 0;
@@ -1247,26 +1429,51 @@ footer{
 }
 
 /* =========================
+   Closing band — home page only
+
+   Decorative wireframe terrain that runs off the bottom of the page. Dark mode
+   only: the art is a green glow on solid black, and it has nothing to sit on
+   once the page turns light. Lazy-loaded because the file is several megabytes
+   and nobody needs it until they have read to the end.
+========================= */
+.bg-strip{ display: none; }
+
+:root[data-mode="dark"] .bg-strip{
+  display: block;
+  width: 100%;
+  height: 30vw;
+  object-fit: cover;
+  object-position: center 61%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* A GIF has no pause control, so the honest response to a reduced-motion
+   request is not to show it at all. */
+@media (prefers-reduced-motion: reduce){
+  :root[data-mode="dark"] .bg-strip{ display: none; }
+}
+
+/* =========================
    Responsive
 ========================= */
 @media (max-width: 760px){
-  :root{ --bar-h: 74px; --bar-h-min: 42px; }
+  :root{ --bar-h: 67px; }
 
-  .navbar-scroll{
-    justify-content: flex-start;
-    gap: .05rem;
-  }
-  .navbar-item{
-    padding: .3rem .34rem;
-    font-size: .64rem;
-  }
-  .navbar-item svg{ width: 25px; height: 25px; }
-  .navbar.is-collapsed .navbar-item svg{ width: 19px; height: 19px; }
+  .navbar-scroll{ gap: clamp(.1rem, .9vw, .5rem); }
 
   .navbar-toggle{
     padding-left: .5rem;
-    margin-left: .25rem;
+    margin-left: calc(var(--nav-inset) + .4rem);
   }
+}
+
+/* Below this the five labels plus the full name simply do not fit. The mark
+   keeps the home button recognisable, so the name is what gives way. */
+@media (max-width: 460px){
+  :root{ --bar-h: 60px; }
+  .navbar-home .navbar-label{ display: none; }
+  .navbar-home{ padding-right: .2rem; margin-right: .2rem; }
 }
 
 @media (max-width: 640px){

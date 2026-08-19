@@ -45,7 +45,7 @@ images/                         Logo, headshot, favicons, project screenshots
 
 **Two independent theming axes.** Light/dark is a `data-mode` attribute on `<html>`, applied by
 a small inline script in every `<head>` *before first paint* so the page never flashes. The accent
-colour is a class on `<body>` — `theme-green`, `theme-aqua`, `theme-gold`, `theme-burgundy`,
+colour is a class on `<body>` — `theme-green`, `theme-aqua`, `theme-gold`, `theme-amber`,
 `theme-sky`, `theme-lime`.
 
 **Derived tokens live in the theme block, not `:root`.** A custom property that references another

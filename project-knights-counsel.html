@@ -7,27 +7,29 @@
   <meta name="description" content="Permission-aware AI retrieval agent for a university legal office. What I specified it must refuse to do, and the evaluation suite built to tell whether it actually refused.">
   <link rel="canonical" href="https://d4davidg.github.io/project-knights-counsel.html">
   <link rel="stylesheet" href="styles.css">
-  <meta name="theme-color" content="#e04a5f">
+  <meta name="theme-color" content="#ff9d2e">
   <link rel="icon" href="/images/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <script>/* set the colour mode before first paint to avoid a flash */
+  <script>/* Set the colour mode before first paint, or the page flashes.
+     A saved choice wins; otherwise the browser's own preference decides, and
+     light is the default when the browser states no preference either way. */
   (function(){try{var m=localStorage.getItem('mode')||
-  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
   document.documentElement.dataset.mode=m;}catch(e){}})();</script>
   <script src="main.js" defer></script>
 </head>
 
-<body class="theme-burgundy">
-  <div class="mouse-glow" aria-hidden="true"></div>
+<body class="theme-amber">
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <nav class="navbar" aria-label="Primary">
-    <div class="navbar-scroll">
-      <a class="navbar-item" href="index.html">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
-        <span class="navbar-label">Home</span>
+      <a class="navbar-item navbar-home" href="index.html">
+        <img src="images/DGsqarecircle.png" alt="" aria-hidden="true"
+             width="1181" height="1181" decoding="async">
+        <span class="navbar-label">David Gusmao</span>
       </a>
+    <div class="navbar-scroll">
       <a class="navbar-item" href="#problem">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.4"/><path d="M9.6 9.2a2.5 2.5 0 0 1 4.85.85c0 1.7-2.45 2.55-2.45 2.55"/><path d="M12 16.6h.01"/></svg>
         <span class="navbar-label">Problem</span>
@@ -45,7 +47,7 @@
         <span class="navbar-label">Evidence</span>
       </a>
       <a class="navbar-item" href="#broke">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 2.4 3.1 15.4a2 2 0 0 0 1.72 3h14.36a2 2 0 0 0 1.72-3L13.7 2.4a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.2M12 17h.01"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9.2v4.4"/><circle cx="12" cy="17.3" r=".95"/></svg>
         <span class="navbar-label">What Broke</span>
       </a>
       <a class="navbar-item" href="#artifacts">

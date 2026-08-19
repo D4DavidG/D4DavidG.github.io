@@ -23,9 +23,11 @@
   <link rel="icon" href="/images/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" href="/images/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <script>/* set the colour mode before first paint to avoid a flash */
+  <script>/* Set the colour mode before first paint, or the page flashes.
+     A saved choice wins; otherwise the browser's own preference decides, and
+     light is the default when the browser states no preference either way. */
   (function(){try{var m=localStorage.getItem('mode')||
-  (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
   document.documentElement.dataset.mode=m;}catch(e){}})();</script>
   <script type="application/ld+json">
   {
@@ -57,15 +59,15 @@
 </head>
 
 <body class="theme-green">
-  <div class="mouse-glow" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <nav class="navbar" aria-label="Primary">
-    <div class="navbar-scroll">
-      <a class="navbar-item" href="#top">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.6" stroke="currentColor" stroke-width="2.3"/><text x="12" y="12.4" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="9.2" fill="currentColor">DG</text></svg>
-        <span class="navbar-label">Top</span>
+      <a class="navbar-item navbar-home" href="#top">
+        <img src="images/DGsqarecircle.png" alt="" aria-hidden="true"
+             width="1181" height="1181" decoding="async">
+        <span class="navbar-label">David Gusmao</span>
       </a>
+    <div class="navbar-scroll">
       <a class="navbar-item" href="#work">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -106,13 +108,9 @@
         </svg>
         <span class="navbar-label">Background</span>
       </a>
-      <a class="navbar-item" href="#contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2.2" y="4.4" width="19.6" height="15.2" rx="2"/>
-          <path d="m21.4 7-8.8 5.6a1.9 1.9 0 0 1-2 0L2.6 7"/>
-        </svg>
-        <span class="navbar-label">Contact</span>
+      <a class="navbar-item" href="#about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.6 20.4a7.4 7.4 0 0 1 14.8 0"/></svg>
+        <span class="navbar-label">About</span>
       </a>
     </div>
     <button class="navbar-item navbar-toggle" type="button" aria-pressed="false"
@@ -124,30 +122,33 @@
   </nav>
   <span id="top" aria-hidden="true"></span>
 
-  <header class="hero glass">
+  <header class="hero">
     <div class="hero-content">
       <div class="logo-container">
         <div class="logo-flipper">
-          <div class="logo-face logo-front">
-            <img class="logo-on-dark" src="images/1.png" alt="DG Logo" width="1200" height="1800" decoding="async">
-            <img class="logo-on-light" src="images/2.png" alt="" aria-hidden="true" width="1200" height="1800" decoding="async">
-          </div>
-          <div class="logo-face logo-back">
+          <div class="logo-face logo-front logo-pfp">
             <img src="images/profile.webp" alt="David Gusmao" width="512" height="768" decoding="async">
+          </div>
+          <div class="logo-face logo-back logo-dg">
+            <img class="logo-on-dark" src="images/1.png" alt="" aria-hidden="true" width="1200" height="1800" decoding="async">
+            <img class="logo-on-light" src="images/2.png" alt="" aria-hidden="true" width="1200" height="1800" decoding="async">
           </div>
         </div>
       </div>
 
-      <h1 class="neon">David Gusmao</h1>
+      <h1 class="hero-name">David Gusmao</h1>
+      <p class="hero-role">Software Engineering &amp; Research</p>
 
       <p class="hero-thesis">
-        I build AI systems and the evaluations that tell you whether they actually work.
+        Building systems that tell you why they work.
       </p>
 
       <p class="hero-lede">
-        Computer Science senior at UCF. Project manager and technical lead on a five-person team
-        delivering a permission-aware AI retrieval agent inside a university legal office's
-        enterprise Microsoft 365 tenant. Independently running a study on automated build
+        Computer Science senior at UCF. 
+        Project manager and technical lead on a team
+        delivering a permission-aware AI retrieval agent for a university legal office's
+        enterprise Microsoft 365 tenant. 
+        Independently running a study on automated build
         inference across six build systems and three program corpora.
       </p>
 
@@ -158,16 +159,22 @@
 
       <div class="hero-buttons">
         <div class="hero-btn-wrapper">
-          <button class="hero-btn" aria-label="Show email addresses" aria-expanded="false">
+          <button class="hero-btn" type="button" aria-label="Show email address" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            <span>Emails</span>
+            <span>Email</span>
           </button>
           <div class="hero-dropdown">
-            <a href="mailto:davidegusmao@outlook.com">davidegusmao@outlook.com</a>
-            <a href="mailto:da045393@ucf.edu">da045393@ucf.edu</a>
+            <div class="hero-dropdown-row">
+              <a href="mailto:davidegusmao@outlook.com">davidegusmao@outlook.com</a>
+              <button class="copy-btn" type="button" data-copy="davidegusmao@outlook.com"
+                      aria-label="Copy email address to clipboard">
+                <span class="icon-copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1.6"/><path d="M5.4 15H4.2A1.8 1.8 0 0 1 2.4 13.2V4.2a1.8 1.8 0 0 1 1.8-1.8h9a1.8 1.8 0 0 1 1.8 1.8v1.2"/></svg></span>
+                <span class="icon-copied"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.6 5 5 10-11"/></svg></span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -205,8 +212,20 @@
           <span>CV</span>
         </a>
       </div>
+
+      <div class="hero-about-row">
+        <a href="#about" class="hero-btn hero-btn-about">
+          <img class="about-dark" src="images/DGsqarecircle.png" alt="" aria-hidden="true"
+               width="1181" height="1181" decoding="async">
+          <img class="about-light" src="images/DGsquarecirclelightmode.png" alt="" aria-hidden="true"
+               width="1181" height="1181" decoding="async">
+          <span>About</span>
+        </a>
+      </div>
     </div>
   </header>
+
+  <hr class="divider">
 
   <main id="main">
     <section id="currently" class="currently" aria-labelledby="h-currently">
@@ -214,7 +233,7 @@
       <p>
         Leading Knights Counsel through its pilot phase, with metadata schema implementation on
         the critical path. Running the Build-Recipe comparison design toward first results.
-        Graduating December 2026 and looking for technical project lead and applied AI research roles.
+        Graduating December 2026 with plans on beginning Master's studies in the Spring. Looking for technical project lead and applied AI research roles.
       </p>
       <p class="updated">Updated August 2026</p>
     </section>
@@ -222,23 +241,24 @@
     <section id="work" aria-labelledby="h-work">
       <div class="section-head">
         <h2 id="h-work">Selected Work</h2>
-        <a class="section-btn" href="work.html">All projects →</a>
+        <a class="section-btn" href="work.html">All projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
       </div>
       <p>
-        Three projects in depth. The reasoning behind each one lives on its own page —
-        what I decided, what I rejected, and how I knew it worked.
+        Top 3 projects. Each page goes into detail about what I decided, what I rejected, and how I knew it worked.
       </p>
 
       <div class="work-grid">
-        <a class="work-card accent-burgundy" href="project-knights-counsel.html">
-          <h3>Knights Counsel — permission-aware AI retrieval agent</h3>
+        <div class="work-card accent-amber">
+          <h3><a href="project-knights-counsel.html">Knights Counsel — permission-aware AI retrieval agent</a></h3>
           <p class="card-meta">Project manager &amp; technical lead · 5-person team · Jun 2026 – Present</p>
-          <p class="card-body">
+          <div class="card-reveal"><div>
+            <p class="card-body">
             An institutional-memory assistant for a university legal office, deployed inside the
             client's enterprise Microsoft 365 tenant. It answers from the office's own documents,
             cites its sources, and declines rather than speculating when retrieval does not supply
             enough grounding.
           </p>
+          </div></div>
           <ul class="stack">
             <li>Copilot Studio</li>
             <li>SharePoint Online</li>
@@ -247,18 +267,20 @@
             <li>React</li>
             <li>TypeScript</li>
           </ul>
-          <span class="card-more">Read the case study →</span>
-        </a>
+          <a class="card-more" href="project-knights-counsel.html">MORE <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
+        </div>
 
-        <a class="work-card accent-sky" href="project-build-recipe.html">
-          <h3>Build-Recipe Inference Agent — automated build inference</h3>
+        <div class="work-card accent-sky">
+          <h3><a href="project-build-recipe.html">Build-Recipe Inference Agent — automated build inference</a></h3>
           <p class="card-meta">Independent research project · May 2026 – Present</p>
-          <p class="card-body">
+          <div class="card-reveal"><div>
+            <p class="card-body">
             A containerized LLM agent that works out how to build software it has never seen:
             which build system, which dependencies, which commands in which order. Structured as a
             cross-tool comparison, because a reported success rate is only interpretable relative
             to the corpus it was measured on.
           </p>
+          </div></div>
           <ul class="stack">
             <li>Python</li>
             <li>Docker</li>
@@ -266,16 +288,18 @@
             <li>Linux</li>
           </ul>
           <p class="card-status">Harness in progress; comparison design complete, results pending.</p>
-          <span class="card-more">Read the case study →</span>
-        </a>
+          <a class="card-more" href="project-build-recipe.html">MORE <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
+        </div>
 
-        <a class="work-card accent-gold" href="project-pocketprofessors.html">
-          <h3>PocketProfessors — MERN collectible app</h3>
+        <div class="work-card accent-gold">
+          <h3><a href="project-pocketprofessors.html">PocketProfessors — MERN collectible app</a></h3>
           <p class="card-meta">Project manager &amp; front-end developer · Jul 2025</p>
-          <p class="card-body">
+          <div class="card-reveal"><div>
+            <p class="card-body">
             A full-stack app where users open packs and collect hand-drawn cards. I owned the
             pack-opening and collection views, the branding and card art, and the delivery plan.
           </p>
+          </div></div>
           <ul class="stack">
             <li>React</li>
             <li>TypeScript</li>
@@ -285,19 +309,19 @@
             <li>JWT</li>
           </ul>
           <p class="card-status">Live at pocketprofessors.com</p>
-          <span class="card-more">Read the case study →</span>
-        </a>
+          <a class="card-more" href="project-pocketprofessors.html">MORE <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
+        </div>
       </div>
 
       <div class="section-foot">
-        <a class="section-btn" href="work.html">All projects →</a>
+        <a class="section-btn" href="work.html">All projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
       </div>
     </section>
 
     <section id="writing" aria-labelledby="h-writing">
       <div class="section-head">
         <h2 id="h-writing">Writing</h2>
-        <a class="section-btn" href="writing.html">All writing →</a>
+        <a class="section-btn" href="writing.html">All writing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
       </div>
 
       <div class="writing-item">
@@ -321,7 +345,7 @@
       </div>
 
       <div class="section-foot">
-        <a class="section-btn" href="writing.html">All writing →</a>
+        <a class="section-btn" href="writing.html">All writing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
       </div>
     </section>
 
@@ -421,18 +445,29 @@
       </article>
     </section>
 
-    <section id="contact" aria-labelledby="h-contact">
-      <h2 id="h-contact">Contact</h2>
+    <section id="about" aria-labelledby="h-about">
+      <h2 id="h-about">About</h2>
       <p>
-        Email <a href="mailto:davidegusmao@outlook.com">davidegusmao@outlook.com</a>
-        (or <a href="mailto:da045393@ucf.edu">da045393@ucf.edu</a> while I am still at UCF).
+        I am a Computer Science senior at UCF who ended up specialising in the unglamorous half of
+        AI work: deciding what a system must refuse to do, and building the evaluation that says
+        whether it actually refused. That is the through-line from Knights Counsel, where the hard
+        part was grounding and citation enforcement rather than the chat interface, to the
+        Build-Recipe study, where the question is how much of any reported success rate is
+        capability and how much is fit to the corpus it was measured on.
       </p>
       <p>
-        <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a> ·
-        <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a> ·
-        <a href="resume.html">Resume</a> ·
-        <a href="downloads/David_Gusmao_Resume.pdf" download>Resume (PDF)</a> ·
-        <a href="downloads/David_Gusmao_CV.pdf" download>CV (PDF)</a>
+        Before either, two years of research assistantships — hand-diagnosing build failures across
+        six build systems, and instrumenting participants for a study of how programmers debug in
+        groups. Outside of that I teach swimming, which is where most of what I know about
+        explaining things to people who are not enjoying themselves comes from.
+      </p>
+      <p>
+        Email <a href="mailto:davidegusmao@outlook.com">davidegusmao@outlook.com</a>, or find me on
+        <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a> and
+        <a href="https://github.com/D4DavidG" target="_blank" rel="noopener">GitHub</a>. There is a
+        <a href="resume.html">resume</a> here too, and a
+        <a href="downloads/David_Gusmao_Resume.pdf" download>PDF</a> or
+        <a href="downloads/David_Gusmao_CV.pdf" download>CV</a> if you would rather have the file.
       </p>
     </section>
   </main>
@@ -443,5 +478,8 @@
       <a href="https://www.linkedin.com/in/david-e-gusmao/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
   </footer>
+
+  <img class="bg-strip" src="images/bg-bottom.gif" alt="" aria-hidden="true"
+       width="540" height="540" loading="lazy" decoding="async">
 </body>
 </html>

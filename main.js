@@ -37,62 +37,9 @@
     });
   }
 
-  /* ---- Nav bar collapse ----
-     Scrolling down shrinks the bar to icons only; scrolling back up restores
-     the labels. Runs regardless of prefers-reduced-motion because it is
-     navigation, not decoration — the stylesheet drops the transition instead. */
-  var navbar = document.querySelector('.navbar');
-  if (navbar) {
-    var lastY = window.scrollY;
-    var pending = false;
-    var DEADZONE = 6;   // ignore sub-pixel jitter and rubber-banding
-    var TOP_ZONE = 48;  // always expanded near the top of the page
-
-    function syncNavbar() {
-      var y = window.scrollY;
-
-      if (y < TOP_ZONE) {
-        navbar.classList.remove('is-collapsed');
-      } else if (y > lastY + DEADZONE) {
-        navbar.classList.add('is-collapsed');
-      } else if (y < lastY - DEADZONE) {
-        navbar.classList.remove('is-collapsed');
-      }
-
-      lastY = y;
-      pending = false;
-    }
-
-    window.addEventListener('scroll', function () {
-      if (!pending) {
-        pending = true;
-        requestAnimationFrame(syncNavbar);
-      }
-    }, { passive: true });
-  }
-
-  /* ---- Cursor-tracked glow ----
-     The .mouse-glow layer reads --mx/--my. */
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var raf = 0;
-  var x = 0;
-  var y = 0;
-
-  function apply() {
-    root.style.setProperty('--mx', x + 'px');
-    root.style.setProperty('--my', y + 'px');
-    raf = 0;
-  }
-
-  window.addEventListener('mousemove', function (e) {
-    x = e.clientX;
-    y = e.clientY;
-    if (!raf) raf = requestAnimationFrame(apply);
-  }, { passive: true });
-
   /* ---- Email dropdown ----
-     Show/hide dropdown on button hover, stay open when hovering dropdown. */
+     Opens on hover, and stays open while the cursor is inside it so the copy
+     button is reachable. */
   var emailBtn = document.querySelector('.hero-btn-wrapper .hero-btn');
   var emailDropdown = document.querySelector('.hero-dropdown');
   if (emailBtn && emailDropdown) {
@@ -116,4 +63,56 @@
     emailDropdown.addEventListener('mouseenter', showDropdown);
     emailDropdown.addEventListener('mouseleave', hideDropdown);
   }
+
+  /* ---- Copy to clipboard ----
+     execCommand is the fallback for insecure origins, where the async
+     Clipboard API is not exposed at all. */
+  function legacyCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.copy-btn'), function (btn) {
+    var revert;
+
+    function confirmCopy() {
+      btn.classList.add('is-copied');
+      btn.setAttribute('aria-label', 'Email address copied');
+      clearTimeout(revert);
+      revert = setTimeout(function () {
+        btn.classList.remove('is-copied');
+        btn.setAttribute('aria-label', 'Copy email address to clipboard');
+      }, 1600);
+    }
+
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy') || '';
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(confirmCopy, function () {
+          if (legacyCopy(text)) confirmCopy();
+        });
+      } else if (legacyCopy(text)) {
+        confirmCopy();
+      }
+    });
+  });
+
+  /* ---- Project card disclosure ----
+     The summary is revealed on hover by CSS alone. This adds the tap path, so
+     the cards are not hover-only on a touch screen. Clicks that land on a link
+     are left alone — those are meant to navigate. */
+  Array.prototype.forEach.call(document.querySelectorAll('.work-card'), function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('a, button')) return;
+      card.classList.toggle('is-open');
+    });
+  });
 })();
