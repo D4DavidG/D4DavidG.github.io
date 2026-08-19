@@ -7,6 +7,9 @@
   <meta name="description" content="David Gusmao — CS senior at UCF. I build AI systems and the evaluations that validate them. Project lead on an enterprise retrieval agent; build-inference research.">
   <link rel="canonical" href="https://d4davidg.github.io/">
   <link rel="preload" href="styles.css" as="style">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap">
   <link rel="stylesheet" href="styles.css">
   <meta name="theme-color" content="#00ff00">
 
@@ -62,8 +65,10 @@
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <nav class="navbar" aria-label="Primary">
-      <a class="navbar-item navbar-home" href="#top">
-        <img src="images/DGsqarecircle.png" alt="" aria-hidden="true"
+      <a class="navbar-item navbar-home" href="index.html">
+        <img class="mark-dark" src="images/DGsqarecircle.png" alt="" aria-hidden="true"
+             width="1181" height="1181" decoding="async">
+        <img class="mark-light" src="images/DGsquarecirclelightmode.png" alt="" aria-hidden="true"
              width="1181" height="1181" decoding="async">
         <span class="navbar-label">David Gusmao</span>
       </a>
@@ -120,42 +125,55 @@
       <span class="navbar-label">Light</span>
     </button>
   </nav>
-  <span id="top" aria-hidden="true"></span>
 
   <header class="hero">
-    <div class="hero-content">
-      <div class="logo-container">
-        <div class="logo-flipper">
-          <div class="logo-face logo-front logo-pfp">
-            <img src="images/profile.webp" alt="David Gusmao" width="512" height="768" decoding="async">
+    <div class="hero-grid">
+
+      <div class="hero-main">
+        <div class="hero-id">
+          <div class="logo-container">
+            <div class="logo-flipper">
+              <div class="logo-face logo-front logo-pfp">
+                <img src="images/profile.webp" alt="David Gusmao" width="512" height="768" decoding="async">
+              </div>
+              <div class="logo-face logo-back logo-dg">
+                <img class="logo-on-dark" src="images/1.png" alt="" aria-hidden="true" width="1200" height="1800" decoding="async">
+                <img class="logo-on-light" src="images/2.png" alt="" aria-hidden="true" width="1200" height="1800" decoding="async">
+              </div>
+            </div>
           </div>
-          <div class="logo-face logo-back logo-dg">
-            <img class="logo-on-dark" src="images/1.png" alt="" aria-hidden="true" width="1200" height="1800" decoding="async">
-            <img class="logo-on-light" src="images/2.png" alt="" aria-hidden="true" width="1200" height="1800" decoding="async">
+
+          <div class="hero-id-text">
+            <h1 class="hero-name">David Gusmao</h1>
+            <p class="hero-role">Software Engineering &amp; Research</p>
           </div>
         </div>
+
+        <p class="hero-thesis">
+          Building systems that tell you why they work.
+        </p>
+
+        <p class="hero-lede">
+          Computer Science senior at UCF.
+          Project manager and technical lead on a team
+          delivering a permission-aware AI retrieval agent for a university legal office's
+          enterprise Microsoft 365 tenant.
+          Independently running a study on automated build
+          inference across six build systems and three program corpora.
+        </p>
       </div>
 
-      <h1 class="hero-name">David Gusmao</h1>
-      <p class="hero-role">Software Engineering &amp; Research</p>
+      <div class="hero-rule" aria-hidden="true"></div>
 
-      <p class="hero-thesis">
-        Building systems that tell you why they work.
-      </p>
+      <div class="hero-aside">
+        <h2 class="hero-aside-title">Looking for</h2>
 
-      <p class="hero-lede">
-        Computer Science senior at UCF. 
-        Project manager and technical lead on a team
-        delivering a permission-aware AI retrieval agent for a university legal office's
-        enterprise Microsoft 365 tenant. 
-        Independently running a study on automated build
-        inference across six build systems and three program corpora.
-      </p>
+        <ul class="hero-looking">
+          <li>Technical project lead and applied AI research roles</li>
+          <li>BS in Computer Science from UCF in December 2026</li>
+        </ul>
 
-      <p class="hero-looking">
-        <strong>Looking for:</strong> technical project lead and applied AI research roles ·
-        graduating December 2026
-      </p>
+        <p class="hero-contact-label">Contact me</p>
 
       <div class="hero-buttons">
         <div class="hero-btn-wrapper">
@@ -221,7 +239,9 @@
                width="1181" height="1181" decoding="async">
           <span>About</span>
         </a>
+        </div>
       </div>
+
     </div>
   </header>
 
@@ -229,7 +249,7 @@
 
   <main id="main">
     <section id="currently" class="currently" aria-labelledby="h-currently">
-      <h2 id="h-currently">Currently</h2>
+      <h2 id="h-currently">CURRENTLY</h2>
       <p>
         Leading Knights Counsel through its pilot phase, with metadata schema implementation on
         the critical path. Running the Build-Recipe comparison design toward first results.
@@ -240,11 +260,12 @@
 
     <section id="work" aria-labelledby="h-work">
       <div class="section-head">
-        <h2 id="h-work">Selected Work</h2>
+        <h2 id="h-work">SELECTED WORK</h2>
         <a class="section-btn" href="work.html">All projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></a>
       </div>
-      <p>
-        Top 3 projects. Each page goes into detail about what I decided, what I rejected, and how I knew it worked.
+      <p class="section-intro">
+        Top recent projects of mine, each page going into heavy detail on the system design,
+        evaluation, and results.
       </p>
 
       <div class="work-grid">
